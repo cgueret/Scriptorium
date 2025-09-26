@@ -65,70 +65,73 @@ template $WritePage: Adw.Bin {
         StackPage {
           name: "editor";
 
-          child: Adw.ToolbarView {
-            hexpand: true;
-            extend-content-to-top-edge: false;
-            reveal-top-bars: true;
-            top-bar-style: raised_border;
-            bottom-bar-style: raised_border;
-            margin-end: 12;
-            margin-top: 12;
-            margin-start: 12;
-            margin-bottom: 12;
-            styles [
-              "card"
-            ]
+          child: Adw.Clamp {
+            maximum-size: 650;
+            Adw.ToolbarView {
+              hexpand: true;
+              extend-content-to-top-edge: false;
+              reveal-top-bars: true;
+              top-bar-style: raised_border;
+              bottom-bar-style: raised_border;
+              margin-end: 12;
+              margin-top: 12;
+              margin-start: 12;
+              margin-bottom: 12;
+              styles [
+                "card"
+              ]
 
-            ScrolledWindow content {
-              $ScrptTextView text_view {
-                vexpand: true;
-                hexpand: true;
-              }
-            }
-
-            [bottom]
-            ActionBar action_bar {
-              revealed: true;
-              valign: end;
-
-              [start]
-              Box {
-                spacing: 3;
-
-                Button format_bold {
-                  icon-name: "format-text-bold-symbolic";
-                  clicked => $do_toggle_bold();
-                  tooltip-text: _("Set the selection to strong (Ctrl+b)");
-                }
-
-                Button format_italic {
-                  icon-name: "format-text-italic-symbolic";
-                  clicked => $do_toggle_italics();
-                  tooltip-text: _("Set the selection to emphasis (Ctrl+i)");
-                }
-
-                ToggleButton show_annotations {
-                  active: true;
-                  icon-name: "tools-check-spelling-symbolic";
-                  toggled => $on_show_annotations_toggled();
-                  tooltip-text: _("Show annotations");
-                }
-
-                ToggleButton show_sidebar_button {
-                  icon-name: "info-outline-symbolic";
-                  tooltip-text: _("Show information panel");
-                  active: bind split_view.show-sidebar no-sync-create; // no-sync-create
+              ScrolledWindow content {
+                $ScrptTextView text_view {
+                  vexpand: true;
+                  hexpand: true;
                 }
               }
 
-              [end]
-              Box {
-                spacing: 3;
+              [bottom]
+              ActionBar action_bar {
+                revealed: true;
+                valign: end;
 
-                Label label_words {}
+                [start]
+                Box {
+                  spacing: 3;
 
-                Label {
-                  label: _("words ");
+                  Button format_bold {
+                    icon-name: "format-text-bold-symbolic";
+                    clicked => $do_toggle_bold();
+                    tooltip-text: _("Set the selection to strong (Ctrl+b)");
+                  }
+
+                  Button format_italic {
+                    icon-name: "format-text-italic-symbolic";
+                    clicked => $do_toggle_italics();
+                    tooltip-text: _("Set the selection to emphasis (Ctrl+i)");
+                  }
+
+                  ToggleButton show_annotations {
+                    active: true;
+                    icon-name: "tools-check-spelling-symbolic";
+                    toggled => $on_show_annotations_toggled();
+                    tooltip-text: _("Show annotations");
+                  }
+
+                  ToggleButton show_sidebar_button {
+                    icon-name: "info-outline-symbolic";
+                    tooltip-text: _("Show information panel");
+                    active: bind split_view.show-sidebar no-sync-create; // no-sync-create
+                  }
+                }
+
+                [end]
+                Box {
+                  spacing: 3;
+
+                  Label label_words {}
+
+                  Label {
+                    label: _("words ");
+                  }
                 }
               }
             }
