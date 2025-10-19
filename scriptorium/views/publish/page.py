@@ -96,6 +96,7 @@ class PublishPage(Adw.Bin):
 
     @Gtk.Template.Callback()
     def on_publishpage_map(self, page):
+        logger.info("Published opened")
         self.reload_book()
 
     def reload_book(self):

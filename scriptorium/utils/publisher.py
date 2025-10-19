@@ -81,7 +81,7 @@ class Publisher(object):
             # If what we wrote before was a scene, add a scene separator
             if previous_was_scene:
                 buffer.write('<p class="separator">&nbsp;</p>\n')
-            buffer.write(resource.to_html())
+            buffer.write(resource.get_content())
 
         # If we are in a Chapter add the header and recurse into the content
         if isinstance(resource, Chapter):
@@ -107,6 +107,8 @@ class Publisher(object):
 
     def _build(self):
         """Build a EPUB from the content of the manuscript."""
+        logger.info("Building book")
+
         # Initialise the book
         self._book = epub.EpubBook()
         self._book.set_identifier(self._manuscript.identifier)
