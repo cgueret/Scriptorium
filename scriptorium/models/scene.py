@@ -20,7 +20,6 @@
 
 from pathlib import Path
 from gi.repository import Gtk, GObject, Gio
-from scriptorium.utils import html_to_buffer, buffer_to_html
 from .commit_message import CommitMessage
 from .entity import Entity
 from .resource import Resource
@@ -40,7 +39,6 @@ class Scene(Resource):
     def __init__(self, project, identifier: str):
         """Create a scene."""
         super().__init__(project, identifier)
-        self._history = Gio.ListStore.new(item_type=CommitMessage)
         self.entities = Gio.ListStore.new(item_type=Entity)
 
         # The base directory for the data of the scene
@@ -53,10 +51,9 @@ class Scene(Resource):
         if not self._scene_content_path.exists():
             self._scene_content_path.touch()
 
-        # Lazy loaded later
-        self._scene_content = None
-
-        self._refresh_history()
+        # Load the current content of the scene
+        logger.info(f"Loading scene content from {self._scene_content_path}")
+        self._scene_content = Path(self._scene_content_path).read_text()
 
     @property
     def data_files(self):
@@ -66,7 +63,19 @@ class Scene(Resource):
     @property
     def history(self):
         """Return the history of commits about that scene."""
-        return self._history
+        history = Gio.ListStore.new(item_type=CommitMessage)
+
+        commits = self.project.repo.iter_commits(
+            all=True, paths=self._scene_content_path
+        )
+        for commit in commits:
+            datetime = commit.committed_datetime
+            message_datetime = datetime.strftime("%A %d %B %Y, %H:%M:%S")
+            message = commit.message.strip()
+            msg = CommitMessage(message_datetime, message)
+            history.append(msg)
+
+        return history
 
     @GObject.Property(type=GObject.Object)
     def chapter(self):
@@ -88,19 +97,11 @@ class Scene(Resource):
         if found:
             self.entities.remove(position)
 
-    def load_into_buffer(self, buffer: Gtk.TextBuffer):
-        """Load the content of a text buffer from disk."""
-        logger.info(f"{self.title}: Loading info buffer")
+    def save(self):
+        """Save the content to disk."""
+        logger.info(f"Saving to {self._scene_content_path}")
 
-        # Load the content of the file and push to the buffer
-        html_to_buffer(self.to_html(), buffer)
-
-    def save_from_buffer(self, buffer: Gtk.TextBuffer):
-        """Save the content of a text buffer to disk."""
-        logger.info(f"{self.title}: Saving from buffer")
-
-        # Write the content of the buffer
-        self._scene_content = buffer_to_html(buffer)
+        # Write the content of the scene
         self._scene_content_path.write_text(self._scene_content)
 
         # Check if the file has been changed
@@ -109,33 +110,12 @@ class Scene(Resource):
             if str(self._scene_content_path.resolve()).endswith(d.a_path):
                 repo.index.add(self._scene_content_path)
                 repo.index.commit(f'Modified scene "{self.identifier}"')
-                # Trigger a refresh of the commit history
-                self._refresh_history()
 
-    def to_html(self):
-        """Return the HTML payload for the scene."""
-        # Check if we can do that
-        if not self._scene_content_path.exists():
-            raise FileNotFoundError(f"Could not open {self._scene_content_path}")
-
-        # Load from disk if we need to
-        if self._scene_content is None:
-            logger.info(f"Loading raw HTML from {self._scene_content_path}")
-            self._scene_content = Path(self._scene_content_path).read_text()
-
+    def get_content(self):
+        """Return the HTML content for the scene."""
         return self._scene_content
 
-    def _refresh_history(self):
-        self._history.remove_all()
-        commits = self.project.repo.iter_commits(
-            all=True,
-            paths=self._scene_content_path
-        )
-        for commit in commits:
-            datetime = commit.committed_datetime
-            message_datetime = datetime.strftime("%A %d %B %Y, %H:%M:%S")
-            message = commit.message.strip()
-            msg = CommitMessage(message_datetime, message)
-            self._history.append(msg)
-
+    def set_content(self, html_code: str) -> None:
+        """Set the HTML content for the scene."""
+        self._scene_content = html_code
 

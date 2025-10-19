@@ -21,13 +21,20 @@ from scriptorium.globals import BASE
 from scriptorium.widgets import AnnotationCard
 from scriptorium.models import Scene
 from scriptorium.utils import switch_tag_for_selection
+from scriptorium.utils import html_to_buffer
+from scriptorium.utils import buffer_to_html
 
 import logging
 import threading
 
 logger = logging.getLogger(__name__)
 
+EDITOR_IDLE_TIMEOUT_TIME = 200
+
 # make font selectable like in https://gitlab.gnome.org/GNOME/gnome-text-editor/-/blob/main/src/editor-preferences-dialog.c
+
+#TODO: when editor is idle (500ms) by default, trigger buffer->html
+#TODO: when it's autosave time (1s) by default, trigger html->disk
 
 # Mutex to avoid having to matches callback edit the buffer at the same time
 text_buffer_lock = threading.Lock()
@@ -145,8 +152,9 @@ class WritePage(Adw.Bin):
             # Clear the annotations list box too
             self.annotations_list.remove_all()
 
-            # Save the content of the buffer
-            self.active_scene.save_from_buffer(buffer)
+            # Update the content of the scene and save it to disk
+            self.active_scene.set_content(buffer_to_html(buffer))
+            self.active_scene.save()
 
             # Clear the content of the text buffer
             buffer.begin_irreversible_action()
@@ -159,7 +167,7 @@ class WritePage(Adw.Bin):
             self.edit_synopsis_binding.unbind()
 
         # Load the scene into the buffer
-        scene.load_into_buffer(buffer)
+        html_to_buffer(scene.get_content(), buffer)
 
         # Connect the information bar properties to the scene
         self.edit_title_binding = scene.bind_property(
@@ -244,13 +252,17 @@ class WritePage(Adw.Bin):
             self.annotations_list.append(card)
 
     def on_editor_idle(self):
-        self._idle_timeout_id = None
+        """Called when the editor has been idle for some time."""
 
+        # Get a pointer to the text buffer
         text_buffer = self.text_view.get_buffer()
-        start_iter, end_iter = text_buffer.get_bounds()
-        content = text_buffer.get_text(start_iter, end_iter, False)
+
+        # Save the current content of the buffer
+        self.active_scene.set_content(buffer_to_html(text_buffer))
 
         # Update the number of words
+        start_iter, end_iter = text_buffer.get_bounds()
+        content = text_buffer.get_text(start_iter, end_iter, False)
         words = len(content.split())
         self.label_words.set_label(str(words))
 
@@ -261,11 +273,19 @@ class WritePage(Adw.Bin):
 
         # If language tool is not ready try again later
         if not language_tool.server_is_alive:
-            self._idle_timeout_id = GLib.timeout_add(200, self.on_editor_idle)
+            self._idle_timeout_id = GLib.timeout_add(
+                EDITOR_IDLE_TIMEOUT_TIME,
+                self.on_editor_idle
+            )
         else:
-            language_tool.check(content, "en-GB", self.on_received_annotations)
+            language_tool.check(
+                content,
+                "en-GB",
+                self.on_received_annotations
+            )
 
         # Don't repeat that callback
+        self._idle_timeout_id = None
         return False
 
     def clear_annotations(self):
@@ -298,21 +318,29 @@ class WritePage(Adw.Bin):
     def on_show_annotations_toggled(self, _toggle_button):
         self.refresh_annotations_tags()
 
+    @Gtk.Template.Callback()
+    def on_writer_unmap(self, _toggle_button):
+        logger.info("Writer closed")
+        if self.active_scene is not None:
+            # Update the content of the scene and save it to disk
+            self.active_scene.set_content(
+                buffer_to_html(self.text_view.get_buffer())
+            )
+            self.active_scene.save()
+
     def on_buffer_changed(self, text_buffer):
         """Keep an eye on modifications of the buffer."""
+
+        # If the popup was visible hide it
         self.popover_annotation.popdown()
+
+        # If there was already a time out check cancel it
         if self._idle_timeout_id:
             GLib.source_remove(self._idle_timeout_id)
 
-        self._idle_timeout_id = GLib.timeout_add(200, self.on_editor_idle)
-
-
-#        if self._idle_timeout_id:
-#            GLib.source_remove(self._idle_timeout_id)
-
-        # Remove the styling
-#        Gtk.StyleContext.remove_provider_for_display(
-#            Gdk.Display.get_default(),
-#            self.css_provider
-#        )
+        # Schedule a new idle check in some time from now
+        self._idle_timeout_id = GLib.timeout_add(
+            EDITOR_IDLE_TIMEOUT_TIME,
+            self.on_editor_idle
+        )
 

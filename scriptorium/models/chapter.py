@@ -53,10 +53,10 @@ class Chapter(Resource):
         else:
             self.content.append(scene)
 
-    def to_html(self):
+    def get_content(self):
         """Return the HTML payload for the chapter."""
         content = []
         for scene in self.content:
-            content.append(scene.to_html())
+            content.append(scene.get_content())
         return "\n".join(content)
 

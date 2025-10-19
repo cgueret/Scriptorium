@@ -2,8 +2,8 @@ using Gtk 4.0;
 using Adw 1;
 
 template $WritePage: Adw.Bin {
-  //closed => $on_writer_closed();
-  //map => $on_writer_opened();
+  unmap => $on_writer_unmap();
+
   Adw.OverlaySplitView {
     sidebar: $WriteNavigation navigation {};
 

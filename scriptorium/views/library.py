@@ -231,7 +231,7 @@ class ScrptLibraryView(Adw.NavigationPage):
 
         dialog = Adw.AlertDialog(
             heading="Delete Project",
-            body=f'This action can not be undone! Are you sure you want to delete "{project.title}" ?',
+            body=f'This  action can not be undone! Are you sure you want to delete "{project.title}" ?',
             close_response="cancel",
         )
         dialog.add_response("cancel", "Cancel")
