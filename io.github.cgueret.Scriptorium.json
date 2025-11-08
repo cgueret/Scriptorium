@@ -1,104 +1,114 @@
 {
-	"id": "io.github.cgueret.Scriptorium",
-	"runtime": "org.gnome.Platform",
-	"runtime-version": "49",
-	"sdk": "org.gnome.Sdk",
-	"sdk-extensions": [
-	 "org.freedesktop.Sdk.Extension.openjdk21"
-	],
-	"command": "scriptorium",
-	"finish-args": [
-		"--share=network",
-		"--share=ipc",
-		"--socket=fallback-x11",
-		"--socket=wayland",
-		"--device=dri",
-		"--env=PATH=/app/jre/bin:/usr/bin:/app/bin"
-	],
-	"cleanup": [
-		"/include",
-		"/lib/pkgconfig",
-		"/man",
-		"/share/doc",
-		"/share/gtk-doc",
-		"/share/man",
-		"/share/pkgconfig",
-		"*.la",
-		"*.a"
-	],
-	"modules": [
-		{
-			"name": "blueprint-compiler",
-			"buildsystem": "meson",
-			"cleanup": ["*"],
-			"sources": [
-				{
-					"type": "git",
-					"url": "https://gitlab.gnome.org/GNOME/blueprint-compiler",
-					"tag": "v0.18.0",
-					"commit": "07c9c9df9cd1b6b4454ecba21ee58211e9144a4b",
-					"x-checker-data": {
-						"type": "git",
-						"tag-pattern": "^v([\\d.]+)$"
-					}
-				}
-			]
-		},
-		{
-			"name": "git",
-			"make-args": [
-				"NO_TCLTK=1",
-				"INSTALL_SYMLINKS=1"
-			],
-			"make-install-args": [
-				"NO_TCLTK=1",
-				"INSTALL_SYMLINKS=1"
-			],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.51.0.tar.xz",
-					"sha256": "60a7c2251cc2e588d5cd87bae567260617c6de0c22dca9cdbfc4c7d2b8990b62"
-				}
-			]
-		},
-		{
-			"name": "LanguageTool",
-			"buildsystem": "simple",
-			"build-commands": [
-				"cp -r . /app/LanguageTool"
-			],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "https://languagetool.org/download/LanguageTool-6.6.zip",
-					"sha256": "53600506b399bb5ffe1e4c8dec794fd378212f14aaf38ccef9b6f89314d11631"
-				}
-			],
-			"modules": [
-				{
-					"name": "openjdk",
-					"buildsystem": "simple",
-					"build-commands": [
-						"/usr/lib/sdk/openjdk21/install.sh"
-					]
-				}
-			]
-		},
-		"python3-lxml.json",
-		"python3-EbookLib.json",
-		"python3-beautifulsoup4.json",
-		"python3-pyyaml.json",
-		"python3-GitPython.json",
-		{
-			"name": "scriptorium",
-			"buildsystem": "meson",
-			"sources": [
-				{
-					"type": "dir",
-					"path": "."
-				}
-			]
-		}
-	]
+    "id" : "io.github.cgueret.Scriptorium",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "49",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.openjdk25"
+    ],
+    "command" : "scriptorium",
+    "finish-args" : [
+        "--share=network",
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--env=PATH=/app/jre/bin:/usr/bin:/app/bin"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "blueprint-compiler",
+            "buildsystem" : "meson",
+            "cleanup" : [
+                "*"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/blueprint-compiler",
+                    "tag" : "v0.18.0",
+                    "commit" : "07c9c9df9cd1b6b4454ecba21ee58211e9144a4b",
+                    "x-checker-data" : {
+                        "type" : "git",
+                        "tag-pattern" : "^v([\\d.]+)$"
+                    }
+                }
+            ]
+        },
+        {
+            "name" : "git",
+            "make-args" : [
+                "NO_TCLTK=1",
+                "INSTALL_SYMLINKS=1"
+            ],
+            "make-install-args" : [
+                "NO_TCLTK=1",
+                "INSTALL_SYMLINKS=1"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.51.2.tar.xz",
+                    "sha256" : "233d7143a2d58e60755eee9b76f559ec73ea2b3c297f5b503162ace95966b4e3"
+                }
+            ]
+        },
+        {
+            "name" : "LanguageTool",
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "cp -r . /app/LanguageTool"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://languagetool.org/download/LanguageTool-6.6.zip",
+                    "sha256" : "53600506b399bb5ffe1e4c8dec794fd378212f14aaf38ccef9b6f89314d11631"
+                }
+            ],
+            "modules" : [
+                {
+                    "name" : "openjdk",
+                    "buildsystem" : "simple",
+                    "build-commands" : [
+                        "/usr/lib/sdk/openjdk25/install.sh"
+                    ]
+                }
+            ]
+        },
+        "python3-lxml.json",
+        "python3-ebooklib.json",
+        "python3-beautifulsoup4.json",
+        "python3-pyyaml.json",
+        "python3-GitPython.json",
+        {
+            "name" : "scriptorium",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "dir",
+                    "path" : "."
+                }
+            ],
+            "config-opts" : [
+                "--libdir=lib"
+            ]
+        }
+    ],
+    "build-options" : {
+        "env" : {
+            "LC_ALL" : "fr_FR.UTF-8"
+        }
+    }
 }
