@@ -1,28 +1,21 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
 data/io.github.cgueret.Scriptorium.desktop.in
-data/io.github.cgueret.Scriptorium.metainfo.xml.in
 data/io.github.cgueret.Scriptorium.gschema.xml
-
-# Main application
+data/io.github.cgueret.Scriptorium.metainfo.xml.in
 scriptorium/main.py
-scriptorium/window.py
-scriptorium/window.blp
-
-# Main views
-scriptorium/views/library.py
-scriptorium/views/library.blp
-scriptorium/views/editor.py
 scriptorium/views/editor.blp
-
-# "Plan" view
-scriptorium/views/plan/editor_scenes.py
-scriptorium/views/plan/editor_images_item.py
+scriptorium/views/editor.py
+scriptorium/views/library.blp
+scriptorium/views/library.py
 scriptorium/views/plan/editor_entities_details.py
+scriptorium/views/plan/editor_entities.py
+scriptorium/views/plan/editor_images_item.py
+scriptorium/views/plan/editor_images.py
 scriptorium/views/plan/editor_manuscript.py
+scriptorium/views/plan/editor_overview_item.py
 scriptorium/views/plan/editor_overview.py
 scriptorium/views/plan/editor_scenes_details.py
-scriptorium/views/plan/editor_images.py
-scriptorium/views/plan/editor_entities.py
-scriptorium/views/plan/editor_overview_item.py
-
+scriptorium/views/plan/editor_scenes.py
+scriptorium/window.blp
+scriptorium/window.py

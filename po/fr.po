@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: scriptorium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-08 11:38+0000\n"
-"PO-Revision-Date: 2025-11-08 11:44+0000\n"
-"Last-Translator:  <christophe.gueret@gmail.com>\n"
+"PO-Revision-Date: 2025-11-08 12:09+0000\n"
+"Last-Translator: christophe.gueret@gmail.com\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/io.github.cgueret.Scriptorium.desktop.in:2
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:7
 #: scriptorium/window.blp:5
 msgid "Scriptorium"
-msgstr ""
+msgstr "Scriptorium"
 
 #: data/io.github.cgueret.Scriptorium.desktop.in:8
 msgid "GTK;"
@@ -32,10 +33,7 @@ msgid "Design and write manuscripts"
 msgstr ""
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:10
-msgid ""
-"Scriptorium is a text editor coupled with a planning tool and a publishing "
-"tool. The objective is to provide writers with a simple and complete "
-"environment to plan, write and publish e-books."
+msgid "Scriptorium is a text editor coupled with a planning tool and a publishing tool. The objective is to provide writers with a simple and complete environment to plan, write and publish e-books."
 msgstr ""
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:13
@@ -165,9 +163,7 @@ msgid "Style Variant"
 msgstr ""
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:31
-msgid ""
-"Use the light or dark variant of the GTK theme and/or GtkSourceView style "
-"scheme."
+msgid "Use the light or dark variant of the GTK theme and/or GtkSourceView style scheme."
 msgstr ""
 
 #: scriptorium/views/library.blp:5
@@ -179,9 +175,7 @@ msgid "Main Menu"
 msgstr ""
 
 #: scriptorium/views/library.blp:47
-msgid ""
-"Your data folder is empty, click on the button on the top left corner to "
-"create a first manuscript"
+msgid "Your data folder is empty, click on the button on the top left corner to create a first manuscript"
 msgstr ""
 
 #: scriptorium/views/library.blp:48
@@ -190,11 +184,11 @@ msgstr ""
 
 #: scriptorium/views/library.blp:64
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: scriptorium/views/library.blp:65
 msgid "Migrate"
-msgstr ""
+msgstr "Migrer"
 
 #: scriptorium/views/library.blp:104 scriptorium/views/editor.blp:65
 msgid "Preferences"
@@ -210,7 +204,7 @@ msgstr ""
 
 #: scriptorium/views/editor.blp:33
 msgid "Plan"
-msgstr "Plannifier"
+msgstr "Planifier"
 
 #: scriptorium/views/editor.blp:40
 msgid "Write"
@@ -223,3 +217,4 @@ msgstr "Publier"
 #: scriptorium/views/editor.blp:77
 msgid "Images"
 msgstr "Images"
+
