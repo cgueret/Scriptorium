@@ -9,6 +9,7 @@
 	"command": "scriptorium",
 	"finish-args": [
 		"--share=network",
+		"--share=locale",
 		"--share=ipc",
 		"--socket=fallback-x11",
 		"--socket=wayland",

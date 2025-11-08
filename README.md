@@ -57,6 +57,23 @@ flatpak remote-add --if-not-exists --user flathub \
     https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
+## Update POT files
+```
+ninja -C _build scriptorium-pot
+```
+
+```
+meson compile -C _build scriptorium-update-po
+```
+
+To create a new localisation, add the localisation name to `LINGUAS` and then
+create a new `.po` from the `.pot` with:
+```
+msginit --locale=fr --input=po/scriptorium.pot --output-file=po/fr.po
+```
+
+
+
 ## Credit
 
 The quill on the icon comes from <a href="https://www.svgrepo.com/svg/229764/quill">SVG Repo</a>

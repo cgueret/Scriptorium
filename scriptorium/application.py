@@ -22,6 +22,11 @@ from .window import ScrptWindow
 from .language_tool import LanguageTool
 import logging
 
+import gettext
+gettext.bindtextdomain('scriptorium', '/usr/share/locale')
+gettext.textdomain('scriptorium')
+from gettext import gettext as _
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(name)-40s: %(levelname)-8s %(message)s'
@@ -80,7 +85,7 @@ class ScriptoriumApplication(Adw.Application):
             copyright='© 2025 Christophe Guéret'
         )
         about.add_credit_section(
-            'Beta testing',
+            _('Beta testing'),
             ['TheShadowOfHassen https://github.com/TheShadowOfHassen']
         )
         # Translators: Replace "translator-credits" with your name/username,

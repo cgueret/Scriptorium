@@ -3,6 +3,26 @@
 data/io.github.cgueret.Scriptorium.desktop.in
 data/io.github.cgueret.Scriptorium.metainfo.xml.in
 data/io.github.cgueret.Scriptorium.gschema.xml
-src/main.py
-src/window.py
-src/window.ui
+
+# Main application
+scriptorium/main.py
+scriptorium/window.py
+scriptorium/window.blp
+
+# Main views
+scriptorium/views/library.py
+scriptorium/views/library.blp
+scriptorium/views/editor.py
+scriptorium/views/editor.blp
+
+# "Plan" view
+scriptorium/views/plan/editor_scenes.py
+scriptorium/views/plan/editor_images_item.py
+scriptorium/views/plan/editor_entities_details.py
+scriptorium/views/plan/editor_manuscript.py
+scriptorium/views/plan/editor_overview.py
+scriptorium/views/plan/editor_scenes_details.py
+scriptorium/views/plan/editor_images.py
+scriptorium/views/plan/editor_entities.py
+scriptorium/views/plan/editor_overview_item.py
+
