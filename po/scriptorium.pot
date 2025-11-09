@@ -165,9 +165,7 @@ msgid "Style Variant"
 msgstr ""
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:31
-msgid ""
-"Use the light or dark variant of the GTK theme and/or GtkSourceView style "
-"scheme."
+msgid "Use the light or dark variant of the GTK theme"
 msgstr ""
 
 #: scriptorium/views/library.blp:5

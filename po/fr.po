@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.8\n"
@@ -26,63 +26,63 @@ msgstr "Scriptorium"
 
 #: data/io.github.cgueret.Scriptorium.desktop.in:8
 msgid "GTK;"
-msgstr ""
+msgstr "GTK;"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:8
 msgid "Design and write manuscripts"
-msgstr ""
+msgstr "Concevoir et rédiger des manuscrits"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:10
 msgid "Scriptorium is a text editor coupled with a planning tool and a publishing tool. The objective is to provide writers with a simple and complete environment to plan, write and publish e-books."
-msgstr ""
+msgstr "Scriptorium est un éditeur de texte associé à un outil de planification et de publication. L'objectif est d'équiper les personnes qui écrivent avec une solution simple et complete pour planifier, écrire et publier des e-books."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:13
 msgid "Scriptorium features are organised around three facets:"
-msgstr ""
+msgstr "Les fonctionalités de Scriptorium s'organise autour de trois angles:"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:15
 msgid "Plan the list of scenes and story elements of the manuscript."
-msgstr ""
+msgstr "Planifier les scènes et éléments d'histoire du manuscript."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:16
 msgid "Write the content of the scenes with a text focused editor."
-msgstr ""
+msgstr "Écrire le contenu des scénes dans un éditeur sans distraction."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:17
 msgid "Publish your manuscript as an epub after previewing it."
-msgstr ""
+msgstr "Publier le manuscript au format ePub après l'avoir prévisualisé"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:19
 msgid "In addition, some general features are:"
-msgstr ""
+msgstr "Additionnellement, d'autre fonctionalités sont présentes:"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:21
 msgid "Dark mode"
-msgstr ""
+msgstr "Mode sombre"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:22
 msgid "Versioning of scenes managed via Git"
-msgstr ""
+msgstr "Gestion de version des scènes via Git"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:23
 msgid "Back-end using plain text YAML and HTML files"
-msgstr ""
+msgstr "Stockage de données utilisant des fichiers YAML et HTML"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:49
 msgid "Plan the content of the manuscript"
-msgstr ""
+msgstr "Planifier le contenu du manuscript"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:53
 msgid "Write and re-arrange the scenes"
-msgstr ""
+msgstr "Écrire et réorganiser les scènes"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:57
 msgid "Write and re-arrange the scenes (dark mode)"
-msgstr ""
+msgstr "Écrire et réorganiser les scènes (mode sombre)"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:61
 msgid "Preview and publish the manuscript as an epub file"
-msgstr ""
+msgstr "Prévisualiser et publier le manuscript dans un fichier ePub"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:69
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:79
@@ -92,95 +92,95 @@ msgstr ""
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:121
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:131
 msgid "Release description"
-msgstr ""
+msgstr "Description de la version"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:71
 msgid "Update to Gnome 49"
-msgstr ""
+msgstr "Mise à jour pour Gnome 49"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:72
 msgid "Clamp the text editor to a usable width"
-msgstr ""
+msgstr "Limite la largeur de l'éditeur de texte"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:81
 msgid "Fix regression in Write"
-msgstr ""
+msgstr "Répare une régression sur Écrire"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:90
 msgid "Re-design of the interface around 3 main facets (Plan/Write/Publish)"
-msgstr ""
+msgstr "Re-organise l'interface autour de 3 angles principaux (Planifier/Écrire/Publier)"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:91
 msgid "Plan: addition of a tool to set the book cover"
-msgstr ""
+msgstr "Planifier: addition d'un outil pour configurer la couverture du livre"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:92
 msgid "Plan: addition of a gallery tool to manage images"
-msgstr ""
+msgstr "Planifier: addition d'une gallerie pour gérer les images"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:93
 msgid "Write: right click on a suggestion to see its content"
-msgstr ""
+msgstr "Écrire: click droit sur une suggestion pour en voir le contenu"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:94
 msgid "Publish: export the manuscript as an epub file"
-msgstr ""
+msgstr "Publier: export du manuscript en fichier ePub"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:103
 msgid "Addition of LanguageTool to provide content suggestions"
-msgstr ""
+msgstr "Addition de LanguageTool pour fournir des suggestions de contenu"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:104
 msgid "Added styling options for the text (strong, emphasis)"
-msgstr ""
+msgstr "Addition d'options de style pour le texte (gras, accentué)"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:105
 msgid "Added preferences dialog to define preferences of the text editor"
-msgstr ""
+msgstr "Addition d'un dialogue de gestion de préférences pour l'éditeur de texte"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:114
 msgid "Fixed metadata for Flatpak"
-msgstr ""
+msgstr "Répare les problèmes avec Flatpak"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:123
 msgid "Added startup screen"
-msgstr ""
+msgstr "Addition d'un écran de démarrage"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:124
 msgid "Fixed bug where icons would not re-style"
-msgstr ""
+msgstr "Réparation d'un problème avec le style des icônes"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:133
 msgid "First public release of the code"
-msgstr ""
+msgstr "Première version publique"
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:21
 msgid "The location for the manuscripts, defaults to user data directory"
-msgstr ""
+msgstr "L'emplacement de stockage des manuscripts, dans les fichiers utilisateur par défaut"
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:30
 msgid "Style Variant"
-msgstr ""
+msgstr "Variante de style"
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:31
-msgid "Use the light or dark variant of the GTK theme and/or GtkSourceView style scheme."
-msgstr ""
+msgid "Use the light or dark variant of the GTK theme"
+msgstr "Utiliser la version claire ou sombre de GTK / GtkSourceView"
 
 #: scriptorium/views/library.blp:5
 msgid "Library"
-msgstr ""
+msgstr "Librairie"
 
 #: scriptorium/views/library.blp:23 scriptorium/views/editor.blp:23
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu principal"
 
 #: scriptorium/views/library.blp:47
 msgid "Your data folder is empty, click on the button on the top left corner to create a first manuscript"
-msgstr ""
+msgstr "Le dossier des données est vide, cliquez sur le bouton en haut à droite pour créer votre premier manuscript"
 
 #: scriptorium/views/library.blp:48
 msgid "Welcome to Scriptorium !"
-msgstr ""
+msgstr "Bienvenue dans Scriptorium !"
 
 #: scriptorium/views/library.blp:64
 msgid "Cancel"
@@ -192,15 +192,15 @@ msgstr "Migrer"
 
 #: scriptorium/views/library.blp:104 scriptorium/views/editor.blp:65
 msgid "Preferences"
-msgstr ""
+msgstr "Préférences"
 
 #: scriptorium/views/library.blp:108 scriptorium/views/editor.blp:69
 msgid "About Scriptorium"
-msgstr "A propos de Scriptorium"
+msgstr "À propos de Scriptorium"
 
 #: scriptorium/views/editor.blp:5
 msgid "Editor"
-msgstr ""
+msgstr "Éditeur"
 
 #: scriptorium/views/editor.blp:33
 msgid "Plan"
@@ -208,7 +208,7 @@ msgstr "Planifier"
 
 #: scriptorium/views/editor.blp:40
 msgid "Write"
-msgstr "Ecrire"
+msgstr "Écrire"
 
 #: scriptorium/views/editor.blp:47
 msgid "Publish"

@@ -72,6 +72,11 @@ create a new `.po` from the `.pot` with:
 msginit --locale=fr --input=po/scriptorium.pot --output-file=po/fr.po
 ```
 
+To test a localisation add something like that to the finishing args of the
+flatpak:
+```
+"--env=LC_ALL=fr_FR.UTF-8"
+```
 
 
 ## Credit
