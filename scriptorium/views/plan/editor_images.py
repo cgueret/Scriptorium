@@ -30,8 +30,8 @@ logger = logging.getLogger(__name__)
 class ScrptImagesPanel(Adw.NavigationPage):
     __gtype_name__ = "ScrptImagesPanel"
     __icon_name__ = "image-x-generic-symbolic"
-    __description__ = "Overview of all the content"
-    __title__ = "Gallery"
+    __description__ = _("Gallery of images used in the project")
+    __title__ = _("Gallery")
 
     images_box = Gtk.Template.Child()
 

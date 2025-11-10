@@ -33,13 +33,13 @@ logger = logging.getLogger(__name__)
 
 PANELS = [
     # Manuscript
-    ("header", "Manuscript"),
+    ("header", _("Manuscript")),
     ("manuscript", ScrptManuscriptPanel),
     # Background research
     # Writing goals
 
     # Story elements
-    ("header", "Story line"),
+    ("header", _("Story line")),
     ("overview", ScrptOverviewPanel),
     ("scenes", ScrptScenesPanel),
     ("entities", ScrptEntityPanel),
@@ -47,7 +47,7 @@ PANELS = [
     # Plot lines
 
     # Special pages
-    ("header", "Additional resources"),
+    ("header", _("Additional resources")),
     ("images", ScrptImagesPanel),
 ]
 

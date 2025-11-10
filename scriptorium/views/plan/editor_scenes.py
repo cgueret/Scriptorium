@@ -35,11 +35,11 @@ logger = logging.getLogger(__name__)
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_scenes.ui")
 class ScrptScenesPanel(Adw.NavigationPage):
     """Panel to list all the scenes and edit their content."""
-
     __gtype_name__ = "ScrptScenesPanel"
-    __title__ = "Scenes list"
     __icon_name__ = "edit-symbolic"
-    __description__ = "Edit the content of the scenes"
+
+    __title__ = _("Scenes list")
+    __description__ = _("Edit the content of the scenes")
 
     scenes_list = Gtk.Template.Child()
     navigation: Adw.NavigationView = Gtk.Template.Child()

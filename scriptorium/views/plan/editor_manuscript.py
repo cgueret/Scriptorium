@@ -31,9 +31,10 @@ logger = logging.getLogger(__name__)
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_manuscript.ui")
 class ScrptManuscriptPanel(Adw.NavigationPage):
     __gtype_name__ = "ScrptManuscriptPanel"
-    __title__ = "Description"
     __icon_name__ = "dictionary-symbolic"
-    __description__ = "Edit the information about the manuscript"
+
+    __title__ = _("Description")
+    __description__ = _("Edit the information about the manuscript")
 
     identifier = Gtk.Template.Child()
     edit_title = Gtk.Template.Child()

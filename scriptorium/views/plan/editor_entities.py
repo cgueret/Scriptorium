@@ -16,8 +16,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-
 import logging
 
 from gi.repository import Adw, Gtk
@@ -33,13 +31,14 @@ logger = logging.getLogger(__name__)
 
 # TODO: When adding a new element offer to pick a template to pre-populate attrs
 
+
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_entities.ui")
 class ScrptEntityPanel(Adw.NavigationPage):
     __gtype_name__ = "ScrptEntityPanel"
-
-    __title__ = "Story elements"
     __icon_name__ = "find-location-symbolic"
-    __description__ = "Set the key elements of the story"
+
+    __title__ = _("Story elements")
+    __description__ = _("Set the key elements of the story")
 
     entities_list = Gtk.Template.Child()
     navigation = Gtk.Template.Child()

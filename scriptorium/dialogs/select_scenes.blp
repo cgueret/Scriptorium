@@ -4,12 +4,12 @@ using Adw 1;
 template $ScrptSelectScenesDialog: Adw.AlertDialog {
   default-response: _("Done");
   close-response: _("Cancel");
-  body: "Select the scene you would like to use and validate when done";
-  heading: "Select scenes";
+  body: _("Select the scene you would like to use and validate when done");
+  heading: _("Select scenes");
   prefer_wide_layout: false;
 
   extra_child: Adw.PreferencesGroup {
-    title: "Available scenes";
+    title: _("Available scenes");
 
     ListBox scenes_list {
       selection-mode: single;
@@ -22,7 +22,7 @@ template $ScrptSelectScenesDialog: Adw.AlertDialog {
       [placeholder]
       Adw.StatusPage {
         icon-name: "item-missing-symbolic";
-        description: "No scene available";
+        description: _("No scene available");
       }
     }
   };

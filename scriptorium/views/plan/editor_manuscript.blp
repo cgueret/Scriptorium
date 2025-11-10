@@ -7,7 +7,7 @@ template $ScrptManuscriptPanel: Adw.NavigationPage {
   child: ScrolledWindow {
     Adw.PreferencesPage {
       Adw.PreferencesGroup {
-        title: "Summary";
+        title: _("Summary");
 
         ListBox {
           selection-mode: none;
@@ -17,7 +17,7 @@ template $ScrptManuscriptPanel: Adw.NavigationPage {
           ]
 
           Adw.ActionRow identifier {
-            title: "Identifier";
+            title: _("Identifier");
             subtitle: "uuid";
             styles [
               "property", "dim-label"
@@ -25,17 +25,17 @@ template $ScrptManuscriptPanel: Adw.NavigationPage {
           }
 
           Adw.EntryRow edit_title {
-            title: "Title";
+            title: _("Title");
           }
 
           $MultiLineEntryRow edit_synopsis {
-            header: "Synopsis";
+            header: _("Synopsis");
           }
         }
       }
 
       Adw.PreferencesGroup {
-        title: "Cover";
+        title: _("Cover");
 
         header-suffix: Adw.SplitButton cover_edit_button {
 

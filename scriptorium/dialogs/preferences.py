@@ -20,18 +20,18 @@
 from gi.repository import Adw, Gtk, Gio, Pango
 from scriptorium.globals import BASE
 from scriptorium.utils import html_to_buffer
+from gettext import gettext as _
 
 import logging
 
 logger = logging.getLogger(__name__)
 
-PLACEHOLDER_TEXT = """
-<p>This is a <hint>placeholder text</hint> to <warning>select</warning> the
-font of the scene editor.
-You can also see how <error>annotations</error> are shown and how words with
-an <em>emphasis</em> or noted as <strong>strong</strong> will look like.</p>
-"""
-
+PLACEHOLDER_TEXT = _(
+"<p>This is a <hint>placeholder text</hint> to <warning>select</warning>"
+"the font of the scene editor.</p>"
+"<p>You can also see how <error>annotations</error> are shown and how words"
+"with an <em>emphasis</em> or noted as <strong>strong</strong> will appear.</p>"
+)
 UNDERLINE_OPTIONS = ["single", "double", "dashed"]
 
 
@@ -81,7 +81,7 @@ class ScrptPreferencesDialog(Adw.PreferencesDialog):
 
         # Load up the text for the font preview
         html_to_buffer(
-            PLACEHOLDER_TEXT.replace("\n", " "),
+            PLACEHOLDER_TEXT,
             self.text_view.get_buffer()
         )
 
