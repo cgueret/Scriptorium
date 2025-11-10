@@ -104,11 +104,11 @@ class WriteNavigation(Adw.Bin):
         manuscript_id = project.manuscript.identifier
         menu = Gio.Menu()
         menu.append(
-            label="Add new Scene",
+            label=_("Add new Scene"),
             detailed_action=f"editor.add_resource(('Scene', '{manuscript_id}'))"
         )
         menu.append(
-            label="Add new Chapter",
+            label=_("Add new Chapter"),
             detailed_action=f"editor.add_resource(('Chapter', '{manuscript_id}'))"
         )
         self.add_menu.set_menu_model(menu)

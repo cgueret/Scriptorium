@@ -21,8 +21,8 @@ template $ScrptScenesPanel: Adw.NavigationPage {
           vexpand: true;
           child: Adw.PreferencesPage {
             Adw.PreferencesGroup {
-              title: "Scenes";
-              description: "This is the list of all the scenes in your project";
+              title: _("Scenes");
+              description: _("This is the list of all the scenes in your project");
               header-suffix: Button {
                 clicked => $on_add_scene_clicked();
 
@@ -42,7 +42,7 @@ template $ScrptScenesPanel: Adw.NavigationPage {
                 [placeholder]
                 Adw.StatusPage {
                   icon-name: "item-missing-symbolic";
-                  description: "Add a first scene and start writing";
+                  description: _("Add a first scene and start writing");
                 }
 
                 row-activated => $on_listbox_row_activated();

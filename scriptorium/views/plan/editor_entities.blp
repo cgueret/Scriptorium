@@ -2,7 +2,7 @@ using Gtk 4.0;
 using Adw 1;
 
 template $ScrptEntityPanel: Adw.NavigationPage {
-  title: "Story elements";
+  title: _("Story elements");
 
   child: Adw.NavigationView navigation {
     Adw.NavigationPage {
@@ -19,8 +19,8 @@ template $ScrptEntityPanel: Adw.NavigationPage {
         content: ScrolledWindow  {
           child: Adw.PreferencesPage {
             Adw.PreferencesGroup {
-              title: "Elements";
-              description: "The character, places, and props of the story";
+              title: _("Elements");
+              description: _("The character, places, and props of the story");
 
               header-suffix: Button {
                 clicked => $on_add_entity_clicked();

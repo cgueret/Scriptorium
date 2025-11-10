@@ -10,15 +10,15 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
 
 
     Adw.PreferencesGroup {
-      title: "Theme";
-      description: "Select the theme for the application";
+      title: _("Theme");
+      description: _("Select the theme for the application");
       Adw.PreferencesRow {
         $ThemeSelector {}
       }
     }
 
     Adw.PreferencesGroup {
-      title: "Projects";
+      title: _("Projects");
       Adw.SwitchRow open_last_project {
         title: _("Restore Previous Session");
         subtitle: _("Open the last project when starting Scriptorium");
@@ -31,7 +31,7 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
     icon-name: "settings-symbolic";
 
     Adw.PreferencesGroup {
-      title: "Preview";
+      title: _("Preview");
       Box {
         styles [
           "card"
@@ -87,7 +87,7 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
         title: _("Underline style");
         subtitle: _("Adjust the style of the underlines");
         model: Gtk.StringList {
-          strings ["single", "double", "dashed"]
+          strings [_("single"), _("double"), _("dashed")]
         };
         notify::selected => $on_underline_style_selected();
       }

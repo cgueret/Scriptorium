@@ -4,12 +4,12 @@ using Adw 1;
 template $ScrptSelectEntitiesDialog: Adw.AlertDialog {
   default-response: _("Done");
   close-response: _("Cancel");
-  body: "Select the element you would like to use and validate when done";
-  heading: "Select story element";
+  body: _("Select the element you would like to use and validate when done");
+  heading: _("Select story element");
   prefer_wide_layout: false;
 
   extra_child: Adw.PreferencesGroup {
-    title: "Available elements";
+    title: _("Available elements");
 
     ListBox list_box {
       selection-mode: single;
@@ -22,7 +22,7 @@ template $ScrptSelectEntitiesDialog: Adw.AlertDialog {
       [placeholder]
       Adw.StatusPage {
         icon-name: "item-missing-symbolic";
-        description: "No more element available";
+        description: _("No more element available");
       }
     }
   };

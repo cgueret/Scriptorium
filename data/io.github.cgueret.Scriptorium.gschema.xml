@@ -28,7 +28,7 @@
       </choices>
       <default>'default'</default>
       <summary>Style Variant</summary>
-      <description>Use the light or dark variant of the GTK theme and/or GtkSourceView style scheme.</description>
+      <description>Use the light or dark variant of the GTK theme</description>
     </key>
     <key name="editor-line-height" type="d">
       <default>1.2</default>

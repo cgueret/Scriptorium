@@ -16,6 +16,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+from gettext import gettext as _
+
 from scriptorium.dialogs import ScrptPreferencesDialog
 from gi.repository import Gio, Adw, GLib, GObject
 from .window import ScrptWindow
@@ -80,7 +82,7 @@ class ScriptoriumApplication(Adw.Application):
             copyright='© 2025 Christophe Guéret'
         )
         about.add_credit_section(
-            'Beta testing',
+            _('Beta testing'),
             ['TheShadowOfHassen https://github.com/TheShadowOfHassen']
         )
         # Translators: Replace "translator-credits" with your name/username,

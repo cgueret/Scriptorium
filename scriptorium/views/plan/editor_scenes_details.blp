@@ -16,7 +16,7 @@ template $ScrptScenesDetailsPanel: Adw.NavigationPage {
       vexpand: true;
       child: Adw.PreferencesPage {
         Adw.PreferencesGroup {
-          title: "Summary";
+          title: _("Summary");
 
           ListBox {
             selection-mode: none;
@@ -26,7 +26,7 @@ template $ScrptScenesDetailsPanel: Adw.NavigationPage {
             ]
 
             Adw.ActionRow identifier {
-              title: "Identifier";
+              title: _("Identifier");
               subtitle: "uuid";
               styles [
                 "property", "dim-label"
@@ -34,17 +34,17 @@ template $ScrptScenesDetailsPanel: Adw.NavigationPage {
             }
 
             Adw.EntryRow edit_title {
-              title: "Title";
+              title: _("Title");
             }
 
             $MultiLineEntryRow edit_synopsis {
-              header: "Synopsis";
+              header: _("Synopsis");
             }
           }
         }
 
         Adw.PreferencesGroup {
-          title: "Elements";
+          title: _("Elements");
 
           header-suffix: Stack assign_remove_stack {
             StackPage {
@@ -54,7 +54,7 @@ template $ScrptScenesDetailsPanel: Adw.NavigationPage {
 
                   Adw.ButtonContent {
                     icon-name: "object-select-symbolic";
-                    label: "Connect story elements ...";
+                    label: _("Connect story elements ...");
                   }
               };
             }

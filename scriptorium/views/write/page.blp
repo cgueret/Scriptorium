@@ -20,14 +20,14 @@ template $WritePage: Adw.Bin {
         margin-bottom: 6;
 
         Adw.PreferencesGroup {
-          title: "Summary";
+          title: _("Summary");
           margin-start: 6;
           margin-end: 6;
           margin-top: 6;
           margin-bottom: 6;
 
           Adw.EntryRow edit_title {
-            title: "Title";
+            title: _("Title");
           }
 
           $MultiLineEntryRow edit_synopsis {
@@ -54,7 +54,7 @@ template $WritePage: Adw.Bin {
               [placeholder]
               Adw.StatusPage {
                 icon-name: "object-select-symbolic";
-                description: "No suggested changes";
+                description: _("No suggested changes");
               }
             }
           }
@@ -143,8 +143,8 @@ template $WritePage: Adw.Bin {
 
           child: Adw.StatusPage {
             icon-name: "edit-symbolic";
-            title: "No scene selected";
-            description: "Create or select a scene to write its content";
+            title: _("No scene selected");
+            description: _("Create or select a scene to write its content");
           };
         }
 

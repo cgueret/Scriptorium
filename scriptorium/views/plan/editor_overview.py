@@ -31,8 +31,9 @@ logger = logging.getLogger(__name__)
 class ScrptOverviewPanel(Adw.NavigationPage):
     __gtype_name__ = "ScrptOverviewPanel"
     __icon_name__ = "view-columns-symbolic"
-    __description__ = "Overview of all the content"
-    __title__ = "Outline"
+
+    __title__ = _("Outline")
+    __description__ = _("Overview of all the content")
 
     main_content = Gtk.Template.Child()
 
