@@ -82,7 +82,7 @@ flatpak:
 
 ## Credit
 
-The quill on the icon comes from <a href="https://www.svgrepo.com/svg/229764/quill">SVG Repo</a>
+Icon made by <a href="https://jimmac.eu/">Jakub Steiner</a>
 
-This project contains a lot of codes inspired by many other open source projects, thanks everyone!
+This project contains a lot of code inspired by many other open source projects, thanks everyone!
 

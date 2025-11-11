@@ -85,6 +85,11 @@ class ScriptoriumApplication(Adw.Application):
             _('Beta testing'),
             ['TheShadowOfHassen https://github.com/TheShadowOfHassen']
         )
+        about.add_credit_section(
+            _('Icon design'),
+            ['Jakub Steiner https://jimmac.eu/']
+        )
+
         # Translators: Replace "translator-credits" with your name/username,
         # and optionally an email or URL.
         # about.set_translator_credits(_('translator-credits'))
