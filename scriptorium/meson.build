@@ -62,6 +62,7 @@ blueprints = custom_target(
 		'views/write/navigation_item.blp',
 
 		'views/publish/page.blp',
+		'views/publish/preview.blp',
 
 		'widgets/chapter_column.blp',
 		'widgets/scene.blp',

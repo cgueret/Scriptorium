@@ -30,10 +30,13 @@ template $PublishPage: Adw.Bin {
           margin-start: 12;
           margin-end: 12;
 
-          Box web_view_placeholder {
+          Box {
             styles [
               "card",
             ]
+            ScrolledWindow {
+              $PublishPreview preview {}
+            }
           }
         }
       }

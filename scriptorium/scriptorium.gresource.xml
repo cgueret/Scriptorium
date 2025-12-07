@@ -46,6 +46,7 @@
 
     <!-- Publish -->
     <file preprocess="xml-stripblanks">views/publish/page.ui</file>
+    <file preprocess="xml-stripblanks">views/publish/preview.ui</file>
     <file>utils/epub-novel.css</file>
   </gresource>
 

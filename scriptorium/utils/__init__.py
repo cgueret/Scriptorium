@@ -14,6 +14,9 @@ def html_to_buffer(html_content: str, buffer: Gtk.TextBuffer):
     """
     Turn the content of an HTML payload into TextBuffer content with tags
     """
+    # Get the list of tags known to this buffer
+    known_tags = set()
+    buffer.get_tag_table().foreach(lambda x: known_tags.add(x.props.name))
 
     # Process the lines and populate the buffer
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -23,7 +26,7 @@ def html_to_buffer(html_content: str, buffer: Gtk.TextBuffer):
             text = child.get_text()
             if len(text) > 1:
                 start = buffer.get_end_iter()
-                if child.name:
+                if child.name and child.name in known_tags:
                     buffer.insert_with_tags_by_name(start, text, child.name)
                 else:
                     buffer.insert(start, text)

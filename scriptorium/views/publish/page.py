@@ -16,20 +16,13 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-
-import logging
-from gi.repository import Adw, Gtk, Gio, GLib
+from gi.repository import Adw, Gtk
 from scriptorium.globals import BASE
 from scriptorium.utils.publisher import Publisher
-from pathlib import Path
 
-try:
-    from gi.repository import WebKit
-    HAVE_WEBKIT = True
-except ImportError:
-    HAVE_WEBKIT = False
-
+import logging
 logger = logging.getLogger(__name__)
+
 
 class NavigationRow(Gtk.Box):
 
@@ -40,12 +33,13 @@ class NavigationRow(Gtk.Box):
         self._part = part
 
         # Set the label
-        label = Gtk.Label(label = part.title)
+        label = Gtk.Label(label=part.title)
         self.append(label)
 
     @property
     def part(self):
         return self._part
+
 
 @Gtk.Template(resource_path=f"{BASE}/views/publish/page.ui")
 class PublishPage(Adw.Bin):
@@ -55,33 +49,11 @@ class PublishPage(Adw.Bin):
     __icon_name__ = "open-book-symbolic"
     __description__ = "Preview and modify the formatting"
 
-    web_view_placeholder = Gtk.Template.Child()
+    preview = Gtk.Template.Child()
     toc = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        # If we have WebKit set the component, otherwise show placeholder
-        if HAVE_WEBKIT:
-            logger.info("Webkit is available")
-            self.web_view = WebKit.WebView()
-            self.web_view.set_zoom_level(1)
-            self.web_view.set_margin_start(6)
-            self.web_view.set_margin_end(6)
-            self.web_view.set_margin_top(6)
-            self.web_view.set_margin_bottom(6)
-            self.web_view.set_vexpand(True)
-            self.web_view.set_hexpand(True)
-            self.web_view_placeholder.append(self.web_view)
-        else:
-            widget = Adw.StatusPage(
-                title="Not available",
-                icon_name="process-stop-symbolic",
-                description="This feature is not available on your operating system"
-            )
-            widget.set_vexpand(True)
-            widget.set_hexpand(True)
-            self.web_view_placeholder.append(widget)
 
         self.toc.connect(
              "row-selected",
@@ -127,17 +99,8 @@ class PublishPage(Adw.Bin):
         if isinstance(content, bytes):
             content = content.decode()
 
-        # Save the CSS to disk to be able to load it
-        style = Gio.File.new_for_uri(
-            f"resource:/{BASE}/utils/epub-novel.css"
-        ).load_contents()[1].decode()
-        directory = Path(GLib.get_user_data_dir()) / Path('style')
-        directory.mkdir(exist_ok=True)
-        (directory / Path('novel.css')).write_text(style)
-
-        # Load the content
-        if HAVE_WEBKIT:
-            self.web_view.load_html(content, "file:///" + str(directory))
+        # Load that into the preview window
+        self.preview.load(content)
 
     @Gtk.Template.Callback()
     def on_publish_clicked(self, _button):

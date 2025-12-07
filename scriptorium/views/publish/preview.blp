@@ -1,0 +1,27 @@
+using Gtk 4.0;
+
+template $PublishPreview: Gtk.TextView {
+  styles [
+    "text_editor"
+  ]
+
+  vexpand: true;
+  hexpand: true;
+  left-margin: 6;
+  right-margin: 6;
+  top-margin: 6;
+  bottom-margin: 6;
+  margin-top: 6;
+  margin-bottom: 6;
+  margin-start: 6;
+  margin-end: 6;
+
+  editable: false;
+
+  buffer: Gtk.TextBuffer buffer {
+    enable-undo: false;
+  };
+
+  wrap-mode: word;
+}
+
