@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: scriptorium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-10 16:56+0000\n"
+"POT-Creation-Date: 2025-12-22 10:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,6 +170,16 @@ msgstr ""
 
 #: scriptorium/application.py:85
 msgid "Beta testing"
+msgstr ""
+
+#: scriptorium/application.py:89
+msgid "Icon design"
+msgstr ""
+
+#. Translators: Replace "translator-credits" with your name/username,
+#. and optionally an email or URL.
+#: scriptorium/application.py:95
+msgid "translator-credits"
 msgstr ""
 
 #: scriptorium/dialogs/dialog_add.blp:5 scriptorium/dialogs/dialog_add.blp:36

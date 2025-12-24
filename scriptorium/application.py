@@ -73,7 +73,7 @@ class ScriptoriumApplication(Adw.Application):
             application_name='Scriptorium',
             application_icon='io.github.cgueret.Scriptorium',
             developer_name='Christophe Guéret',
-            version='1.1.0',
+            version='1.2.0',
             website='https://github.com/cgueret/Scriptorium',
             developers=[
                 'Christophe Guéret <christophe.gueret@gmail.com>',
@@ -85,14 +85,14 @@ class ScriptoriumApplication(Adw.Application):
             _('Beta testing'),
             ['TheShadowOfHassen https://github.com/TheShadowOfHassen']
         )
-        about.add_credit_section(
-            _('Icon design'),
+        about.set_artists(
             ['Jakub Steiner https://jimmac.eu/']
         )
 
         # Translators: Replace "translator-credits" with your name/username,
         # and optionally an email or URL.
-        # about.set_translator_credits(_('translator-credits'))
+        about.set_translator_credits(_('translator-credits'))
+
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
