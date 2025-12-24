@@ -63,6 +63,17 @@
   </screenshots>
 
   <releases>
+    <release version="1.2.0" date="2025-12-24">
+      <url type="details">https://github.com/cgueret/Scriptorium/releases/tag/v1.2.0</url>
+      <description translate="no">
+        <p>Release description</p>
+        <ul>
+          <li>Added Russian translation from KevinDev64</li>
+          <li>Added French translation</li>
+          <li>New stylish icon by Jakub Steiner</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2025-09-26">
       <url type="details">https://github.com/cgueret/Scriptorium/releases/tag/v1.1.0</url>
       <description translate="no">
