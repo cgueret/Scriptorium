@@ -28,6 +28,9 @@ scriptorium_sources = [
 ]
 install_data(scriptorium_sources, install_dir: moduledir)
 
+# Install all the templates
+#install_subdir('templates', install_dir: moduledir / 'templates')
+install_emptydir(moduledir / 'templates')
 
 
 blueprints = custom_target(
