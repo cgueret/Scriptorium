@@ -13,7 +13,7 @@
         "--socket=fallback-x11",
         "--socket=wayland",
         "--device=dri",
-        "--env=PATH=/app/jre/bin:/usr/bin:/app/bin",
+        "--env=PATH=/app/jre/bin:/usr/bin:/app/bin"
     ],
     "cleanup" : [
         "/include",
