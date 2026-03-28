@@ -29,11 +29,26 @@ from scriptorium.globals import BASE
 logger = logging.getLogger(__name__)
 
 
+class KeyValuePair(GObject.Object):
+    key = GObject.Property(
+        type=str,
+        flags=GObject.ParamFlags.READWRITE,
+        default=""
+    )
+    value = GObject.Property(
+        type=str,
+        nick="Value",
+        blurb="Value",
+        flags=GObject.ParamFlags.READWRITE,
+        default="",
+    )
+
+
 def find_in_model(input_list: Gio.ListModel, value: str, default: int) -> int:
     """Look for the index of a target string, return the default if not found."""
     position = 0
     while input_list.get_item(position) is not None:
-        if input_list.get_item(position).get_string() == value:
+        if input_list.get_item(position).key == value:
             return position
         position += 1
     return default
@@ -128,9 +143,18 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
         else:
             # Add the language options to the drop down
             logger.info(languages)
-            model = self.language_drop_down.get_model()
+            model = Gio.ListStore(item_type=KeyValuePair)
             for language in languages:
-                model.append(language['name'])
+                model.append(KeyValuePair(
+                    key=language['longCode'], value=language['name']
+                ))
+            list_store_expression = Gtk.PropertyExpression.new(
+                KeyValuePair,
+                None,
+                "value",
+            )
+            self.language_drop_down.set_expression(list_store_expression)
+            self.language_drop_down.set_model(model)
 
             index_english = find_in_model(model, "English", 0)
 
@@ -141,7 +165,7 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
                 target_property="selected",
                 flags=GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
                 transform_from=lambda src, position:
-                    model.get_string(position),
+                    self.language_drop_down.get_selected_item().key,
                 transform_to=lambda src, string:
                     find_in_model(model, string, index_english)
             )
