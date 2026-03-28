@@ -3,6 +3,7 @@ using Adw 1;
 
 template $ScrptManuscriptPanel: Adw.NavigationPage {
   title: "Manuscript details";
+  realize => $on_scrptmanuscriptpanel_realize();
 
   child: ScrolledWindow {
     Adw.PreferencesPage {
@@ -30,6 +31,29 @@ template $ScrptManuscriptPanel: Adw.NavigationPage {
 
           $MultiLineEntryRow edit_synopsis {
             header: _("Synopsis");
+          }
+
+          ListBoxRow {
+            child: Box {
+              orientation: vertical;
+              margin-start: 12;
+              margin-end: 12;
+              margin-top: 6;
+              margin-bottom: 6;
+              spacing: 6;
+              Label {
+                label: _("Language");
+                styles [
+                  "subtitle"
+                ]
+                halign: start;
+              }
+              DropDown language_drop_down {
+                enable-search: true;
+                hexpand: true;
+                model: StringList {};
+              }
+            };
           }
         }
       }

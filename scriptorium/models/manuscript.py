@@ -39,6 +39,9 @@ class Manuscript(Resource):
     # The cover of the manuscript
     cover = GObject.Property(type=Image)
 
+    # The language of the manuscript
+    language = GObject.Property(type=str)
+
     def __init__(self, project, identifier):
         """Create a new manuscript."""
         super().__init__(project, identifier)

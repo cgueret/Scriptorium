@@ -29,6 +29,7 @@ SEND_PING_TIMEOUT_SECONDS = 1
 
 # TODO Replace pings with a passive check, update alive everytime asked
 
+
 class LanguageTool(GObject.Object):
 
     # This is True when we could connect to Language Tool, False otherwise
@@ -37,20 +38,44 @@ class LanguageTool(GObject.Object):
     def __init__(self):
         super().__init__()
 
+        # HTTP session to dialog with the server
         self._session = Soup.Session()
 
+        # Used to connect to an internal instance when needed
         self._proc_language_tool = None
 
-        GLib.timeout_add_seconds(SEND_PING_TIMEOUT_SECONDS, self.send_ping)
+    def startup(self):
+        """Startup the server."""
+        if not self.server_is_alive:
+            logger.info("Starting LanguageTool server")
+            self._start_or_connect_to_server()
 
-    def send_ping(self):
+    def shutdown(self):
+        """Shutdown the server."""
+        # Only shut down the server if we manage the instance
+        if self.server_is_alive and self._proc_language_tool:
+            logger.info("Stopping internal LanguageTool server")
+            self._proc_language_tool.force_exit()
+
+        # The server is now offline
+        self.server_is_alive = False
+
+    def _start_or_connect_to_server(self):
+        """
+        Handle an attempt to either connect to an external instance of
+        language tool or start an internal server.
+        """
+
+        # Send a ping to the port where LanguageTool is expected to be found
         message = Soup.Message.new("GET", "http://localhost:8081")
         self._session.send_and_read_async(
-            message, GObject.PRIORITY_LOW, None, self.handle_ping_reply
+            message, GObject.PRIORITY_LOW, None, self._handle_ping_reply
         )
+
+        # When called on a timeout, we don't want this to repeat
         return False
 
-    def handle_ping_reply(self, session, result):
+    def _handle_ping_reply(self, session, result):
         try:
             message = session.send_and_read_finish(result)
             if "LanguageTool API" in message.get_data().decode():
@@ -61,38 +86,56 @@ class LanguageTool(GObject.Object):
             self.server_is_alive = False
 
             # Let's try to start it
-            self._start_server()
+            logger.info("Starting internal LanguageTool server")
 
-            # Try to ping it
-            GLib.timeout_add_seconds(SEND_PING_TIMEOUT_SECONDS, self.send_ping)
+            # Start the subprocess
+            if self._proc_language_tool is None:
+                self._proc_language_tool = Gio.Subprocess.new(
+                    [
+                        "java",
+                        "-cp",
+                        "/app/LanguageTool/languagetool-server.jar",
+                        "org.languagetool.server.HTTPServer",
+                        "--allow-origin",
+                        "--public",
+                        "--port",
+                        "8081",
+                    ],
+                    Gio.SubprocessFlags.INHERIT_FDS | Gio.SubprocessFlags.STDOUT_PIPE,
+                )
 
-    def shutdown(self):
-        if self._proc_language_tool:
-            self._proc_language_tool.force_exit()
+            # Try to connect to it
+            GLib.timeout_add_seconds(
+                SEND_PING_TIMEOUT_SECONDS,
+                self._start_or_connect_to_server
+            )
 
-    def _start_server(self):
-        # Only try once!
-        if self._proc_language_tool is not None:
-            return
+    def languages(self, callback):
+        """Get a list of supported languages."""
 
-        logger.info("Starting LanguageTool server")
-
-        # Start the subprocess
-        self._proc_language_tool = Gio.Subprocess.new(
-            [
-                "java",
-                "-cp",
-                "/app/LanguageTool/languagetool-server.jar",
-                "org.languagetool.server.HTTPServer",
-                "--allow-origin",
-                "--public",
-                "--port",
-                "8081",
-            ],
-            Gio.SubprocessFlags.INHERIT_FDS | Gio.SubprocessFlags.STDOUT_PIPE,
+        # Send a request
+        message = Soup.Message.new("GET", "http://localhost:8081/v2/languages")
+        self._session.send_and_read_async(
+            msg=message,
+            io_priority=GObject.PRIORITY_LOW,
+            cancellable=None,
+            callback=self._handle_languages_reply,
+            user_data=callback
         )
 
+    def _handle_languages_reply(self, session, result, callback):
+        try:
+            message = session.send_and_read_finish(result)
+            languages = json.loads(message.get_data().decode())
+            callback(languages)
+        except GLib.GError:
+            logger.error("Error fetching languages")
+            callback(None)
+
     def check(self, text: str, language: str, callback):
+        """ Check a text. """
+
+        # Return None if the server is not alive
         if not self.server_is_alive:
             return None
 

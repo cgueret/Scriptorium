@@ -73,7 +73,7 @@ class PlanPage(Adw.Bin):
         self.connect("map", self.on_map)
 
     def on_map(self, _):
-        #Open the default panel
+        # Open the default panel
         row = None
         for index in range(len(PANELS)):
             if PANELS[index][0] == DEFAULT:
