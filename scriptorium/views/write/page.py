@@ -280,7 +280,7 @@ class WritePage(Adw.Bin):
         else:
             language_tool.check(
                 content,
-                "en-GB",
+                self.project.manuscript.language,
                 self.on_received_annotations
             )
 
