@@ -142,9 +142,10 @@ class ScriptoriumApplication(Adw.Application):
 
         # Instantiate our language tool interface
         self.language_tool = LanguageTool()
+        self.language_tool.startup()
 
     def on_shutdown(self, _application):
-        # Instantiate our language tool interface
+        # Inform the language tool interface of the shutdown
         self.language_tool.shutdown()
 
 
