@@ -44,6 +44,44 @@ class KeyValuePair(GObject.Object):
     )
 
 
+def flag(code):
+    return "".join(chr(0x1F1E6 + ord(c) - ord("A")) for c in code)
+
+
+LANGUAGE_SHORT_CODE_TO_FLAG = {
+    "en": flag("GB"),
+    "fr": flag("FR"),
+    "el": flag("GR"),
+    "es": flag("ES"),
+    "pt": flag("PT"),
+    "be": flag("BY"),
+    "de": flag("DE"),
+    "fa": flag("IR"),
+    "ja": flag("JP"),
+    "ca": flag("ES"),
+    "it": flag("IT"),
+    "nl": flag("NL"),
+    "pl": flag("PL"),
+    "ru": flag("RU"),
+    "br": flag("FR"),
+    "da": flag("DK"),
+    "ga": flag("IE"),
+    "gl": flag("ES"),
+    "km": flag("KH"),
+    "ro": flag("RO"),
+    "sl": flag("SI"),
+    "ta": flag("IN"),
+    "tl": flag("PH"),
+    "uk": flag("UA"),
+    "zh": flag("CN"),
+    "sv": flag("SE"),
+    "ast": flag("ES"),
+    "sk": flag("SK"),
+    "crh": flag("UA"),
+    "de-DE-x-simple-language": flag("DE"),
+}
+
+
 def find_in_model(input_list: Gio.ListModel, value: str, default: int) -> int:
     """Look for the index of a target string, return the default if not found."""
     position = 0
@@ -142,11 +180,13 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
             )
         else:
             # Add the language options to the drop down
-            logger.info(languages)
             model = Gio.ListStore(item_type=KeyValuePair)
             for language in languages:
+                lang_code = language['code']
+                country_flag = LANGUAGE_SHORT_CODE_TO_FLAG.get(lang_code, " ")
                 model.append(KeyValuePair(
-                    key=language['longCode'], value=language['name']
+                    key=language['longCode'],
+                    value=country_flag + " " + language['name']
                 ))
             list_store_expression = Gtk.PropertyExpression.new(
                 KeyValuePair,
