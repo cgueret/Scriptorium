@@ -28,13 +28,17 @@ class Image(Resource):
     def data_files(self):
         """Return the file path for the image if it has been set."""
         if self.file_name is not None and self.file_name != '':
-            return [self.base_directory / Path(self.file_name)]
+            return [
+                Path("images") / Path(self.file_name)
+            ]
         else:
             return []
 
     @property
     def path(self):
-        return self.data_files[0] if len(self.data_files) > 0 else None
+        if len(self.data_files) > 0:
+            return self.project.base_directory / self.data_files[0]
+        return None
 
     @property
     def width(self):
@@ -56,9 +60,7 @@ class Image(Resource):
         shutil.copyfile(file_path, target_path)
 
         # Commit the change in content
-        repo = self.project.repo
-        repo.index.add(target_path)
-        repo.index.commit(f'Set image content for "{self.identifier}"')
+        self.project.save_resource(self)
 
     @property
     def texture(self) -> Gdk.Texture:
@@ -67,7 +69,7 @@ class Image(Resource):
         if self._texture is None:
             if len(self.data_files) > 0:
                 self._texture = Gdk.Texture.new_from_file(
-                    Gio.File.new_for_path(str(self.data_files[0]).encode())
+                    Gio.File.new_for_path(str(self.path).encode())
                 )
 
         # Return the texture
