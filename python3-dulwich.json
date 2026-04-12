@@ -1,0 +1,33 @@
+{
+    "name": "python3-dulwich",
+    "buildsystem": "simple",
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"dulwich\" --no-build-isolation"
+    ],
+    "build-options": {
+		 "env": {
+			 "PURE": "1"
+		 }
+    },
+    "sources": [
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/02/c4/bfe2a4e5b203f87ea925339691dd6e379e1a80d805dff0502e496bcaec39/dulwich-1.1.0.tar.gz",
+            "sha256": "9aa855db9fee0a7065ae9ffb38e14e353876d82f17e33e1a1fb3830eb8d0cf43",
+            "x-checker-data": {
+                "type": "pypi",
+                "name": "dulwich"
+            }
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/39/08/aaaad47bc4e9dc8c725e68f9d04865dbcb2052843ff09c97b08904852d84/urllib3-2.6.3-py3-none-any.whl",
+            "sha256": "bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4",
+            "x-checker-data": {
+                "type": "pypi",
+                "name": "urllib3",
+                "packagetype": "bdist_wheel"
+            }
+        }
+    ]
+}

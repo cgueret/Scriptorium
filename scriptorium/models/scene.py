@@ -20,7 +20,6 @@
 
 from pathlib import Path
 from gi.repository import Gtk, GObject, Gio
-from .commit_message import CommitMessage
 from .entity import Entity
 from .resource import Resource
 
@@ -58,24 +57,14 @@ class Scene(Resource):
     @property
     def data_files(self):
         # An eventual list of data files associated with the resource
-        return [self._scene_content_path]
+        return [
+            Path("scenes") / Path(f"{self.identifier}.html")
+        ]
 
     @property
     def history(self):
         """Return the history of commits about that scene."""
-        history = Gio.ListStore.new(item_type=CommitMessage)
-
-        commits = self.project.repo.iter_commits(
-            all=True, paths=self._scene_content_path
-        )
-        for commit in commits:
-            datetime = commit.committed_datetime
-            message_datetime = datetime.strftime("%A %d %B %Y, %H:%M:%S")
-            message = commit.message.strip()
-            msg = CommitMessage(message_datetime, message)
-            history.append(msg)
-
-        return history
+        return self.project.get_history(self)
 
     @GObject.Property(type=GObject.Object)
     def chapter(self):
@@ -104,12 +93,8 @@ class Scene(Resource):
         # Write the content of the scene
         self._scene_content_path.write_text(self._scene_content)
 
-        # Check if the file has been changed
-        repo = self.project.repo
-        for d in repo.index.diff(None):
-            if str(self._scene_content_path.resolve()).endswith(d.a_path):
-                repo.index.add(self._scene_content_path)
-                repo.index.commit(f'Modified scene "{self.identifier}"')
+        # Inform the project of changes
+        self.project.save_resource(self)
 
     def get_content(self):
         """Return the HTML content for the scene."""

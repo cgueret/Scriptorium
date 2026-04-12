@@ -19,10 +19,14 @@
 
 import logging
 from gi.repository import GObject, Gio, Gtk
-import git
+from .commit_message import CommitMessage
+from datetime import datetime
+
 import yaml
 from pathlib import Path
 import uuid
+from dulwich import porcelain
+from dulwich.repo import Repo
 
 from .resource import Resource
 from .image import Image
@@ -81,14 +85,14 @@ class Project(GObject.Object):
         # Check if this is a directory we need to initialize
         if self._base_directory.exists():
             # Initialise the interface for tracking versions of the manuscript
-            self._repo = git.Repo(self._base_directory)
+            self._repo = Repo(self._base_directory)
 
             # Load the YAML data
             self._load_yaml()
         else:
             # Let's create the project
             self._base_directory.mkdir()
-            self._repo = git.Repo.init(self._base_directory)
+            self._repo = porcelain.init(self._base_directory)
 
             # Initialise the YAML data
             self._yaml_data = {
@@ -100,7 +104,7 @@ class Project(GObject.Object):
 
             # Do a first commit
             self._save_yaml()
-            self.repo.index.commit("Created project")
+            porcelain.commit(self.repo, "Created project")
 
         # See if we can open the project
         self._set_can_be_opened()
@@ -142,7 +146,7 @@ class Project(GObject.Object):
             self._save_yaml()
 
             # Commit the migration
-            self.repo.index.commit("Migrated project to new format")
+            porcelain.commit(self.repo, "Migrated project to new format")
 
             # The project can be opened now
             self.can_be_opened = True
@@ -187,7 +191,7 @@ class Project(GObject.Object):
             yaml.safe_dump(self._yaml_data, file, indent=2, sort_keys=True)
 
         # Add this edit to the list of changes to be in the next commit
-        self.repo.index.add(yaml_file)
+        porcelain.add(self.repo, yaml_file)
 
     @property
     def base_directory(self) -> Path:
@@ -246,10 +250,30 @@ class Project(GObject.Object):
         # Keep track of the creation in the project history
         self.save_to_disk()
         for data_file in resource.data_files:
-            self.repo.index.add(data_file)
-        self.repo.index.commit(f'Created new {cls.__gtype_name__} "{title}"')
+            porcelain.add(self.repo, data_file)
+        porcelain.commit(
+            self.repo,
+            f'Created new {cls.__gtype_name__} titled "{title}"'
+        )
 
         return resource
+
+    def save_resource(self, resource):
+        """Save the resource."""
+        # The base content of a resource is actually in the YAML
+        # We focus here on saving the content of resource data files
+
+        # Check if the file has been changed
+        unstaged_files = porcelain.status(self.repo).unstaged
+        for file_name in unstaged_files:
+            for data_file_name in resource.data_files:
+                if data_file_name == file_name.decode():
+                    porcelain.add(self.repo, file_name)
+
+        porcelain.commit(
+            self.repo,
+            f'Modified files for "{resource.identifier}"'
+        )
 
     def delete_resource(self, resource):
         """Delete the resource."""
@@ -301,12 +325,31 @@ class Project(GObject.Object):
         # Keep track of the deletion of this resource in the history
         self.save_to_disk()
         for data_file in resource.data_files:
-            self.repo.index.remove(data_file)
-        self.repo.index.commit(f'Deleted resource "{resource.identifier}"')
+            logger.info(data_file)
+            porcelain.rm(self.repo, [data_file])
+        porcelain.commit(
+            self.repo,
+            f'Deleted resource "{resource.identifier}"'
+        )
 
         # Emit the signal of the resource and eventually do additional
         # actions
         resource.process_deleted()
+
+    def get_history(self, resource) -> Gio.ListStore:
+        """Return the history of commits for the resource."""
+        history = Gio.ListStore.new(item_type=CommitMessage)
+
+        track = [str(f).encode() for f in resource.data_files]
+        walker = self.repo.get_walker(paths=track, max_entries=10)
+        for entry in walker:
+            commit_datetime = datetime.fromtimestamp(entry.commit.author_time)
+            message_datetime = commit_datetime.strftime("%A %d %B %Y, %H:%M:%S")
+            message = entry.commit.message.decode().strip()
+            msg = CommitMessage(message_datetime, message)
+            history.append(msg)
+
+        return history
 
     def open(self):
         """Open the project by parsing the dict structure into objects."""

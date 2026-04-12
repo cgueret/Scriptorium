@@ -47,24 +47,6 @@
             ]
         },
         {
-            "name" : "git",
-            "make-args" : [
-                "NO_TCLTK=1",
-                "INSTALL_SYMLINKS=1"
-            ],
-            "make-install-args" : [
-                "NO_TCLTK=1",
-                "INSTALL_SYMLINKS=1"
-            ],
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.52.0.tar.xz",
-                    "sha256" : "3cd8fee86f69a949cb610fee8cd9264e6873d07fa58411f6060b3d62729ed7c5"
-                }
-            ]
-        },
-        {
             "name" : "LanguageTool",
             "buildsystem" : "simple",
             "build-commands" : [
@@ -91,7 +73,7 @@
         "python3-ebooklib.json",
         "python3-beautifulsoup4.json",
         "python3-pyyaml.json",
-        "python3-GitPython.json",
+        "python3-dulwich.json",
         {
             "name" : "scriptorium",
             "buildsystem" : "meson",
