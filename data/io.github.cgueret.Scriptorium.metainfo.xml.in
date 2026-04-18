@@ -6,7 +6,7 @@
 
   <name>Scriptorium</name>
   <summary>Design and write manuscripts</summary>
-  <description>
+  <summary xml:lang="hr">Dizajniraj i piši manuskripte</summary>  <description>
     <p>Scriptorium is a text editor coupled with a planning tool and a publishing tool.
     The objective is to provide writers with a simple and complete environment to plan, write and publish e-books.
     </p>
@@ -21,6 +21,21 @@
       <li>Dark mode</li>
       <li>Versioning of scenes managed via Git</li>
       <li>Back-end using plain text YAML and HTML files</li>
+    </ul>
+    <p xml:lang="hr">Scriptorium je uređivač teksta u kombinaciji s alatom za planiranje i alatom za objavljivanje.
+    Cilj aplikacije je pružiti piscima jednostavno i cjelovito okruženje za planiranje, pisanje i objavljivanje e-knjiga.
+    </p>
+    <p xml:lang="hr">Scriptorium je organiziran u tri glavne radnje:</p>
+    <ul>
+      <li>Planiranje popisa scena i elemenata priče manuskripta..</li>
+      <li>Pisanje sadržaja scena pomoću uređivača s fokusom na tekst.</li>
+      <li>Objavljivanje manuskripta u epub formatu nakon pregleda..</li>
+    </ul>
+    <p xml:lang="hr">Osim toga, neke opće funkcije su:</p>
+    <ul>
+      <li>Tamni modus</li>
+      <li>Verzioniranje scena upravljano putem Git-a</li>
+      <li>Pozadinski dio sustava koji koristi neformatirane tekstualne YAML i HTML datoteke</li>
     </ul>
   </description>
 
