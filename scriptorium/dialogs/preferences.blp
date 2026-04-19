@@ -23,12 +23,25 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
         title: _("Restore Previous Session");
         subtitle: _("Open the last project when starting Scriptorium");
       }
+
+      Adw.ActionRow projects_directory {
+        title: _("Data directory");
+        subtitle: _("");
+
+        [suffix]
+        Gtk.Button projects_directory_button {
+          icon-name: "folder-symbolic";
+          tooltip-text: _("Change storage location");
+          valign: center;
+          clicked => $on_projects_directory_button_clicked();
+        }
+      }
     }
   }
 
   Adw.PreferencesPage {
     title: _("Editor");
-    icon-name: "settings-symbolic";
+    icon-name: "edit-symbolic";
 
     Adw.PreferencesGroup {
       title: _("Preview");
@@ -94,4 +107,9 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
 
     }
   }
+}
+
+Gtk.FileDialog projects_directory_dialog {
+  title: _("Select storage location");
+  modal: true;
 }

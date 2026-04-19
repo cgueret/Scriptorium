@@ -6,6 +6,7 @@ template $ScrptLibraryView: Adw.NavigationPage {
   tag: "library";
 
   shown => $on_scrptlibraryview_shown();
+  realize => $on_scrptlibraryview_realize();
 
   child: Adw.ToolbarView {
     [top]

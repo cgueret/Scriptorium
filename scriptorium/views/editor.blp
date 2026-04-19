@@ -4,7 +4,8 @@ using Adw 1;
 template $ScrptEditorView: Adw.NavigationPage {
   title: _("Editor");
   tag: "editor";
-  unrealize => $on_editorview_closed();
+  realize => $on_scrpteditorview_realize();
+  unrealize => $on_scrpteditorview_unrealize();
 
   child: Adw.ToolbarView {
     top-bar-style: raised_border;

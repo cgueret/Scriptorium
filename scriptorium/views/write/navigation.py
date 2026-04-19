@@ -16,9 +16,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+from gettext import gettext as _
+
 import logging
 
-from gi.repository import Gio, Graphene, Gtk, Adw
+from gi.repository import Gio, Graphene, Gtk, Adw, GLib
 
 from scriptorium.globals import BASE
 from scriptorium.models import Chapter, Manuscript, Scene
@@ -76,6 +78,7 @@ class WriteNavigation(Adw.Bin):
 
     def connect_to(self, project):
         """Connect the navigation to the project and its contents."""
+        logger.info(f"Connect navigation to {project}")
 
         # Turn the content into a tree, instance of Chapter may have children
         roots = Gio.ListStore.new(Manuscript)
@@ -102,6 +105,7 @@ class WriteNavigation(Adw.Bin):
         # append items at the end of the manuscript by default. Users who want
         # to position items directly can use the context actions instead
         manuscript_id = project.manuscript.identifier
+        logger.info(f"Connect navigation to {manuscript_id}")
         menu = Gio.Menu()
         menu.append(
             label=_("Add new Scene"),
@@ -112,7 +116,11 @@ class WriteNavigation(Adw.Bin):
             detailed_action=f"editor.add_resource(('Chapter', '{manuscript_id}'))"
         )
         self.add_menu.set_menu_model(menu)
-        self.add_menu.set_detailed_action_name(
-            f"editor.add_resource(('Scene', '{manuscript_id}'))"
+        self.add_menu.connect(
+            "clicked",
+            lambda _: self.activate_action(
+                "editor.add_resource",
+                GLib.Variant("(ss)", ("Scene", manuscript_id))
+            )
         )
 

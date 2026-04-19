@@ -8,11 +8,11 @@ template $ScrptWindow: Adw.ApplicationWindow {
 
   content: Adw.ToastOverlay toast_overlay {
     child: Adw.NavigationView navigation {
-      $ScrptLibraryView library_panel {}
     };
   };
 
   close-request => $on_close_request();
+  realize => $on_scrptwindow_realize();
 
   ShortcutController {
     Shortcut {

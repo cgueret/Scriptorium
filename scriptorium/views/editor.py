@@ -53,7 +53,7 @@ class ScrptEditorView(Adw.NavigationPage):
     plan_page = Gtk.Template.Child()
     file_filter_image = Gtk.Template.Child()
 
-    def __init__(self):
+    def __init__(self, project: Project):
         """Create a new instance of the editor."""
         super().__init__()
 
@@ -114,16 +114,20 @@ class ScrptEditorView(Adw.NavigationPage):
         )
         group.add_action(action)
 
-    def connect_to_project(self, project: Project):
-        # Keep track of the project the editor is associated to
+        # Keep track of the project for this editor window
         self.project = project
 
-        self.write_page.connect_to_project(project)
-        self.publish_page.connect_to_project(project)
-        self.plan_page.connect_to_project(project)
+    @Gtk.Template.Callback()
+    def on_scrpteditorview_realize(self, _editorview):
+        """Called when the editor widgets are all created."""
+        if self.project is not None:
+            logger.info("Editor is open, connect the tabs to the manuscript")
+            self.plan_page.connect_to_project(self.project)
+            self.write_page.connect_to_project(self.project)
+            self.publish_page.connect_to_project(self.project)
 
     @Gtk.Template.Callback()
-    def on_editorview_closed(self, _editorview):
+    def on_scrpteditorview_unrealize(self, _editorview):
         """Handle a request to close the editor."""
         if self.project is not None:
             logger.info("Editor is closed, saving the manuscript")
