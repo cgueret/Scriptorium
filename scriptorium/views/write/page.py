@@ -60,6 +60,7 @@ class WritePage(Adw.Bin):
     def __init__(self):
         """Create an instance of the editor."""
         super().__init__()
+
         # By default we have no active scene
         self.active_scene = None
 

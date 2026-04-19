@@ -20,6 +20,8 @@
 from gi.repository import Adw, GObject, Gio, Gtk
 from gi.repository import GLib
 
+from scriptorium.views import ScrptEditorView
+
 from scriptorium.globals import BASE
 from scriptorium.models import Library, Project
 from scriptorium.dialogs import ScrptAddDialog
@@ -38,8 +40,6 @@ class ScrptLibraryView(Adw.NavigationPage):
     # The Library is the data model holding the list of projects
     library: Library = Library()
 
-    selected_project = GObject.Property(type=Project)
-
     # The base path of all the manuscripts
     manuscripts_base_path = GObject.Property(type=str)
 
@@ -55,8 +55,10 @@ class ScrptLibraryView(Adw.NavigationPage):
 
     identifier = Gtk.Template.Child()
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, manuscripts_base_path):
+        super().__init__()
+
+        self.manuscripts_base_path = manuscripts_base_path
 
         # Connect an instance of the theme button to the menu
         popover = self.win_menu.get_popover()
@@ -83,6 +85,7 @@ class ScrptLibraryView(Adw.NavigationPage):
         group.add_action(action)
 
         # Signal to the list model to detect when content is available
+        # this is useful when a new Manuscript is created
         self.library.projects.connect(
             "items-changed",
             self.on_grid_content_changed
@@ -98,16 +101,25 @@ class ScrptLibraryView(Adw.NavigationPage):
 
     @Gtk.Template.Callback()
     def on_scrptlibraryview_shown(self, _src):
-        """Update the selected project to None."""
+        """
+        Called when the window becomes visible. This is likely to happen
+        when the editor is closed so we use the callback to unset the selected
+        manuscript.
+        """
+        logger.info("Shown")
 
         # Disable the current selection
         selection_model = self.projects_grid.get_model()
         selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
 
-        # Set the window to no project opened
-        window = self.props.root
-        if window is not None:
-            window.project = None
+    @Gtk.Template.Callback()
+    def on_scrptlibraryview_realize(self, _src):
+        logger.info(f"Opening library at {self.manuscripts_base_path}")
+
+        # Connect the library to the folder
+        self.library.open_folder(self.manuscripts_base_path)
+
+        self.open_last_project()
 
     @Gtk.Template.Callback()
     def on_add_manuscript_clicked(self, _button):
@@ -142,20 +154,40 @@ class ScrptLibraryView(Adw.NavigationPage):
 
     def on_selection_changed(self, selection_model, position, n_items):
         """
-        Called when a manuscript is selected
+        Called when a manuscript is selected in the list.
         """
         # Get the selected project
-        selected_item = selection_model.get_selected_item()
-        if selected_item is not None:
-            selected_project = selection_model.get_selected_item()
+        selected_project = selection_model.get_selected_item()
+
+        # Keep track of the last manuscript selected (this could be None)
+        logger.info(f"Set last selected project to {selected_project}")
+        settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")
+        settings.set_string(
+            "last-manuscript-name",
+            selected_project.identifier if selected_project is not None else ""
+        )
+
+        selected_project = selection_model.get_selected_item()
+        if selected_project is not None:
             logger.info(f"Selected project {selected_project.identifier}")
             if not selected_project.can_be_opened:
                 self.migrate_dialog.choose(self)
                 #selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
             else:
                 # Open the project
-                window = self.props.root
-                window.project = selected_project
+                self._open_project(selected_project)
+
+    def _open_project(self, project):
+        """
+        Open a selected project and remember it as the last project selected
+        """
+        # If we did select something, open the editor
+        if project is not None:
+            logger.info(f"\"{project.title}\": create and open editor")
+
+            # Create an editor navigation page and push it to the navigation
+            editor_page = ScrptEditorView(project)
+            self.get_parent().push(editor_page)
 
     def open_last_project(self):
         """Check if we need to open the last project."""
@@ -182,15 +214,6 @@ class ScrptLibraryView(Adw.NavigationPage):
             if model[index].can_be_opened:
                 model.select_item(index, True)
 
-    def on_projects_base_path_changed(self, window, parameter):
-        base_path = window.get_property(parameter.name)
-        logger.info(f"Opening library at {base_path}")
-
-        # Connect the library to the folder
-        self.library.open_folder(base_path)
-
-        self.open_last_project()
-
     @Gtk.Template.Callback()
     def on_migrate_dialog_response(self, _dialog, response):
         """Handle a response to migrating a project."""
@@ -211,7 +234,7 @@ class ScrptLibraryView(Adw.NavigationPage):
                 window.inform("Project successfuly migrated!")
 
                 # Open the project right away
-                window.project = selected_project
+                self._open_project(selected_project)
             else:
                 window.inform("Something went wrong. See logs for details")
 

@@ -23,12 +23,17 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
         title: _("Restore Previous Session");
         subtitle: _("Open the last project when starting Scriptorium");
       }
+
+      Adw.ActionRow projects_directory {
+        title: _("Data directory");
+        subtitle: _("");
+      }
     }
   }
 
   Adw.PreferencesPage {
     title: _("Editor");
-    icon-name: "settings-symbolic";
+    icon-name: "edit-symbolic";
 
     Adw.PreferencesGroup {
       title: _("Preview");

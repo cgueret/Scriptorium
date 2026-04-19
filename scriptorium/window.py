@@ -21,8 +21,9 @@ import logging
 from gi.repository import Gtk, Adw, GObject, Gdk, Gio, GLib
 from pathlib import Path
 
-# It seems Builder won't find the widgets unless we import them?
-from scriptorium.views import ScrptEditorView
+# Needed here for some weird reason, Builder does not find it otherwise
+# TODO: idea: maybe instantiate the libraryview and reset it on folder change
+from scriptorium.views import ScrptLibraryView
 
 from scriptorium.models import Project
 from scriptorium.globals import BASE
@@ -38,17 +39,25 @@ class ScrptWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'ScrptWindow'
 
     navigation = Gtk.Template.Child()
-    library_panel = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
 
     # This is a pointer to the currently open project, defaults to None
-    project = GObject.Property(type=Project, default=None)
+    #project = GObject.Property(
+    #    type=Project,
+    #    default=None
+    #)
 
     # The base path of all the manuscripts
-    projects_base_path = GObject.Property(type=str)
+    manuscripts_folder = GObject.Property(
+        type=str,
+        default=None
+    )
 
     # This is the identifier of the manuscript that was last opened
-    last_manuscript_name = GObject.Property(type=str, default=None)
+    last_manuscript_name = GObject.Property(
+        type=str,
+        default=None
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -58,9 +67,11 @@ class ScrptWindow(Adw.ApplicationWindow):
         css_provider.load_from_file(
             Gio.File.new_for_uri(f"resource:/{BASE}/style.css")
         )
-        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
             css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
 
         # Load custom icons
         theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
@@ -70,17 +81,26 @@ class ScrptWindow(Adw.ApplicationWindow):
         self.settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")
 
         # Bind the settings related to the window
-        self.settings.bind("window-width", self, "default-width",
+        self.settings.bind(
+            "window-width", self, "default-width",
             Gio.SettingsBindFlags.DEFAULT
         )
-        self.settings.bind("window-height", self, "default-height",
+        self.settings.bind(
+            "window-height", self, "default-height",
             Gio.SettingsBindFlags.DEFAULT
         )
-        self.settings.bind("window-maximized", self, "maximized",
+        self.settings.bind(
+            "window-maximized", self, "maximized",
             Gio.SettingsBindFlags.DEFAULT
         )
 
-        self.settings.bind("last-manuscript-name", self, "last-manuscript-name",
+        # Bindings related to projects management
+        self.settings.bind(
+            "last-manuscript-name", self, "last-manuscript-name",
+            Gio.SettingsBindFlags.DEFAULT
+        )
+        self.settings.bind(
+            "manuscripts-folder", self, "manuscripts-folder",
             Gio.SettingsBindFlags.DEFAULT
         )
 
@@ -97,23 +117,34 @@ class ScrptWindow(Adw.ApplicationWindow):
 
         # The library is where a project is selected by the user. We keep an
         # eye on actions there
-        self.connect(
-            'notify::project',
-            self.on_project_changed
-        )
-
-        # Connect a callback in the library to keep an eye on projects base path
-        self.connect(
-            'notify::projects-base-path',
-            self.library_panel.on_projects_base_path_changed
-        )
+        #self.connect(
+        #    'notify::project',
+        #    self.on_project_changed
+        #)
 
         # Open the default data directory
         # (TODO Implement the setting for data folder)
-        projects_path = Path(GLib.get_user_data_dir()) / Path('manuscripts')
-        if not projects_path.exists():
-            projects_path.mkdir()
-        self.projects_base_path = projects_path.resolve()
+        #projects_path = Path(self.manuscripts_folder) / Path('manuscripts')
+        #if not projects_path.exists():
+        #    projects_path.mkdir()
+        #self.projects_base_path = projects_path.resolve()
+
+    @Gtk.Template.Callback()
+    def on_scrptwindow_realize(self, window):
+        """Called with the window is created."""
+
+        # See if we have a manuscript folder path set
+        # If not, use the app base directory
+        if not self.manuscripts_folder or self.manuscripts_folder == "":
+            folder = Path(GLib.get_user_data_dir()) / "manuscripts"
+            folder.mkdir(exist_ok=True)
+            self.manuscripts_folder = folder
+
+        # Inform the user of the data folder
+        logger.info(f'Data location: {self.manuscripts_folder}')
+
+        # Open the library at this location
+        self._open_library()
 
     @Gtk.Template.Callback()
     def on_close_request(self, event):
@@ -121,51 +152,13 @@ class ScrptWindow(Adw.ApplicationWindow):
         # Save the name of the last edited project
 
     def _open_library(self):
-        # Get a reference to the library panel
-        self.library_panel.connect('notify::selected-project',
-            self.on_selected_project_changed)
+        """Create a library panel and add it to the navigation."""
 
-        # Set the data folder
-        manuscript_path = Path(GLib.get_user_data_dir()) / Path('manuscripts')
-        if not manuscript_path.exists():
-            manuscript_path.mkdir()
-        logger.info(f'Data location: {manuscript_path}')
-        self.library_panel.set_property('manuscripts_base_path',
-                                    manuscript_path.resolve())
+        # Create a library panel
+        library_panel = ScrptLibraryView(self.manuscripts_folder)
 
-        #last_opened = self.settings.get_string("last-manuscript-name")
-        #logger.info(f"Trigger selection for last opened: {last_opened}")
-
-        #manuscripts_model = self._library_panel.manuscripts_grid.get_model()
-        #if self.settings.get_boolean("open-last-project"):
-        #    if len(manuscripts_model) > 0:
-        #        index = 0
-        #        for i in range(len(manuscripts_model)):
-        #            if manuscripts_model[i].identifier == last_opened:
-        #                index = i
-        #        manuscripts_model.select_item(index, True)
-
-    def on_project_changed(self, _navigation, _other):
-        """Handle a change in the selected project."""
-        logger.info(f"Change currently edited project to {self.project}")
-
-        # If we did select something, open the editor
-        if self.project is not None:
-            logger.info(f"\"{self.project.title}\": create and open editor")
-
-            # Create an editor navigation page and push it to the stack
-            editor_page = ScrptEditorView()
-            if not self.project.is_opened:
-                self.project.open()
-            editor_page.connect_to_project(self.project)
-            self.navigation.push(editor_page)
-
-        # Keep track of the last manuscript selected
-        settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")
-        settings.set_string(
-            "last-manuscript-name",
-            self.project.identifier if self.project is not None else ""
-        )
+        # Add it to the navigation
+        self.navigation.push(library_panel)
 
     def close_editor(self, editor_view):
         self.navigation.pop()

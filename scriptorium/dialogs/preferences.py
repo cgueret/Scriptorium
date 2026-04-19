@@ -45,6 +45,7 @@ class ScrptPreferencesDialog(Adw.PreferencesDialog):
     editor_line_height = Gtk.Template.Child()
     font_dialog_button = Gtk.Template.Child()
     editor_underline_style = Gtk.Template.Child()
+    projects_directory = Gtk.Template.Child()
 
     def __init__(self):
         """Create a new instance of the class."""
@@ -59,6 +60,13 @@ class ScrptPreferencesDialog(Adw.PreferencesDialog):
             "open-last-project",
             self.open_last_project,
             "active",
+            Gio.SettingsBindFlags.DEFAULT
+        )
+
+        settings.bind(
+            "manuscripts-folder",
+            self.projects_directory,
+            "subtitle",
             Gio.SettingsBindFlags.DEFAULT
         )
 
