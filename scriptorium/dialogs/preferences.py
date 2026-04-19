@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Dialog to select scenes in Scriptorium."""
-from gi.repository import Adw, Gtk, Gio, Pango
+from gi.repository import Adw, Gtk, Gio, Pango, GLib
 from scriptorium.globals import BASE
 from scriptorium.utils import html_to_buffer
 from gettext import gettext as _
@@ -27,9 +27,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 PLACEHOLDER_TEXT = _(
-"<p>This is a <hint>placeholder text</hint> to <warning>select</warning>"
+"<p>This is a <hint>placeholder text</hint> to <warning>select</warning> "
 "the font of the scene editor.</p>"
-"<p>You can also see how <error>annotations</error> are shown and how words"
+"<p>You can also see how <error>annotations</error> are shown and how words "
 "with an <em>emphasis</em> or noted as <strong>strong</strong> will appear.</p>"
 )
 UNDERLINE_OPTIONS = ["single", "double", "dashed"]
@@ -39,13 +39,19 @@ UNDERLINE_OPTIONS = ["single", "double", "dashed"]
 class ScrptPreferencesDialog(Adw.PreferencesDialog):
     __gtype_name__ = "ScrptPreferencesDialog"
 
+    # Setting to open the last project on application launch
     open_last_project = Gtk.Template.Child()
+
+    # Settings for the editor
     text_view = Gtk.Template.Child()
     font_dialog_button = Gtk.Template.Child()
     editor_line_height = Gtk.Template.Child()
-    font_dialog_button = Gtk.Template.Child()
     editor_underline_style = Gtk.Template.Child()
-    projects_directory = Gtk.Template.Child()
+
+    # Information about the storage location for manuscripts
+    projects_directory: Adw.ActionRow = Gtk.Template.Child()
+    projects_directory_button: Gtk.Button = Gtk.Template.Child()
+    projects_directory_dialog: Gtk.FileDialog = Gtk.Template.Child()
 
     def __init__(self):
         """Create a new instance of the class."""
@@ -118,4 +124,28 @@ class ScrptPreferencesDialog(Adw.PreferencesDialog):
             "editor-underline-style",
             UNDERLINE_OPTIONS[selected_value]
         )
+
+    @Gtk.Template.Callback()
+    def on_projects_directory_button_clicked(self, _button):
+        """Handle a click to select storage location."""
+        def on_folder_selected(dialog, result):
+            try:
+                folder = dialog.select_folder_finish(result)
+            except GLib.Error as e:
+                logger.info(f"Error when changing data folder: {e}")
+                return
+            self.projects_directory.set_subtitle(folder.get_path())
+
+        # Configure the dialog to open the current storage value
+        self.projects_directory_dialog.set_initial_folder(
+            Gio.File.new_for_path(self.projects_directory.get_subtitle())
+        )
+
+        # Open the dialog
+        self.projects_directory_dialog.select_folder(
+            parent=self.get_root(),
+            cancellable=None,
+            callback=on_folder_selected,
+        )
+
 

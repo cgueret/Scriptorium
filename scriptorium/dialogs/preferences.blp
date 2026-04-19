@@ -27,6 +27,14 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
       Adw.ActionRow projects_directory {
         title: _("Data directory");
         subtitle: _("");
+
+        [suffix]
+        Gtk.Button projects_directory_button {
+          icon-name: "folder-symbolic";
+          tooltip-text: _("Change storage location");
+          valign: center;
+          clicked => $on_projects_directory_button_clicked();
+        }
       }
     }
   }
@@ -99,4 +107,9 @@ template $ScrptPreferencesDialog: Adw.PreferencesDialog {
 
     }
   }
+}
+
+Gtk.FileDialog projects_directory_dialog {
+  title: _("Select storage location");
+  modal: true;
 }

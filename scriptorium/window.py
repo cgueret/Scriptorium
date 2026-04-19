@@ -117,10 +117,10 @@ class ScrptWindow(Adw.ApplicationWindow):
 
         # The library is where a project is selected by the user. We keep an
         # eye on actions there
-        #self.connect(
-        #    'notify::project',
-        #    self.on_project_changed
-        #)
+        self.connect(
+            'notify::manuscripts-folder',
+            self.on_manuscripts_folder_changed
+        )
 
         # Open the default data directory
         # (TODO Implement the setting for data folder)
@@ -143,22 +143,15 @@ class ScrptWindow(Adw.ApplicationWindow):
         # Inform the user of the data folder
         logger.info(f'Data location: {self.manuscripts_folder}')
 
-        # Open the library at this location
-        self._open_library()
-
-    @Gtk.Template.Callback()
-    def on_close_request(self, event):
-        logger.info("Window close requested")
-        # Save the name of the last edited project
-
-    def _open_library(self):
-        """Create a library panel and add it to the navigation."""
-
         # Create a library panel
         library_panel = ScrptLibraryView(self.manuscripts_folder)
 
         # Add it to the navigation
         self.navigation.push(library_panel)
+
+    @Gtk.Template.Callback()
+    def on_close_request(self, event):
+        logger.info("Window close requested")
 
     def close_editor(self, editor_view):
         self.navigation.pop()
@@ -167,3 +160,15 @@ class ScrptWindow(Adw.ApplicationWindow):
         toast = Adw.Toast.new(title=message)
         toast.set_timeout(3)
         self.toast_overlay.add_toast(toast)
+
+    def on_manuscripts_folder_changed(self, _src, _value):
+        """Called when the manuscripts storage location is changed."""
+        self.inform("Data folder changed")
+
+        # Create a library panel
+        library_panel = ScrptLibraryView(self.manuscripts_folder)
+
+        # Replace all the other panels by that one
+        self.navigation.replace(pages=[library_panel])
+
+
