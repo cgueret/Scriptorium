@@ -73,13 +73,13 @@ class ScriptoriumApplication(Adw.Application):
             application_name='Scriptorium',
             application_icon='io.github.cgueret.Scriptorium',
             developer_name='Christophe Guéret',
-            version='1.2.0',
+            version='1.3.0',
             website='https://github.com/cgueret/Scriptorium',
             developers=[
                 'Christophe Guéret <christophe.gueret@gmail.com>',
                 'Diego C Sampaio https://github.com/kriptolix'
             ],
-            copyright='© 2025 Christophe Guéret'
+            copyright='© 2025-2026 Christophe Guéret'
         )
         about.add_credit_section(
             _('Beta testing'),

@@ -78,6 +78,19 @@
   </screenshots>
 
   <releases>
+    <release version="1.3.0" date="2026-04-29">
+      <url type="details">https://github.com/cgueret/Scriptorium/releases/tag/v1.3.0</url>
+      <description translate="no">
+        <p>Release description</p>
+        <ul>
+          <li>Added Dutch, Polish, Russian and Croatian translations</li>
+          <li>Added an option to set the language of the manuscript</li>
+          <li>Added an option to select the storage location of manuscripts</li>
+          <li>Changed the Git back-end to a Python implementation</li>
+          <li>Moved to Gnome 50 and updated Python dependencies</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.2.0" date="2025-12-24">
       <url type="details">https://github.com/cgueret/Scriptorium/releases/tag/v1.2.0</url>
       <description translate="no">
