@@ -1,0 +1,580 @@
+# Croatian translation for scriptorium.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the scriptorium package.
+# Milo Ivir <mail@milotype.de>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: scriptorium\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-22 10:36+0000\n"
+"PO-Revision-Date: 2026-04-18 13:27+0200\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 3.9\n"
+
+#: data/io.github.cgueret.Scriptorium.desktop.in:2
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:7
+#: scriptorium/window.blp:5
+msgid "Scriptorium"
+msgstr "Scriptorium"
+
+#: data/io.github.cgueret.Scriptorium.desktop.in:8
+msgid "GTK;"
+msgstr "GTK;"
+
+#: data/io.github.cgueret.Scriptorium.gschema.xml:21
+msgid "The location for the manuscripts, defaults to user data directory"
+msgstr ""
+"Standardno mjesto za spremanje manuskripata je korisnička mapa podataka"
+
+#: data/io.github.cgueret.Scriptorium.gschema.xml:30
+msgid "Style Variant"
+msgstr "Varijanta stila"
+
+#: data/io.github.cgueret.Scriptorium.gschema.xml:31
+msgid "Use the light or dark variant of the GTK theme"
+msgstr "Koristi svijetlu ili tamnu varijantu GTK teme"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:8
+msgid "Design and write manuscripts"
+msgstr "Dizajniraj i piši manuskripte"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:10
+msgid ""
+"Scriptorium is a text editor coupled with a planning tool and a publishing "
+"tool. The objective is to provide writers with a simple and complete "
+"environment to plan, write and publish e-books."
+msgstr ""
+"Scriptorium je uređivač teksta u kombinaciji s alatom za planiranje i "
+"alatom za objavljivanje. Cilj aplikacije je pružiti piscima jednostavno i "
+"cjelovito okruženje za planiranje, pisanje i objavljivanje e-knjiga."
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:13
+msgid "Scriptorium features are organised around three facets:"
+msgstr "Scriptorium je organiziran u tri glavne radnje:"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:15
+msgid "Plan the list of scenes and story elements of the manuscript."
+msgstr "Planiranje popisa scena i elemenata priče manuskripta."
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:16
+msgid "Write the content of the scenes with a text focused editor."
+msgstr "Pisanje sadržaja scena pomoću uređivača s fokusom na tekst."
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:17
+msgid "Publish your manuscript as an epub after previewing it."
+msgstr "Objavljivanje manuskripta u epub formatu nakon pregleda."
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:19
+msgid "In addition, some general features are:"
+msgstr "Osim toga, neke opće funkcije su:"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:21
+msgid "Dark mode"
+msgstr "Tamni modus"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:22
+msgid "Versioning of scenes managed via Git"
+msgstr "Verzioniranje scena upravljano putem Git-a"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:23
+msgid "Back-end using plain text YAML and HTML files"
+msgstr ""
+"Pozadinski dio sustava koji koristi obične tekstualne YAML i HTML datoteke"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:49
+msgid "Plan the content of the manuscript"
+msgstr "Planiraj sadržaj manuskripta"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:53
+msgid "Write and re-arrange the scenes"
+msgstr "Piši i preuredi scene"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:57
+msgid "Write and re-arrange the scenes (dark mode)"
+msgstr "Piši i preuredi scene (tamni način)"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:61
+msgid "Preview and publish the manuscript as an epub file"
+msgstr "Pregledaj i objavi manuskript kao epub datoteku"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:69
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:79
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:88
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:101
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:112
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:121
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:131
+msgid "Release description"
+msgstr "Opis izdanja"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:71
+msgid "Update to Gnome 49"
+msgstr "Ažuriranje za Gnome 49"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:72
+msgid "Clamp the text editor to a usable width"
+msgstr "Uređivač teksta ograničen na upotrebljivu širinu"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:81
+msgid "Fix regression in Write"
+msgstr "Ispravljena regresija u Writeu"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:90
+msgid "Re-design of the interface around 3 main facets (Plan/Write/Publish)"
+msgstr "Redizajn sučelja za tri glavne radnje (Planiraj/Piši/Objavi)"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:91
+msgid "Plan: addition of a tool to set the book cover"
+msgstr "Plan: dodavanje alata za postavljanje naslovnice knjige"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:92
+msgid "Plan: addition of a gallery tool to manage images"
+msgstr "Plan: dodavanje alata za galeriju za upravljanje slikama"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:93
+msgid "Write: right click on a suggestion to see its content"
+msgstr ""
+"Piši: klikni desnom tipkom miša na prijedlog za prikaz njegovog sadržaj"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:94
+msgid "Publish: export the manuscript as an epub file"
+msgstr "Objavi: izvezi manuskript kao epub datoteku"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:103
+msgid "Addition of LanguageTool to provide content suggestions"
+msgstr "Dodan je LanguageTool alat za pružanje prijedloga sadržaja"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:104
+msgid "Added styling options for the text (strong, emphasis)"
+msgstr "Dodane su opcije za stiliziranja teksta (podebljano, kurziv)"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:105
+msgid "Added preferences dialog to define preferences of the text editor"
+msgstr ""
+"Dodan je dijalog s postavkama za definiranje postavki uređivača teksta"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:114
+msgid "Fixed metadata for Flatpak"
+msgstr "Ispravljeni metapodaci za Flatpak"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:123
+msgid "Added startup screen"
+msgstr "Dodano je početni ekran"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:124
+msgid "Fixed bug where icons would not re-style"
+msgstr "Ispravljena greška gdje ikone nisu htjele promijeniti stil"
+
+#: data/io.github.cgueret.Scriptorium.metainfo.xml.in:133
+msgid "First public release of the code"
+msgstr "Prvo javno izdanje koda"
+
+#: scriptorium/application.py:85
+msgid "Beta testing"
+msgstr "Beta testiranje"
+
+#: scriptorium/application.py:89
+msgid "Icon design"
+msgstr "Dizajn ikona"
+
+#. Translators: Replace "translator-credits" with your name/username,
+#. and optionally an email or URL.
+#: scriptorium/application.py:95
+msgid "translator-credits"
+msgstr "Milo Ivir <mail@milotype.de>"
+
+#: scriptorium/dialogs/dialog_add.blp:5 scriptorium/dialogs/dialog_add.blp:36
+msgid "Add"
+msgstr "Dodaj"
+
+#: scriptorium/dialogs/dialog_add.blp:6 scriptorium/dialogs/dialog_add.blp:35
+#: scriptorium/dialogs/select_entities.blp:6
+#: scriptorium/dialogs/select_entities.blp:31
+#: scriptorium/dialogs/select_scenes.blp:6
+#: scriptorium/dialogs/select_scenes.blp:31 scriptorium/views/library.blp:64
+msgid "Cancel"
+msgstr "Odustani"
+
+#: scriptorium/dialogs/dialog_add.blp:12
+#: scriptorium/views/plan/editor_manuscript.blp:10
+#: scriptorium/views/plan/editor_scenes_details.blp:19
+#: scriptorium/views/write/page.blp:23
+msgid "Summary"
+msgstr "Sažetak"
+
+#: scriptorium/dialogs/preferences.blp:8
+msgid "General"
+msgstr "Opće"
+
+#: scriptorium/dialogs/preferences.blp:13
+msgid "Theme"
+msgstr "Tema"
+
+#: scriptorium/dialogs/preferences.blp:14
+msgid "Select the theme for the application"
+msgstr "Odaberi temu za aplikaciju"
+
+#: scriptorium/dialogs/preferences.blp:21
+msgid "Projects"
+msgstr "Projekti"
+
+#: scriptorium/dialogs/preferences.blp:23
+msgid "Restore Previous Session"
+msgstr "Obnovi prethodnu sesiju"
+
+#: scriptorium/dialogs/preferences.blp:24
+msgid "Open the last project when starting Scriptorium"
+msgstr "Otvori zadnji projekt pri pokretanju Scriptoriuma"
+
+#: scriptorium/dialogs/preferences.blp:30 scriptorium/views/editor.blp:5
+msgid "Editor"
+msgstr "Uređivač"
+
+#: scriptorium/dialogs/preferences.blp:34
+msgid "Preview"
+msgstr "Pregled"
+
+#: scriptorium/dialogs/preferences.blp:55
+msgid "Settings"
+msgstr "Postavke"
+
+#: scriptorium/dialogs/preferences.blp:58
+msgid "Font"
+msgstr "Font"
+
+#: scriptorium/dialogs/preferences.blp:59
+msgid "The font used within the scene editor"
+msgstr "Font koji se koristi unutar uređivača scena"
+
+#: scriptorium/dialogs/preferences.blp:68
+msgid "Select a font"
+msgstr "Odaberi font …"
+
+#: scriptorium/dialogs/preferences.blp:76
+msgid "Line Height"
+msgstr "Visina retka"
+
+#: scriptorium/dialogs/preferences.blp:77
+msgid "Adjust the space between lines"
+msgstr "Prilagodi razmak između redaka"
+
+#: scriptorium/dialogs/preferences.blp:87
+msgid "Underline style"
+msgstr "Stil podcrtavanja"
+
+#: scriptorium/dialogs/preferences.blp:88
+msgid "Adjust the style of the underlines"
+msgstr "Prilagodi stil podcrtavanja"
+
+#: scriptorium/dialogs/preferences.blp:90
+msgid "single"
+msgstr "jednostruko"
+
+#: scriptorium/dialogs/preferences.blp:90
+msgid "double"
+msgstr "dvostruko"
+
+#: scriptorium/dialogs/preferences.blp:90
+msgid "dashed"
+msgstr "isprekidano"
+
+#: scriptorium/dialogs/preferences.py:30
+msgid ""
+"<p>This is a <hint>placeholder text</hint> to <warning>select</warning>the "
+"font of the scene editor.</p><p>You can also see how <error>annotations</"
+"error> are shown and how wordswith an <em>emphasis</em> or noted as "
+"<strong>strong</strong> will appear.</p>"
+msgstr ""
+"<p>Ovo je <hint>privremeni tekst</hint> za <warning>biranje</warning>fonta "
+"uređivača scena.</p><p>Također možeš vidjeti kako se <error>prikazuju "
+"bilješke</error> i kako će se prikazati riječi u <em>kurzivu</em> ili "
+"<strong>podebljano</strong> .</p>"
+
+#: scriptorium/dialogs/select_entities.blp:5
+#: scriptorium/dialogs/select_entities.blp:32
+#: scriptorium/dialogs/select_scenes.blp:5
+#: scriptorium/dialogs/select_scenes.blp:32
+msgid "Done"
+msgstr "Gotovo"
+
+#: scriptorium/dialogs/select_entities.blp:7
+msgid "Select the element you would like to use and validate when done"
+msgstr "Odaberi element koji želiš koristiti i provjeri kad završiš"
+
+#: scriptorium/dialogs/select_entities.blp:8
+msgid "Select story element"
+msgstr "Odaberi element priče"
+
+#: scriptorium/dialogs/select_entities.blp:12
+msgid "Available elements"
+msgstr "Dostupni elementi"
+
+#: scriptorium/dialogs/select_entities.blp:25
+msgid "No more element available"
+msgstr "Više nema elemenata"
+
+#: scriptorium/dialogs/select_scenes.blp:7
+msgid "Select the scene you would like to use and validate when done"
+msgstr "Odaberi scenu koju želiš koristiti i provjeri kad završiš"
+
+#: scriptorium/dialogs/select_scenes.blp:8
+msgid "Select scenes"
+msgstr "Odaberi scene"
+
+#: scriptorium/dialogs/select_scenes.blp:12
+msgid "Available scenes"
+msgstr "Dostupne scene"
+
+#: scriptorium/dialogs/select_scenes.blp:25
+msgid "No scene available"
+msgstr "Nema dostupnih scena"
+
+#: scriptorium/views/editor.blp:23 scriptorium/views/library.blp:23
+msgid "Main Menu"
+msgstr "Glavni izbornik"
+
+#: scriptorium/views/editor.blp:33
+msgid "Plan"
+msgstr "Planiraj"
+
+#: scriptorium/views/editor.blp:40
+msgid "Write"
+msgstr "Piši"
+
+#: scriptorium/views/editor.blp:47 scriptorium/views/publish/page.blp:53
+#: scriptorium/views/publish/page.blp:54
+msgid "Publish"
+msgstr "Objavi"
+
+#: scriptorium/views/editor.blp:65 scriptorium/views/library.blp:104
+msgid "Preferences"
+msgstr "Postavke"
+
+#: scriptorium/views/editor.blp:69 scriptorium/views/library.blp:108
+msgid "About Scriptorium"
+msgstr "O Scriptoriumu"
+
+#: scriptorium/views/editor.blp:77 scriptorium/views/plan/editor_images.blp:12
+msgid "Images"
+msgstr "Slike"
+
+#: scriptorium/views/library.blp:5
+msgid "Library"
+msgstr "Biblioteka"
+
+#: scriptorium/views/library.blp:47
+msgid ""
+"Your data folder is empty, click on the button on the top left corner to "
+"create a first manuscript"
+msgstr ""
+"Tvoja mapa s podacima je prazna. Klikni na gumb u gornjem lijevom kutu za "
+"izradu prvog manuskripta"
+
+#: scriptorium/views/library.blp:48
+msgid "Welcome to Scriptorium !"
+msgstr "Pozdrav u Scriptorium!"
+
+#: scriptorium/views/library.blp:65
+msgid "Migrate"
+msgstr "Migriraj"
+
+#: scriptorium/views/library_item.blp:62
+msgid "Menu"
+msgstr "Izbornik"
+
+#: scriptorium/views/plan/editor_entities.blp:5
+#: scriptorium/views/plan/editor_entities.py:40
+msgid "Story elements"
+msgstr "Elementi priče"
+
+#: scriptorium/views/plan/editor_entities.blp:22
+#: scriptorium/views/plan/editor_scenes_details.blp:47
+msgid "Elements"
+msgstr "Elementi"
+
+#: scriptorium/views/plan/editor_entities.blp:23
+msgid "The character, places, and props of the story"
+msgstr "Likovi, mjesta i rekviziti priče"
+
+#: scriptorium/views/plan/editor_entities.py:41
+msgid "Set the key elements of the story"
+msgstr "Postavi ključne elemente priče"
+
+#: scriptorium/views/plan/editor_images.blp:13
+msgid "These are all the images associated to your project"
+msgstr "Ovo su sve slike koje su povezane s tvojim projektom"
+
+#: scriptorium/views/plan/editor_images_item.blp:25
+msgid "Remove this image from the project"
+msgstr "Ukloni ovu sliku iz projekta"
+
+#: scriptorium/views/plan/editor_images_item.blp:35
+msgid "Use this image as cover"
+msgstr "Koristi ovu sliku kao naslovnicu"
+
+#: scriptorium/views/plan/editor_images.py:33
+msgid "Gallery of images used in the project"
+msgstr "Galerija slika koje se koriste u projektu"
+
+#: scriptorium/views/plan/editor_images.py:34
+msgid "Gallery"
+msgstr "Galerija"
+
+#: scriptorium/views/plan/editor_manuscript.blp:20
+#: scriptorium/views/plan/editor_scenes_details.blp:29
+msgid "Identifier"
+msgstr "Identifikator"
+
+#: scriptorium/views/plan/editor_manuscript.blp:28
+#: scriptorium/views/plan/editor_scenes_details.blp:37
+#: scriptorium/views/write/page.blp:30
+msgid "Title"
+msgstr "Naslov"
+
+#: scriptorium/views/plan/editor_manuscript.blp:32
+#: scriptorium/views/plan/editor_scenes_details.blp:41
+msgid "Synopsis"
+msgstr "Sažetak"
+
+#: scriptorium/views/plan/editor_manuscript.blp:38
+msgid "Cover"
+msgstr "Naslovnica"
+
+#: scriptorium/views/plan/editor_manuscript.blp:60
+msgid "No cover selected"
+msgstr "Nije odabrana nijedna naslovnica"
+
+#: scriptorium/views/plan/editor_manuscript.py:36
+msgid "Description"
+msgstr "Opis"
+
+#: scriptorium/views/plan/editor_manuscript.py:37
+msgid "Edit the information about the manuscript"
+msgstr "Uredi informacije o manuskriptu"
+
+#: scriptorium/views/plan/editor_overview.blp:12
+msgid "Overview"
+msgstr "Pregled"
+
+#: scriptorium/views/plan/editor_overview.blp:13
+msgid "Outline of the story per chapters and scenes"
+msgstr "Strukturiraj priču po poglavljima i scenama"
+
+#: scriptorium/views/plan/editor_overview.py:35
+msgid "Outline"
+msgstr "Struktura"
+
+#: scriptorium/views/plan/editor_overview.py:36
+msgid "Overview of all the content"
+msgstr "Pregled cjelokupnog sadržaja"
+
+#: scriptorium/views/plan/editor_scenes.blp:24
+msgid "Scenes"
+msgstr "Scene"
+
+#: scriptorium/views/plan/editor_scenes.blp:25
+msgid "This is the list of all the scenes in your project"
+msgstr "Ovo je popis svih scena u tvom projektu"
+
+#: scriptorium/views/plan/editor_scenes.blp:45
+msgid "Add a first scene and start writing"
+msgstr "Dodaj prvu scenu i počni pisati"
+
+#: scriptorium/views/plan/editor_scenes_details.blp:57
+msgid "Connect story elements ..."
+msgstr "Poveži elemente priče …"
+
+#: scriptorium/views/plan/editor_scenes.py:41
+msgid "Scenes list"
+msgstr "Popis scena"
+
+#: scriptorium/views/plan/editor_scenes.py:42
+msgid "Edit the content of the scenes"
+msgstr "Uredi sadržaj scena"
+
+#. Manuscript
+#: scriptorium/views/plan/page.py:36
+msgid "Manuscript"
+msgstr "Manuskript"
+
+#. Background research
+#. Writing goals
+#. Story elements
+#: scriptorium/views/plan/page.py:42
+msgid "Story line"
+msgstr "Radnje"
+
+#. Time line
+#. Plot lines
+#. Special pages
+#: scriptorium/views/plan/page.py:50
+msgid "Additional resources"
+msgstr "Dodatni resursi"
+
+#: scriptorium/views/write/navigation.blp:32
+#: scriptorium/views/write/navigation.py:107
+msgid "Add new Scene"
+msgstr "Dodaj novu scenu"
+
+#: scriptorium/views/write/navigation.py:111
+msgid "Add new Chapter"
+msgstr "Dodaj novo poglavlje"
+
+#: scriptorium/views/write/page.blp:39
+msgid "Suggestions"
+msgstr "Prijedlozi"
+
+#: scriptorium/views/write/page.blp:57
+msgid "No suggested changes"
+msgstr "Nema predloženih promjena"
+
+#: scriptorium/views/write/page.blp:103
+msgid "Set the selection to strong (Ctrl+b)"
+msgstr "Postavi odabir na podebljano (Ctrl+b)"
+
+#: scriptorium/views/write/page.blp:109
+msgid "Set the selection to emphasis (Ctrl+i)"
+msgstr "Postavi odabir na kurziv (Ctrl+i)"
+
+#: scriptorium/views/write/page.blp:116
+msgid "Show annotations"
+msgstr "Prikaži napomene"
+
+#: scriptorium/views/write/page.blp:121
+msgid "Show information panel"
+msgstr "Prikaži ploču s informacijama"
+
+#: scriptorium/views/write/page.blp:133
+msgid "words "
+msgstr "riječi "
+
+#: scriptorium/views/write/page.blp:146
+msgid "No scene selected"
+msgstr "Nije odabrana nijedna scena"
+
+#: scriptorium/views/write/page.blp:147
+msgid "Create or select a scene to write its content"
+msgstr "Stvori ili odaberi scenu za pisanje njenog sadržaja"
+
+#: scriptorium/widgets/theme_selector.blp:28
+#: scriptorium/widgets/theme_selector.blp:30
+msgid "Follow system style"
+msgstr "Slijedi stil sustava"
+
+#: scriptorium/widgets/theme_selector.blp:42
+#: scriptorium/widgets/theme_selector.blp:44
+msgid "Light style"
+msgstr "Svijetli stil"
+
+#: scriptorium/widgets/theme_selector.blp:57
+#: scriptorium/widgets/theme_selector.blp:59
+msgid "Dark style"
+msgstr "Tamni stil"
