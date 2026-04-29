@@ -1,7 +1,7 @@
 {
     "id" : "io.github.cgueret.Scriptorium",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "49",
+    "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.openjdk25"
@@ -37,8 +37,8 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/blueprint-compiler",
-                    "tag" : "v0.18.0",
-                    "commit" : "07c9c9df9cd1b6b4454ecba21ee58211e9144a4b",
+                    "tag" : "v0.20.4",
+                    "commit" : "31b62c24a72c1670d2d93dcdf2d130f1ae12778e",
                     "x-checker-data" : {
                         "type" : "git",
                         "tag-pattern" : "^v([\\d.]+)$"
