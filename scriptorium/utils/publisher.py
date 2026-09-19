@@ -79,10 +79,12 @@ class Publisher(object):
 
         # If we are in a Chapter add the header and recurse into the content
         if isinstance(resource, Chapter):
-            if depth == 1:
-                buffer.write(f'<h{depth} class="chapter-title">{resource.title}</h{depth}>\n')
+            usable_depth = min(depth, 6) # HTML goes down to h6 at most
+            if usable_depth == 1:
+                buffer.write(f'<h{usable_depth} class="chapter-title">')
             else:
-                buffer.write(f"<h{depth}>{resource.title}</h{depth}>\n")
+                buffer.write(f'<h{usable_depth}>')
+            buffer.write(f'{resource.title}</h{usable_depth}>\n')
 
             # We keep track of the content just before to place scene separators
             previous_entry = None
@@ -120,11 +122,10 @@ class Publisher(object):
 
         # Add the content
         for entry in self._manuscript.content:
-            slug = entry.title.lower().replace(' ', '_')
             epub_html = epub.EpubHtml(
                 title=entry.title,
-                file_name=f"{slug}.xhtml",
-                lang="en"
+                file_name=f"{entry.identifier}.xhtml",
+                lang=self._manuscript.language
             )
             epub_html.set_content(self._get_chapter_content(entry))
             self._book.add_item(epub_html)
