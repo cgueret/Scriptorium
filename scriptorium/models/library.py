@@ -50,9 +50,14 @@ class Library(GObject.Object):
         logger.info(f"Scanning content of {self._base_directory}")
         self.projects.remove_all()
         for directory in self._base_directory.iterdir():
-            logger.info(f"Adding project {directory.name}")
-            project = Project(directory)
-            self.projects.append(project)
+            if not directory.is_dir():
+                continue
+            try:
+                project = Project(directory)
+                self.projects.append(project)
+                logger.info(f"Added project {directory.name}")
+            except Exception:
+                logger.warning("Ignoring %s", directory.name, exc_info=True)
 
     @property
     def base_directory(self) -> Path:
