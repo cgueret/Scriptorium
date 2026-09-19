@@ -267,12 +267,12 @@ class Project(GObject.Object):
         unstaged_files = porcelain.status(self.repo).unstaged
         for file_name in unstaged_files:
             for data_file_name in resource.data_files:
-                if data_file_name == file_name.decode():
+                if str(data_file_name) == file_name.decode():
                     porcelain.add(self.repo, file_name)
 
         porcelain.commit(
             self.repo,
-            f'Modified files for "{resource.identifier}"'
+            f'Modified content of "{resource.title}"'
         )
 
     def delete_resource(self, resource):
