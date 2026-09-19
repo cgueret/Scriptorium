@@ -28,25 +28,6 @@
     ],
     "modules" : [
         {
-            "name" : "blueprint-compiler",
-            "buildsystem" : "meson",
-            "cleanup" : [
-                "*"
-            ],
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/blueprint-compiler",
-                    "tag" : "v0.20.4",
-                    "commit" : "31b62c24a72c1670d2d93dcdf2d130f1ae12778e",
-                    "x-checker-data" : {
-                        "type" : "git",
-                        "tag-pattern" : "^v([\\d.]+)$"
-                    }
-                }
-            ]
-        },
-        {
             "name" : "LanguageTool",
             "buildsystem" : "simple",
             "build-commands" : [

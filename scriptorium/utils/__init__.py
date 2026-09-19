@@ -1,34 +1,46 @@
-
-
-from gi.repository import Gtk
-from bs4 import BeautifulSoup
-
 import io
-
 import logging
+from gi.repository import Gtk
+from bs4 import BeautifulSoup, NavigableString
+import html
 
 logger = logging.getLogger(__name__)
+
+FORMATTING_TAGS = ("em", "strong")
+
+
+def _insert_node(node, buffer, tags=()):
+    """
+    Insert an HTML node into the buffer. This function is called
+    recursively in order to preserve <em><strong>test</strong></em> cases
+    """
+    if isinstance(node, NavigableString):
+        text = str(node)
+        if not text:
+            return
+        end = buffer.get_end_iter()
+        if tags:
+            buffer.insert_with_tags_by_name(end, text, *tags)
+        else:
+            buffer.insert(end, text)
+        return
+    known = buffer.get_tag_table().lookup(node.name) is not None
+    child_tags = tags + (node.name,) if known else tags
+    for child in node.children:
+        _insert_node(child, buffer, child_tags)
 
 
 def html_to_buffer(html_content: str, buffer: Gtk.TextBuffer):
     """
     Turn the content of an HTML payload into TextBuffer content with tags
     """
-
     # Process the lines and populate the buffer
-    soup = BeautifulSoup(html_content, 'html.parser')
-    paragraphs = soup.find_all('p')
+    soup = BeautifulSoup(html_content, "html.parser")
+    paragraphs = soup.find_all("p")
     for paragraph in paragraphs:
-        for child in paragraph.children:
-            text = child.get_text()
-            if len(text) > 1:
-                start = buffer.get_end_iter()
-                if child.name:
-                    buffer.insert_with_tags_by_name(start, text, child.name)
-                else:
-                    buffer.insert(start, text)
-        start = buffer.get_end_iter()
-        buffer.insert(start, "\n\n")
+        _insert_node(paragraph, buffer)
+        end = buffer.get_end_iter()
+        buffer.insert(end, "\n\n")
 
     # Place the cursor at the start of the buffer
     start = buffer.get_start_iter()
@@ -54,12 +66,15 @@ def buffer_to_html(buffer: Gtk.TextBuffer):
         # Extract the current text
         segment_text = buffer.get_text(iterator, next_toggle, True)
 
-        # Apply tags
-        segment_html = segment_text
+        # Escape it to be a bit more robust
+        segment_html = html.escape(segment_text, quote=False)
+
+        # Apply tags only if they are recognized
         tags = iterator.get_tags()
         for tag in tags:
-            tag_id = tag.get_property('name')
-            segment_html = f"<{tag_id}>{segment_html}</{tag_id}>"
+            tag_id = tag.get_property("name")
+            if tag_id in FORMATTING_TAGS:
+                segment_html = f"<{tag_id}>{segment_html}</{tag_id}>"
 
         # Append that piece of text
         html_content.append(segment_html)
@@ -68,17 +83,17 @@ def buffer_to_html(buffer: Gtk.TextBuffer):
         iterator = next_toggle.copy()
 
     # Split according to paragraphs
-    paragraphs = ''.join(html_content).split('\n\n')
+    paragraphs = "".join(html_content).split("\n\n")
 
     buffer = io.StringIO()
     first_paragraph = True
     for paragraph in paragraphs:
-        if paragraph != '':
+        if paragraph != "":
             if first_paragraph:
                 first_paragraph = False
                 buffer.write(f'<p class="first-paragraph">{paragraph}</p>\n')
             else:
-                buffer.write(f'<p>{paragraph}</p>\n')
+                buffer.write(f"<p>{paragraph}</p>\n")
 
     content = buffer.getvalue()
     buffer.close()
@@ -103,6 +118,7 @@ def get_child_at(widget, position):
         widget.get_last_child()
 
     return child
+
 
 def switch_tag_for_selection(text_buffer, tag_name):
     if not text_buffer.get_has_selection():
