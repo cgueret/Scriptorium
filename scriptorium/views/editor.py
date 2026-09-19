@@ -99,7 +99,7 @@ class ScrptEditorView(Adw.NavigationPage):
             )
         action.connect(
             "activate",
-            lambda _action, parameter: self.on__set_cover(parameter.get_string())
+            lambda _action, parameter: self.on_set_cover(parameter.get_string())
         )
         group.add_action(action)
 

@@ -20,7 +20,6 @@ from gi.repository import Gio
 from scriptorium.models import Resource, Manuscript, Chapter, Scene
 from scriptorium.globals import BASE
 from ebooklib import epub
-from jinja2 import Environment, PackageLoader, select_autoescape
 
 import io
 
@@ -46,11 +45,6 @@ class Publisher(object):
         # The EBook built from the manuscript
         self._book = None
 
-        # Load the templates
-        self._env = Environment(
-            loader=PackageLoader("scriptorium"),
-            autoescape=select_autoescape()
-        )
 
     @property
     def table_of_contents(self):

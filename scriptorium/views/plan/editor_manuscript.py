@@ -144,11 +144,11 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
         # Create the menu for changing the cover
         menu = Gio.Menu()
         menu.append(
-            label=" Import a new cover",
+            label=_("Import a new cover"),
             detailed_action="editor.import_cover"
         )
         menu.append(
-            label="Remove cover",
+            label=_("Remove cover"),
             detailed_action="editor.set_cover('')"
         )
         self.cover_edit_button.set_menu_model(menu)
