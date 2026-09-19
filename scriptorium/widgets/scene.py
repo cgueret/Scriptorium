@@ -20,13 +20,14 @@
 from gi.repository import Adw, Gtk, GObject
 from scriptorium.models import Scene
 from scriptorium.utils import get_child_at
+from scriptorium.globals import BASE
 
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-@Gtk.Template(resource_path="/com/github/cgueret/Scriptorium/widgets/scene.ui")
+@Gtk.Template(resource_path=f"{BASE}/widgets/scene.ui")
 class SceneCard(Adw.Bin):
     __gtype_name__ = "SceneCard"
 

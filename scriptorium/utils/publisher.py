@@ -79,7 +79,7 @@ class Publisher(object):
 
         # If we are in a Chapter add the header and recurse into the content
         if isinstance(resource, Chapter):
-            usable_depth = min(depth, 6) # HTML goes down to h6 at most
+            usable_depth = min(depth, 6)  # HTML goes down to h6 at most
             if usable_depth == 1:
                 buffer.write(f'<h{usable_depth} class="chapter-title">')
             else:
@@ -109,7 +109,7 @@ class Publisher(object):
         self._book = epub.EpubBook()
         self._book.set_identifier(self._manuscript.identifier)
         self._book.set_title(self._manuscript.title)
-        self._book.set_language("en")
+        self._book.set_language(self._manuscript.language)
         self._book.toc = ()
 
         # Set the cover

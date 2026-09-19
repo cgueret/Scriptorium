@@ -20,13 +20,14 @@ from gi.repository import Adw, Gtk, GObject, Gdk
 
 from scriptorium.models import Chapter
 from .scene import SceneCard
+from scriptorium.globals import BASE
 
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-@Gtk.Template(resource_path="/com/github/cgueret/Scriptorium/widgets/chapter_column.ui")
+@Gtk.Template(resource_path=f"{BASE}/widgets/chapter_column.ui")
 class ChapterColumn(Adw.Bin):
     __gtype_name__ = "ChapterColumn"
 

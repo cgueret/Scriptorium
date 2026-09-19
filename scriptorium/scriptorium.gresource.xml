@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/com/github/cgueret/Scriptorium">
+  <gresource prefix="/io/github/cgueret/Scriptorium">
     <!-- Main application UI -->
     <file>style.css</file>
     <file preprocess="xml-stripblanks">window.ui</file>
@@ -50,12 +50,12 @@
   </gresource>
 
   <!-- Assets -->
-  <gresource prefix="/com/github/cgueret/Scriptorium/assets">
+  <gresource prefix="/io/github/cgueret/Scriptorium/assets">
     <file>style.css</file>
   </gresource>
 
   <!-- Icons -->
-  <gresource prefix="/com/github/cgueret/Scriptorium/icons/scalable/actions">
+  <gresource prefix="/io/github/cgueret/Scriptorium/icons/scalable/actions">
     <file preprocess="xml-stripblanks" alias="plus-large-symbolic.svg">icons/hicolor/scalable/actions/plus-large-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="dictionary-symbolic.svg">icons/hicolor/scalable/actions/dictionary-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="library-symbolic.svg">icons/hicolor/scalable/actions/library-symbolic.svg</file>
