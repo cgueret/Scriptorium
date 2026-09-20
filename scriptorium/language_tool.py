@@ -170,34 +170,34 @@ class LanguageTool(GObject.Object):
         for match in results['matches']:
             annotation = Annotation()
 
-            # Set the message
-            annotation.title = match["shortMessage"]
-            if len(match["shortMessage"]) == 0:
-                annotation.title = match["rule"]["category"]["name"]
-            annotation.message = match["message"]
+            try:
+                # Set the message
+                annotation.title = match["shortMessage"]
+                if len(match["shortMessage"]) == 0:
+                    annotation.title = match["rule"]["category"]["name"]
+                annotation.message = match["message"]
 
-            # Set the boundaries
-            annotation.offset = match["offset"]
-            annotation.length = match["length"]
+                # Set the boundaries
+                annotation.offset = match["offset"]
+                annotation.length = match["length"]
 
-            # Set the category
-            if match["type"]["typeName"] == "Hint":
-                annotation.category = "hint"
-            elif match["rule"]["issueType"] == "style":
-                annotation.category = "hint"
-            elif match["type"]["typeName"] == "Other":
-                annotation.category = "warning"
-            elif match["rule"]["issueType"] == "inconsistency":
-                annotation.category = "warning"
-            else:
-                annotation.category = "error"
+                # Set the category
+                if match["type"]["typeName"] in ("Hint", "style"):
+                    annotation.category = "hint"
+                elif match["type"]["typeName"] in ("Other", "inconsistency"):
+                    annotation.category = "warning"
+                else:
+                    annotation.category = "error"
 
-            # Add the suggestions
-            for replacement in match["replacements"]:
-                annotation.suggestions.append(replacement["value"])
+                # Add the suggestions
+                for replacement in match["replacements"]:
+                    annotation.suggestions.append(replacement["value"])
 
-            # Append the annotation
-            annotations.append(annotation)
+                # Append the annotation
+                annotations.append(annotation)
+            except KeyError:
+                # Ignore those who miss one of the keys
+                pass
 
         # Call back with the annotations
         callback(annotations)
