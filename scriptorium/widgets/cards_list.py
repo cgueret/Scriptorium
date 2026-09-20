@@ -292,7 +292,7 @@ class CardsList(Gtk.Box):
 
         # We reached the end of the list, return the last child
         if child is None:
-            self.get_last_child()
+            return self.get_last_child()
 
         return child
 

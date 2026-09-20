@@ -115,7 +115,7 @@ def get_child_at(widget, position):
 
     # We reached the end of the list, return the last child
     if child is None:
-        widget.get_last_child()
+        return widget.get_last_child()
 
     return child
 
