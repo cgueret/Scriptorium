@@ -168,9 +168,9 @@ class LanguageTool(GObject.Object):
         # Prepare a list of annotations
         annotations = []
         for match in results['matches']:
-            annotation = Annotation()
-
             try:
+                annotation = Annotation()
+
                 # Set the message
                 annotation.title = match["shortMessage"]
                 if len(match["shortMessage"]) == 0:
@@ -186,6 +186,8 @@ class LanguageTool(GObject.Object):
                     annotation.category = "hint"
                 elif match["type"]["typeName"] in ("Other", "inconsistency"):
                     annotation.category = "warning"
+                elif match["type"]["typeName"] in ("UnknownWord"):
+                    annotation.category = "error"
                 else:
                     annotation.category = "error"
 
@@ -197,6 +199,7 @@ class LanguageTool(GObject.Object):
                 annotations.append(annotation)
             except KeyError:
                 # Ignore those who miss one of the keys
+                logger.info(f"Ignored {match}")
                 pass
 
         # Call back with the annotations
