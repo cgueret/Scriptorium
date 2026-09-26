@@ -19,6 +19,19 @@ In addition, some general features are:
   * Versioning of scenes managed via Git
   * Back-end using plain text YAML and HTML files
 
+## Project policy for using LLMs
+
+Scriptorium does not and will not contain feature to write books automatically. 
+The idea is to provide a friendly, Gnome native, application to write and format
+books. It is aimed at users actually interested in writing.
+
+The same applies for the code of Scriptorium. Everyone is welcome to contribute
+but under the condition that the contribution is authored by someone caring about
+writing the code. Contributors commissioning an LLM to write the code for them
+will see their PR declined. That said, contributors are free to use LLMs for 
+things like assessing the quality of the code if they desire doing so (just 
+like everyone is free to use ruff, mypy, etc).
+
 
 ## Installation
 
