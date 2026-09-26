@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Dialog to add a new entity in Scriptorium."""
+
 import logging
 
 from gi.repository import Adw, GObject, Gtk
@@ -45,4 +46,3 @@ class ScrptAddDialog(Adw.AlertDialog):
         """Check the length of the title."""
         new_title = entry_row.get_text()
         self.set_response_enabled("add", len(new_title) > 1)
-

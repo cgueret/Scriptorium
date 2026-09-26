@@ -25,14 +25,15 @@ from pathlib import Path
 
 try:
     from gi.repository import WebKit
+
     HAVE_WEBKIT = True
 except ImportError:
     HAVE_WEBKIT = False
 
 logger = logging.getLogger(__name__)
 
-class NavigationRow(Gtk.Box):
 
+class NavigationRow(Gtk.Box):
     def __init__(self, part):
         super().__init__(margin_top=6)
 
@@ -40,16 +41,16 @@ class NavigationRow(Gtk.Box):
         self._part = part
 
         # Set the label
-        label = Gtk.Label(label = part.title)
+        label = Gtk.Label(label=part.title)
         self.append(label)
 
     @property
     def part(self):
         return self._part
 
+
 @Gtk.Template(resource_path=f"{BASE}/views/publish/page.ui")
 class PublishPage(Adw.Bin):
-
     __gtype_name__ = "PublishPage"
     __title__ = "Formatting"
     __icon_name__ = "open-book-symbolic"
@@ -77,16 +78,13 @@ class PublishPage(Adw.Bin):
             widget = Adw.StatusPage(
                 title="Not available",
                 icon_name="process-stop-symbolic",
-                description="This feature is not available on your operating system"
+                description="This feature is not available on your operating system",
             )
             widget.set_vexpand(True)
             widget.set_hexpand(True)
             self.web_view_placeholder.append(widget)
 
-        self.toc.connect(
-             "row-selected",
-             self.on_selected_item
-        )
+        self.toc.connect("row-selected", self.on_selected_item)
 
     def connect_to_project(self, project):
         logger.info("Project changed")
@@ -128,12 +126,14 @@ class PublishPage(Adw.Bin):
             content = content.decode()
 
         # Save the CSS to disk to be able to load it
-        style = Gio.File.new_for_uri(
-            f"resource:/{BASE}/utils/epub-novel.css"
-        ).load_contents()[1].decode()
-        directory = Path(GLib.get_user_data_dir()) / Path('style')
+        style = (
+            Gio.File.new_for_uri(f"resource:/{BASE}/utils/epub-novel.css")
+            .load_contents()[1]
+            .decode()
+        )
+        directory = Path(GLib.get_user_data_dir()) / Path("style")
         directory.mkdir(exist_ok=True)
-        (directory / Path('novel.css')).write_text(style)
+        (directory / Path("novel.css")).write_text(style)
 
         # Load the content
         if HAVE_WEBKIT:
@@ -156,4 +156,3 @@ class PublishPage(Adw.Bin):
         file_dialog = Gtk.FileDialog.new()
         file_dialog.set_initial_name(file_name)
         file_dialog.save(self.props.root, None, save_path_selected, None)
-

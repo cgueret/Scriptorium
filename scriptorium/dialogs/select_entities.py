@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Dialog to select scenes in Scriptorium."""
+
 from gi.repository import Adw, Gtk
 from scriptorium.globals import BASE
 
@@ -49,7 +50,7 @@ class ScrptSelectEntitiesDialog(Adw.AlertDialog):
 
     def _filter(self, row):
         """Return True if the element is not already associated to the scene"""
-        show = (row.entity not in self._scene.entities)
+        show = row.entity not in self._scene.entities
         # If we have at least one scene available the user can add it
         if show and not self.get_response_enabled("done"):
             self.set_response_enabled("done", True)

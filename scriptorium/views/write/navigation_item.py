@@ -220,25 +220,21 @@ class NavigationItem(Adw.Bin):
         # Main menu to add new Chapter or Scene for container nodes
         if isinstance(self.resource, (Manuscript, Chapter)):
             menu.append(
-                label = "Add new child Chapter",
-                detailed_action = f"editor.add_resource(('Chapter', '{id}'))"
+                label="Add new child Chapter",
+                detailed_action=f"editor.add_resource(('Chapter', '{id}'))",
             )
             menu.append(
-                label = "Add new child Scene",
-                detailed_action = f"editor.add_resource(('Scene', '{id}'))"
+                label="Add new child Scene",
+                detailed_action=f"editor.add_resource(('Scene', '{id}'))",
             )
 
         # Add a menu to delete the resource, unless it's a root node
         if not isinstance(self.resource, Manuscript):
             dangerous_section = Gio.Menu()
             dangerous_section.append(
-                label = "Delete",
-                detailed_action = f"editor.delete_resource('{id}')"
+                label="Delete", detailed_action=f"editor.delete_resource('{id}')"
             )
-            menu.append_section(
-                label = None,
-                section = dangerous_section
-            )
+            menu.append_section(label=None, section=dangerous_section)
 
         # Create the popover menu and make it pop up
         popover = Gtk.PopoverMenu.new_from_model(menu)
@@ -246,4 +242,3 @@ class NavigationItem(Adw.Bin):
         popover.set_autohide(True)
         popover.set_position(Gtk.PositionType.RIGHT)
         popover.popup()
-

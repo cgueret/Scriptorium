@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 class Annotation(GObject.Object):
     """An annotation is a section of a text marked with some text."""
+
     __gtype_name__ = "Annotation"
 
     title = GObject.Property(type=str)
@@ -40,4 +41,3 @@ class Annotation(GObject.Object):
         """Create a new instance of Chapter."""
         super().__init__()
         self.suggestions = Gtk.StringList()
-

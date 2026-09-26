@@ -23,6 +23,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class Resource(GObject.Object):
     __gtype_name__ = "Resource"
 
@@ -93,4 +94,3 @@ class Resource(GObject.Object):
 
         # We emit the signal
         self.emit("deleted")
-

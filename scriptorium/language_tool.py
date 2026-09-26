@@ -31,7 +31,6 @@ SEND_PING_TIMEOUT_SECONDS = 1
 
 
 class LanguageTool(GObject.Object):
-
     # This is True when we could connect to Language Tool, False otherwise
     server_is_alive = GObject.Property(type=bool, default=False)
 
@@ -106,8 +105,7 @@ class LanguageTool(GObject.Object):
 
             # Try to connect to it
             GLib.timeout_add_seconds(
-                SEND_PING_TIMEOUT_SECONDS,
-                self._start_or_connect_to_server
+                SEND_PING_TIMEOUT_SECONDS, self._start_or_connect_to_server
             )
 
     def languages(self, callback):
@@ -120,7 +118,7 @@ class LanguageTool(GObject.Object):
             io_priority=GObject.PRIORITY_LOW,
             cancellable=None,
             callback=self._handle_languages_reply,
-            user_data=callback
+            user_data=callback,
         )
 
     def _handle_languages_reply(self, session, result, callback):
@@ -133,21 +131,23 @@ class LanguageTool(GObject.Object):
             callback(None)
 
     def check(self, text: str, language: str, callback):
-        """ Check a text. """
+        """Check a text."""
 
         # Return None if the server is not alive
         if not self.server_is_alive:
             return None
 
-        encoded = Soup.form_encode_hash({
-            "text": text,
-            "language": language,
-        })
+        encoded = Soup.form_encode_hash(
+            {
+                "text": text,
+                "language": language,
+            }
+        )
 
         message = Soup.Message.new_from_encoded_form(
             method="POST",
             uri_string="http://localhost:8081/v2/check",
-            encoded_form=encoded
+            encoded_form=encoded,
         )
 
         self._session.send_and_read_async(
@@ -155,7 +155,7 @@ class LanguageTool(GObject.Object):
             cancellable=None,
             io_priority=GObject.PRIORITY_LOW,
             callback=self._process_check_result,
-            user_data=callback
+            user_data=callback,
         )
 
     def _process_check_result(self, session, result, callback):
@@ -167,7 +167,7 @@ class LanguageTool(GObject.Object):
 
         # Prepare a list of annotations
         annotations = []
-        for match in results['matches']:
+        for match in results["matches"]:
             try:
                 annotation = Annotation()
 
@@ -204,4 +204,3 @@ class LanguageTool(GObject.Object):
 
         # Call back with the annotations
         callback(annotations)
-

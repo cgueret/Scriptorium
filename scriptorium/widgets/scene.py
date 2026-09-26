@@ -39,16 +39,16 @@ class SceneCard(Adw.Bin):
     prefixes = Gtk.Template.Child()
     entities = Gtk.Template.Child()
 
-    def __init__(self, scene: Scene, can_activate: bool = False, can_move: bool = False):
+    def __init__(
+        self, scene: Scene, can_activate: bool = False, can_move: bool = False
+    ):
         super().__init__()
         self._scene = scene
 
         # Configure the information for the scene
         self.set_property("title", scene.title)
         self.set_property("synopsis", scene.synopsis)
-        self.bind_property(
-            "title", scene, "title", GObject.BindingFlags.BIDIRECTIONAL
-        )
+        self.bind_property("title", scene, "title", GObject.BindingFlags.BIDIRECTIONAL)
         self.bind_property(
             "synopsis", scene, "synopsis", GObject.BindingFlags.BIDIRECTIONAL
         )
@@ -86,5 +86,3 @@ class SceneCard(Adw.Bin):
             entry = liststore.get_item(position + i)
             child = get_child_at(self.entities, position + i - 1)
             self.entities.insert_child_after(self._get_avatar(entry), child)
-
-

@@ -30,6 +30,14 @@ from .resource import Resource
 from .image import Image
 
 __all__ = [
-    'Library', 'Manuscript', 'Chapter', 'Scene', 'CommitMessage',
-    'Entity', 'Project', 'Annotation', 'Resource', 'Image'
+    "Library",
+    "Manuscript",
+    "Chapter",
+    "Scene",
+    "CommitMessage",
+    "Entity",
+    "Project",
+    "Annotation",
+    "Resource",
+    "Image",
 ]

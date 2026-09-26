@@ -93,4 +93,3 @@ class ChapterColumn(Adw.Bin):
         # Move the chapter
         logger.info(f"Move {chapter.title} where {self._chapter.title} is")
         chapter.project.manuscript.splice_chapters(chapter, self._chapter)
-

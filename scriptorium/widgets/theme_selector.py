@@ -66,4 +66,3 @@ class ThemeSelector(Adw.Bin):
             self.add_css_class("dark")
         else:
             self.remove_css_class("dark")
-

@@ -37,7 +37,6 @@ PANELS = [
     ("manuscript", ScrptManuscriptPanel),
     # Background research
     # Writing goals
-
     # Story elements
     ("header", _("Story line")),
     ("overview", ScrptOverviewPanel),
@@ -45,7 +44,6 @@ PANELS = [
     ("entities", ScrptEntityPanel),
     # Time line
     # Plot lines
-
     # Special pages
     ("header", _("Additional resources")),
     ("images", ScrptImagesPanel),
@@ -134,4 +132,3 @@ class PlanPage(Adw.Bin):
                 p = panel(self)
 
         self.panels.replace([p])
-

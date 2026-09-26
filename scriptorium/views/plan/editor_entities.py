@@ -51,12 +51,13 @@ class ScrptEntityPanel(Adw.NavigationPage):
         # Connect to the entities of the manuscript
         self.entities_list.bind_model(
             self._editor.project.entities,
-            lambda entity: EntityCard(entity, can_activate=True)
+            lambda entity: EntityCard(entity, can_activate=True),
         )
 
     @Gtk.Template.Callback()
     def on_add_entity_clicked(self, _button):
         """Handle a request to add a new entity."""
+
         def handle_response(dialog, task):
             response = dialog.choose_finish(task)
             if response == "add":
@@ -74,4 +75,3 @@ class ScrptEntityPanel(Adw.NavigationPage):
         logger.info(f'Clicked on entity "{entity.title}"')
         details_panel = ScrptEntitiesDetailsPanel(entity)
         self.navigation.push(details_panel)
-

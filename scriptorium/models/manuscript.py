@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 
 class Manuscript(Resource):
     """A manuscript is a collection of scenes and chapters."""
+
     __gtype_name__ = "Manuscript"
 
     # Properties of the manuscript
@@ -73,5 +74,3 @@ class Manuscript(Resource):
         # Now move the source where the target used to be located
         self.content.remove(source_position)
         self.content.insert(target_position, source_chapter)
-
-

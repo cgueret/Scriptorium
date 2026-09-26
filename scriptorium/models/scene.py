@@ -57,9 +57,7 @@ class Scene(Resource):
     @property
     def data_files(self):
         # An eventual list of data files associated with the resource
-        return [
-            Path("scenes") / Path(f"{self.identifier}.html")
-        ]
+        return [Path("scenes") / Path(f"{self.identifier}.html")]
 
     @property
     def history(self):
@@ -103,4 +101,3 @@ class Scene(Resource):
     def set_content(self, html_code: str) -> None:
         """Set the HTML content for the scene."""
         self._scene_content = html_code
-

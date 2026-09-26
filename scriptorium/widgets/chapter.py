@@ -34,5 +34,3 @@ class ChapterCard(Adw.Bin):
     @GObject.Property(type=Chapter)
     def chapter(self):
         return self._chapter
-
-

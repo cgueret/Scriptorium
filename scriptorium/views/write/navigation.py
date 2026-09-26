@@ -74,7 +74,11 @@ class WriteNavigation(Adw.Bin):
         widget.resource = resource
 
         # Set the parent model
-        widget.parent_model = list_row.get_parent().get_children() if list_row.get_parent() is not None else None
+        widget.parent_model = (
+            list_row.get_parent().get_children()
+            if list_row.get_parent() is not None
+            else None
+        )
 
     def connect_to(self, project):
         """Connect the navigation to the project and its contents."""
@@ -86,8 +90,12 @@ class WriteNavigation(Adw.Bin):
 
         # Create a tree list model which recurse into content as applicable
         tree_list_model = Gtk.TreeListModel.new(
-            roots, False, True,
-            lambda item: item.content if isinstance(item, (Manuscript, Chapter)) else None
+            roots,
+            False,
+            True,
+            lambda item: (
+                item.content if isinstance(item, (Manuscript, Chapter)) else None
+            ),
         )
         tree_list_model.set_autoexpand(False)
 
@@ -109,18 +117,16 @@ class WriteNavigation(Adw.Bin):
         menu = Gio.Menu()
         menu.append(
             label=_("Add new Scene"),
-            detailed_action=f"editor.add_resource(('Scene', '{manuscript_id}'))"
+            detailed_action=f"editor.add_resource(('Scene', '{manuscript_id}'))",
         )
         menu.append(
             label=_("Add new Chapter"),
-            detailed_action=f"editor.add_resource(('Chapter', '{manuscript_id}'))"
+            detailed_action=f"editor.add_resource(('Chapter', '{manuscript_id}'))",
         )
         self.add_menu.set_menu_model(menu)
         self.add_menu.connect(
             "clicked",
             lambda _: self.activate_action(
-                "editor.add_resource",
-                GLib.Variant("(ss)", ("Scene", manuscript_id))
-            )
+                "editor.add_resource", GLib.Variant("(ss)", ("Scene", manuscript_id))
+            ),
         )
-

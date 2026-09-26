@@ -25,8 +25,7 @@ from .language_tool import LanguageTool
 import logging
 
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(name)-40s: %(levelname)-8s %(message)s'
+    level=logging.INFO, format="%(name)-40s: %(levelname)-8s %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -38,8 +37,10 @@ class ScriptoriumApplication(Adw.Application):
     language_tool = GObject.Property(type=LanguageTool)
 
     def __init__(self):
-        super().__init__(application_id='io.github.cgueret.Scriptorium',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+        super().__init__(
+            application_id="io.github.cgueret.Scriptorium",
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+        )
 
         self.connect("startup", self.on_startup)
         self.connect("shutdown", self.on_shutdown)
@@ -49,11 +50,11 @@ class ScriptoriumApplication(Adw.Application):
         color_scheme = self.settings.get_string(value)
 
         style_manager = Adw.StyleManager.get_default()
-        if color_scheme == 'dark':
+        if color_scheme == "dark":
             style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
-        elif color_scheme == 'light':
+        elif color_scheme == "light":
             style_manager.set_color_scheme(Adw.ColorScheme.FORCE_LIGHT)
-        elif color_scheme == 'default':
+        elif color_scheme == "default":
             style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
 
     def do_activate(self):
@@ -70,34 +71,32 @@ class ScriptoriumApplication(Adw.Application):
     def on_about_action(self, *args):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(
-            application_name='Scriptorium',
-            application_icon='io.github.cgueret.Scriptorium',
-            developer_name='Christophe Guéret',
-            version='1.3.0',
-            website='https://github.com/cgueret/Scriptorium',
+            application_name="Scriptorium",
+            application_icon="io.github.cgueret.Scriptorium",
+            developer_name="Christophe Guéret",
+            version="1.3.0",
+            website="https://github.com/cgueret/Scriptorium",
             developers=[
-                'Christophe Guéret <christophe.gueret@gmail.com>',
-                'Diego C Sampaio https://github.com/kriptolix'
+                "Christophe Guéret <christophe.gueret@gmail.com>",
+                "Diego C Sampaio https://github.com/kriptolix",
             ],
-            copyright='© 2025-2026 Christophe Guéret'
+            copyright="© 2025-2026 Christophe Guéret",
         )
         about.add_credit_section(
-            _('Beta testing'),
-            ['TheShadowOfHassen https://github.com/TheShadowOfHassen']
+            _("Beta testing"),
+            ["TheShadowOfHassen https://github.com/TheShadowOfHassen"],
         )
-        about.set_artists(
-            ['Jakub Steiner https://jimmac.eu/']
-        )
+        about.set_artists(["Jakub Steiner https://jimmac.eu/"])
 
         # Translators: Replace "translator-credits" with your name/username,
         # and optionally an email or URL.
-        about.set_translator_credits(_('translator-credits'))
+        about.set_translator_credits(_("translator-credits"))
 
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        logger.info('app.preferences action activated')
+        logger.info("app.preferences action activated")
         preferences = ScrptPreferencesDialog()
         preferences.present(self.props.active_window)
 
@@ -121,24 +120,19 @@ class ScriptoriumApplication(Adw.Application):
         Handle the application startup.
         """
         # Create the basic application actions
-        self.create_action('quit', lambda *_: self.quit())
-        self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+        self.create_action("quit", lambda *_: self.quit())
+        self.create_action("about", self.on_about_action)
+        self.create_action("preferences", self.on_preferences_action)
 
         # Check which theme should be applies
-        self.settings = Gio.Settings(
-            schema_id="io.github.cgueret.Scriptorium"
-        )
+        self.settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")
         style_variant_action = self.settings.create_action("style-variant")
         self.add_action(style_variant_action)
-        self.settings.connect(
-            "changed::style-variant",
-            self.change_color_scheme
-        )
+        self.settings.connect("changed::style-variant", self.change_color_scheme)
 
         # Get the current color scheme
         current_value = self.settings.get_string("style-variant")
-        style_variant_action.activate(GLib.Variant('s', current_value))
+        style_variant_action.activate(GLib.Variant("s", current_value))
 
         # Instantiate our language tool interface
         self.language_tool = LanguageTool()
@@ -147,5 +141,3 @@ class ScriptoriumApplication(Adw.Application):
     def on_shutdown(self, _application):
         # Inform the language tool interface of the shutdown
         self.language_tool.shutdown()
-
-

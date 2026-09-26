@@ -25,6 +25,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: Enhance the widget with a placeholder to show when list is empty
 
+
 class CardDropZone(Gtk.Box):
     __gtype_name__ = "CardDropZone"
 
@@ -225,9 +226,9 @@ class CardsList(Gtk.Box):
     __gtype_name__ = "CardsList"
 
     __gsignals__ = {
-            # signal_name: (flags, return_type, argument_types)
-            "start-drag": (GObject.SignalFlags.RUN_FIRST, None, ()),
-            "stop-drag": (GObject.SignalFlags.RUN_FIRST, None, ())
+        # signal_name: (flags, return_type, argument_types)
+        "start-drag": (GObject.SignalFlags.RUN_FIRST, None, ()),
+        "stop-drag": (GObject.SignalFlags.RUN_FIRST, None, ()),
     }
 
     def __init__(self):
@@ -295,4 +296,3 @@ class CardsList(Gtk.Box):
             return self.get_last_child()
 
         return child
-

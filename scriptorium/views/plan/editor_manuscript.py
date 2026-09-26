@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Editor panel to select and work on the scenes."""
+
 from gettext import gettext as _
 
 import logging
@@ -30,11 +31,7 @@ logger = logging.getLogger(__name__)
 
 
 class KeyValuePair(GObject.Object):
-    key = GObject.Property(
-        type=str,
-        flags=GObject.ParamFlags.READWRITE,
-        default=""
-    )
+    key = GObject.Property(type=str, flags=GObject.ParamFlags.READWRITE, default="")
     value = GObject.Property(
         type=str,
         nick="Value",
@@ -144,13 +141,9 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
         # Create the menu for changing the cover
         menu = Gio.Menu()
         menu.append(
-            label=_("Import a new cover"),
-            detailed_action="editor.import_cover"
+            label=_("Import a new cover"), detailed_action="editor.import_cover"
         )
-        menu.append(
-            label=_("Remove cover"),
-            detailed_action="editor.set_cover('')"
-        )
+        menu.append(label=_("Remove cover"), detailed_action="editor.set_cover('')")
         self.cover_edit_button.set_menu_model(menu)
 
     @Gtk.Template.Callback()
@@ -174,20 +167,19 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
         """Process a reply from LanguageTool with a list of languages."""
         if not languages:
             logger.info("Will retry fetching languages in 2 second")
-            GLib.timeout_add_seconds(
-                2,
-                self._ask_language_tool_for_languages
-            )
+            GLib.timeout_add_seconds(2, self._ask_language_tool_for_languages)
         else:
             # Add the language options to the drop down
             model = Gio.ListStore(item_type=KeyValuePair)
             for language in languages:
-                lang_code = language['code']
+                lang_code = language["code"]
                 country_flag = LANGUAGE_SHORT_CODE_TO_FLAG.get(lang_code, " ")
-                model.append(KeyValuePair(
-                    key=language['longCode'],
-                    value=country_flag + " " + language['name']
-                ))
+                model.append(
+                    KeyValuePair(
+                        key=language["longCode"],
+                        value=country_flag + " " + language["name"],
+                    )
+                )
             list_store_expression = Gtk.PropertyExpression.new(
                 KeyValuePair,
                 None,
@@ -203,21 +195,22 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
                 source_property="language",
                 target=self.language_drop_down,
                 target_property="selected",
-                flags=GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
-                transform_from=lambda _, position:
-                    self.language_drop_down.get_selected_item().key,
-                transform_to=lambda _, string:
-                    find_in_model(model, string, index_english)
+                flags=GObject.BindingFlags.BIDIRECTIONAL
+                | GObject.BindingFlags.SYNC_CREATE,
+                transform_from=lambda _, position: (
+                    self.language_drop_down.get_selected_item().key
+                ),
+                transform_to=lambda _, string: find_in_model(
+                    model, string, index_english
+                ),
             )
 
             # Select the current language
             logger.info(self._editor.project.manuscript.language)
             self.language_drop_down.set_selected(
                 find_in_model(
-                    model,
-                    self._editor.project.manuscript.language,
-                    index_english
-                 )
+                    model, self._editor.project.manuscript.language, index_english
+                )
             )
 
     def create_message_entry(self, message):
@@ -250,4 +243,3 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
         else:
             self.cover_picture.set_paintable(None)
             self.cover_stack.set_visible_child_name("no_image_set")
-

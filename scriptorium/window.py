@@ -34,43 +34,36 @@ logger = logging.getLogger(__name__)
 # they are activated and push. Later on we will be able to easily spawn them
 # as separate window instead if this is what the user would prefer
 
-@Gtk.Template(resource_path=f'{BASE}/window.ui')
+
+@Gtk.Template(resource_path=f"{BASE}/window.ui")
 class ScrptWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'ScrptWindow'
+    __gtype_name__ = "ScrptWindow"
 
     navigation = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
 
     # This is a pointer to the currently open project, defaults to None
-    #project = GObject.Property(
+    # project = GObject.Property(
     #    type=Project,
     #    default=None
-    #)
+    # )
 
     # The base path of all the manuscripts
-    manuscripts_folder = GObject.Property(
-        type=str,
-        default=None
-    )
+    manuscripts_folder = GObject.Property(type=str, default=None)
 
     # This is the identifier of the manuscript that was last opened
-    last_manuscript_name = GObject.Property(
-        type=str,
-        default=None
-    )
+    last_manuscript_name = GObject.Property(type=str, default=None)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         # Load custom CSS
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_file(
-            Gio.File.new_for_uri(f"resource:/{BASE}/style.css")
-        )
+        css_provider.load_from_file(Gio.File.new_for_uri(f"resource:/{BASE}/style.css"))
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(),
             css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
         # Load custom icons
@@ -82,26 +75,27 @@ class ScrptWindow(Adw.ApplicationWindow):
 
         # Bind the settings related to the window
         self.settings.bind(
-            "window-width", self, "default-width",
-            Gio.SettingsBindFlags.DEFAULT
+            "window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT
         )
         self.settings.bind(
-            "window-height", self, "default-height",
-            Gio.SettingsBindFlags.DEFAULT
+            "window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT
         )
         self.settings.bind(
-            "window-maximized", self, "maximized",
-            Gio.SettingsBindFlags.DEFAULT
+            "window-maximized", self, "maximized", Gio.SettingsBindFlags.DEFAULT
         )
 
         # Bindings related to projects management
         self.settings.bind(
-            "last-manuscript-name", self, "last-manuscript-name",
-            Gio.SettingsBindFlags.DEFAULT
+            "last-manuscript-name",
+            self,
+            "last-manuscript-name",
+            Gio.SettingsBindFlags.DEFAULT,
         )
         self.settings.bind(
-            "manuscripts-folder", self, "manuscripts-folder",
-            Gio.SettingsBindFlags.DEFAULT
+            "manuscripts-folder",
+            self,
+            "manuscripts-folder",
+            Gio.SettingsBindFlags.DEFAULT,
         )
 
         # Create a property for last open project and connect that to a setting
@@ -117,17 +111,14 @@ class ScrptWindow(Adw.ApplicationWindow):
 
         # The library is where a project is selected by the user. We keep an
         # eye on actions there
-        self.connect(
-            'notify::manuscripts-folder',
-            self.on_manuscripts_folder_changed
-        )
+        self.connect("notify::manuscripts-folder", self.on_manuscripts_folder_changed)
 
         # Open the default data directory
         # (TODO Implement the setting for data folder)
-        #projects_path = Path(self.manuscripts_folder) / Path('manuscripts')
-        #if not projects_path.exists():
+        # projects_path = Path(self.manuscripts_folder) / Path('manuscripts')
+        # if not projects_path.exists():
         #    projects_path.mkdir()
-        #self.projects_base_path = projects_path.resolve()
+        # self.projects_base_path = projects_path.resolve()
 
     @Gtk.Template.Callback()
     def on_scrptwindow_realize(self, window):
@@ -141,7 +132,7 @@ class ScrptWindow(Adw.ApplicationWindow):
             self.manuscripts_folder = folder
 
         # Inform the user of the data folder
-        logger.info(f'Data location: {self.manuscripts_folder}')
+        logger.info(f"Data location: {self.manuscripts_folder}")
 
         # Create a library panel
         library_panel = ScrptLibraryView(self.manuscripts_folder)
@@ -170,5 +161,3 @@ class ScrptWindow(Adw.ApplicationWindow):
 
         # Replace all the other panels by that one
         self.navigation.replace(pages=[library_panel])
-
-

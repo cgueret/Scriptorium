@@ -32,5 +32,5 @@ __all__ = [
     "ScrptEntityPanel",
     "ScrptEntitiesDetailsPanel",
     "ScrptScenesPanel",
-    "ScrptScenesDetailsPanel"
-    ]
+    "ScrptScenesDetailsPanel",
+]

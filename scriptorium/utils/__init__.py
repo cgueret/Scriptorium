@@ -137,4 +137,3 @@ def switch_tag_for_selection(text_buffer, tag_name):
         text_buffer.remove_tag(tag, start, end)
     else:
         text_buffer.apply_tag(tag, start, end)
-

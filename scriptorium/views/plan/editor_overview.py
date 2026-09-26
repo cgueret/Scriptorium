@@ -64,4 +64,3 @@ class ScrptOverviewPanel(Adw.NavigationPage):
         chapter = list_item.get_item()
         chapter_column = list_item.get_child()
         chapter_column.connect_to_chapter(chapter)
-

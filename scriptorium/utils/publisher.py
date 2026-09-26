@@ -24,7 +24,9 @@ from ebooklib import epub
 import io
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 # Create instances of PublisherSection and return the toc. When asked to export
 # the book call the rest of the epub lib functions
@@ -44,7 +46,6 @@ class Publisher(object):
 
         # The EBook built from the manuscript
         self._book = None
-
 
     @property
     def table_of_contents(self):
@@ -69,7 +70,9 @@ class Publisher(object):
 
         return content
 
-    def _extract_content(self, resource: Resource, depth, buffer, previous_was_scene = False):
+    def _extract_content(
+        self, resource: Resource, depth, buffer, previous_was_scene=False
+    ):
         # If we just have a resource return that as is
         if isinstance(resource, Scene):
             # If what we wrote before was a scene, add a scene separator
@@ -83,15 +86,14 @@ class Publisher(object):
             if usable_depth == 1:
                 buffer.write(f'<h{usable_depth} class="chapter-title">')
             else:
-                buffer.write(f'<h{usable_depth}>')
-            buffer.write(f'{resource.title}</h{usable_depth}>\n')
+                buffer.write(f"<h{usable_depth}>")
+            buffer.write(f"{resource.title}</h{usable_depth}>\n")
 
             # We keep track of the content just before to place scene separators
             previous_entry = None
             for entry in resource.content:
                 self._extract_content(
-                    entry, depth+1, buffer,
-                    isinstance(previous_entry, Scene)
+                    entry, depth + 1, buffer, isinstance(previous_entry, Scene)
                 )
                 previous_entry = entry
 
@@ -115,17 +117,14 @@ class Publisher(object):
         # Set the cover
         cover_img = self._manuscript.cover
         if cover_img is not None:
-            self._book.set_cover(
-                cover_img.path.name,
-                open(cover_img.path, 'rb').read()
-            )
+            self._book.set_cover(cover_img.path.name, open(cover_img.path, "rb").read())
 
         # Add the content
         for entry in self._manuscript.content:
             epub_html = epub.EpubHtml(
                 title=entry.title,
                 file_name=f"{entry.identifier}.xhtml",
-                lang=self._manuscript.language
+                lang=self._manuscript.language,
             )
             epub_html.set_content(self._get_chapter_content(entry))
             self._book.add_item(epub_html)
@@ -144,9 +143,11 @@ class Publisher(object):
         self._book.add_item(epub.EpubNav())
 
         # define CSS style
-        style = Gio.File.new_for_uri(
-            f"resource:/{BASE}/utils/epub-novel.css"
-        ).load_contents()[1].decode()
+        style = (
+            Gio.File.new_for_uri(f"resource:/{BASE}/utils/epub-novel.css")
+            .load_contents()[1]
+            .decode()
+        )
         style_css = epub.EpubItem(
             uid="style_novel",
             file_name="style/novel.css",
@@ -160,4 +161,3 @@ class Publisher(object):
         # Connect it to all the parts
         for part in self._book.toc:
             part.add_item(style_css)
-

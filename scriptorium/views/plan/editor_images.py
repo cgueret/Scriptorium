@@ -43,5 +43,3 @@ class ScrptImagesPanel(Adw.NavigationPage):
 
         # Connect the model of the flow box
         self.images_box.bind_model(editor.project.images, ImageItem)
-
-

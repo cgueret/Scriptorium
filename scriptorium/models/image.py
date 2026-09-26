@@ -8,7 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 class Image(Resource):
-
     __gtype_name__ = "Image"
 
     file_name = GObject.Property(type=str)
@@ -27,10 +26,8 @@ class Image(Resource):
     @property
     def data_files(self):
         """Return the file path for the image if it has been set."""
-        if self.file_name is not None and self.file_name != '':
-            return [
-                Path("images") / Path(self.file_name)
-            ]
+        if self.file_name is not None and self.file_name != "":
+            return [Path("images") / Path(self.file_name)]
         else:
             return []
 
@@ -52,7 +49,7 @@ class Image(Resource):
         """Set the content of the image from the file path indicated."""
 
         # Define the target file name
-        file_extensions = ''.join(file_path.suffixes)
+        file_extensions = "".join(file_path.suffixes)
         self.file_name = self.identifier + file_extensions
 
         # Copy the content of the file
@@ -74,5 +71,3 @@ class Image(Resource):
 
         # Return the texture
         return self._texture
-
-

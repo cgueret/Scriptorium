@@ -81,4 +81,3 @@ class ScrptEntitiesDetailsPanel(Adw.NavigationPage):
 
             # Return to listing the entities
             self.get_parent().pop()
-

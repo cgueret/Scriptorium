@@ -33,8 +33,8 @@ EDITOR_IDLE_TIMEOUT_TIME = 200
 
 # make font selectable like in https://gitlab.gnome.org/GNOME/gnome-text-editor/-/blob/main/src/editor-preferences-dialog.c
 
-#TODO: when editor is idle (500ms) by default, trigger buffer->html
-#TODO: when it's autosave time (1s) by default, trigger html->disk
+# TODO: when editor is idle (500ms) by default, trigger buffer->html
+# TODO: when it's autosave time (1s) by default, trigger html->disk
 
 # Mutex to avoid having to matches callback edit the buffer at the same time
 text_buffer_lock = threading.Lock()
@@ -81,7 +81,7 @@ class WritePage(Adw.Bin):
         action_group.add_action(action)
         shortcut = Gtk.Shortcut.new(
             Gtk.ShortcutTrigger.parse_string("<Primary>b"),
-            Gtk.NamedAction.new("custom.do_toggle_bold")
+            Gtk.NamedAction.new("custom.do_toggle_bold"),
         )
         controller.add_shortcut(shortcut)
 
@@ -90,7 +90,7 @@ class WritePage(Adw.Bin):
         action_group.add_action(action)
         shortcut = Gtk.Shortcut.new(
             Gtk.ShortcutTrigger.parse_string("<Primary>i"),
-            Gtk.NamedAction.new("custom.do_toggle_italics")
+            Gtk.NamedAction.new("custom.do_toggle_italics"),
         )
         controller.add_shortcut(shortcut)
 
@@ -190,18 +190,15 @@ class WritePage(Adw.Bin):
     def on_text_view_click(self, _gesture, n_press, x, y):
         # If we are on a suggestion, automatically select it.
         # This will trigger the selection changed
-        #if self.popover:
+        # if self.popover:
         #    self.popover.popdown()
         self.popover_annotation.popdown()
 
         if isinstance(_gesture, Gtk.GestureClick) and n_press == 1:
             buff_x, buff_y = self.text_view.window_to_buffer_coords(
-                Gtk.TextWindowType.WIDGET,
-                x, y
+                Gtk.TextWindowType.WIDGET, x, y
             )
-            found, click_iter = self.text_view.get_iter_at_location(
-                buff_x, buff_y
-            )
+            found, click_iter = self.text_view.get_iter_at_location(buff_x, buff_y)
             if found and self._annotations is not None:
                 offset = click_iter.get_offset()
                 location = self.text_view.get_iter_location(click_iter)
@@ -213,14 +210,11 @@ class WritePage(Adw.Bin):
                         self.text_view.move_overlay(
                             child=self.anchor_overlay,
                             xpos=iter_x,
-                            ypos=iter_y+(location.height / 2)+3
+                            ypos=iter_y + (location.height / 2) + 3,
                         )
                         self.popover_annotation.set_pointing_to(
                             Gdk.Rectangle(
-                                x=iter_x,
-                                y=iter_y,
-                                width=1,
-                                height=location.height
+                                x=iter_x, y=iter_y, width=1, height=location.height
                             )
                         )
                         self.popover_annotation.set_child(
@@ -229,11 +223,11 @@ class WritePage(Adw.Bin):
                         self.popover_annotation.popup()
 
     @Gtk.Template.Callback()
-    def do_toggle_bold(self, _src, _param = None):
+    def do_toggle_bold(self, _src, _param=None):
         switch_tag_for_selection(self.text_view.get_buffer(), "strong")
 
     @Gtk.Template.Callback()
-    def do_toggle_italics(self, _src, _param = None):
+    def do_toggle_italics(self, _src, _param=None):
         switch_tag_for_selection(self.text_view.get_buffer(), "em")
 
     def on_received_annotations(self, annotations):
@@ -275,14 +269,11 @@ class WritePage(Adw.Bin):
         # If language tool is not ready try again later
         if not language_tool.server_is_alive:
             self._idle_timeout_id = GLib.timeout_add(
-                EDITOR_IDLE_TIMEOUT_TIME,
-                self.on_editor_idle
+                EDITOR_IDLE_TIMEOUT_TIME, self.on_editor_idle
             )
         else:
             language_tool.check(
-                content,
-                self.project.manuscript.language,
-                self.on_received_annotations
+                content, self.project.manuscript.language, self.on_received_annotations
             )
 
         # Don't repeat that callback
@@ -305,15 +296,11 @@ class WritePage(Adw.Bin):
         if self.show_annotations.get_active() and self._annotations:
             buffer = self.text_view.get_buffer()
             for annotation in self._annotations:
-                start_iter = buffer.get_iter_at_offset(
-                    annotation.offset
-                )
+                start_iter = buffer.get_iter_at_offset(annotation.offset)
                 end_iter = buffer.get_iter_at_offset(
                     annotation.offset + annotation.length
                 )
-                buffer.apply_tag_by_name(
-                    annotation.category, start_iter, end_iter
-                )
+                buffer.apply_tag_by_name(annotation.category, start_iter, end_iter)
 
     @Gtk.Template.Callback()
     def on_show_annotations_toggled(self, _toggle_button):
@@ -324,9 +311,7 @@ class WritePage(Adw.Bin):
         logger.info("Writer closed")
         if self.active_scene is not None:
             # Update the content of the scene and save it to disk
-            self.active_scene.set_content(
-                buffer_to_html(self.text_view.get_buffer())
-            )
+            self.active_scene.set_content(buffer_to_html(self.text_view.get_buffer()))
             self.active_scene.save()
 
     def on_buffer_changed(self, text_buffer):
@@ -341,7 +326,5 @@ class WritePage(Adw.Bin):
 
         # Schedule a new idle check in some time from now
         self._idle_timeout_id = GLib.timeout_add(
-            EDITOR_IDLE_TIMEOUT_TIME,
-            self.on_editor_idle
+            EDITOR_IDLE_TIMEOUT_TIME, self.on_editor_idle
         )
-

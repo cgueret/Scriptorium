@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 
 class Chapter(Resource):
     """A chapter is a list of scenes."""
+
     __gtype_name__ = "Chapter"
 
     content = GObject.Property(type=Gio.ListStore)
@@ -59,4 +60,3 @@ class Chapter(Resource):
         for scene in self.content:
             content.append(scene.get_content())
         return "\n".join(content)
-

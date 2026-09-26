@@ -29,12 +29,9 @@ ANIMATION_DURATION = 100
 
 
 def animate_opacity(widget, from_value, to_value):
-    animation_target = Adw.PropertyAnimationTarget.new(
-        widget, "opacity"
-    )
+    animation_target = Adw.PropertyAnimationTarget.new(widget, "opacity")
     animation = Adw.TimedAnimation.new(
-        widget, from_value, to_value, ANIMATION_DURATION,
-        animation_target
+        widget, from_value, to_value, ANIMATION_DURATION, animation_target
     )
     animation.play()
 
@@ -65,4 +62,3 @@ class ImageItem(Gtk.Overlay):
     @Gtk.Template.Callback()
     def on_eventcontrollermotion_leave(self, _src):
         animate_opacity(self.remove_image_button, 1.0, 0.0)
-

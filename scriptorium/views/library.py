@@ -70,26 +70,21 @@ class ScrptLibraryView(Adw.NavigationPage):
 
         # Create the action to edit the attributes of a project
         action = Gio.SimpleAction.new(
-            name="about",
-            parameter_type=GLib.VariantType.new("s")
-            )
+            name="about", parameter_type=GLib.VariantType.new("s")
+        )
         action.connect("activate", self.on_about_project)
         group.add_action(action)
 
         # Create the action to delete a project
         action = Gio.SimpleAction.new(
-            name="delete",
-            parameter_type=GLib.VariantType.new("s")
-            )
+            name="delete", parameter_type=GLib.VariantType.new("s")
+        )
         action.connect("activate", self.on_delete_project)
         group.add_action(action)
 
         # Signal to the list model to detect when content is available
         # this is useful when a new Manuscript is created
-        self.library.projects.connect(
-            "items-changed",
-            self.on_grid_content_changed
-        )
+        self.library.projects.connect("items-changed", self.on_grid_content_changed)
 
         # Connect the model to the grid, don't select anything by default
         selection_model = Gtk.SingleSelection(model=self.library.projects)
@@ -164,7 +159,7 @@ class ScrptLibraryView(Adw.NavigationPage):
         settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")
         settings.set_string(
             "last-manuscript-name",
-            selected_project.identifier if selected_project is not None else ""
+            selected_project.identifier if selected_project is not None else "",
         )
 
         selected_project = selection_model.get_selected_item()
@@ -172,7 +167,7 @@ class ScrptLibraryView(Adw.NavigationPage):
             logger.info(f"Selected project {selected_project.identifier}")
             if not selected_project.can_be_opened:
                 self.migrate_dialog.choose(self)
-                #selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
+                # selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
             else:
                 # Open the project
                 self._open_project(selected_project)
@@ -183,7 +178,7 @@ class ScrptLibraryView(Adw.NavigationPage):
         """
         # If we did select something, open the editor
         if project is not None:
-            logger.info(f"\"{project.title}\": create and open editor")
+            logger.info(f'"{project.title}": create and open editor')
 
             # Create an editor navigation page and push it to the navigation
             editor_page = ScrptEditorView(project)
@@ -285,8 +280,10 @@ class ScrptLibraryView(Adw.NavigationPage):
         if self.edit_title_bind is not None:
             self.edit_title_bind.unbind()
         self.edit_title_bind = project.bind_property(
-            "title", self.edit_title, "text",
-            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE
+            "title",
+            self.edit_title,
+            "text",
+            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
         )
 
         self.about_dialog.present(self)

@@ -70,4 +70,3 @@ class EntityCard(Adw.Bin):
     @GObject.Property(type=Entity)
     def entity(self):
         return self._entity
-

@@ -72,4 +72,3 @@ class AnnotationCard(Adw.Bin):
         )
         text_buffer.delete(start_iter, end_iter)
         text_buffer.insert(start_iter, button.get_label())
-

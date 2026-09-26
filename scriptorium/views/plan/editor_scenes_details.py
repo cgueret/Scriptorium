@@ -69,17 +69,16 @@ class ScrptScenesDetailsPanel(Adw.NavigationPage):
 
         self.history_list.bind_model(scene.history, self.create_message_entry)
         self.entities_list.bind_model(
-            scene.entities,
-            lambda entity: EntityCard(entity, can_move=True)
+            scene.entities, lambda entity: EntityCard(entity, can_move=True)
         )
 
-        self.entities_list.connect("start-drag",
-            lambda x:
-            self.assign_remove_stack.set_visible_child_name("remove")
+        self.entities_list.connect(
+            "start-drag",
+            lambda x: self.assign_remove_stack.set_visible_child_name("remove"),
         )
-        self.entities_list.connect("stop-drag",
-            lambda x:
-            self.assign_remove_stack.set_visible_child_name("assign")
+        self.entities_list.connect(
+            "stop-drag",
+            lambda x: self.assign_remove_stack.set_visible_child_name("assign"),
         )
 
     @Gtk.Template.Callback()
@@ -132,9 +131,5 @@ class ScrptScenesDetailsPanel(Adw.NavigationPage):
                 logger.info(f"Connectiong {entity.title}")
                 self._scene.connect_to(entity)
 
-        dialog = ScrptSelectEntitiesDialog(
-            self._scene,
-            self._scene.project.entities
-        )
+        dialog = ScrptSelectEntitiesDialog(self._scene, self._scene.project.entities)
         dialog.choose(self, None, handle_response)
-

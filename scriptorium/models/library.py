@@ -35,7 +35,9 @@ class Library(GObject.Object):
 
     projects: GObject.Property = GObject.Property(type=Gio.ListStore)
 
-    def __init__(self, ):
+    def __init__(
+        self,
+    ):
         """Create an instance of the library for the target folder."""
         super().__init__()
 
@@ -110,4 +112,3 @@ class Library(GObject.Object):
         # That does not seem to be here
         logger.warning(f"Project not found: {identifier}")
         return None
-

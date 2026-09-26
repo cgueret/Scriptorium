@@ -9,9 +9,14 @@ from .multiline_entry_row import MultiLineEntryRow
 from .text_view import ScrptTextView
 
 __all__ = [
-    "SceneCard", "ChapterCard", "EntityCard",
-    "ChapterColumn", "CardsList",
-    "ThemeSelector", "WriterPopover", "AnnotationCard",
-    "MultiLineEntryRow", "ScrptTextView"
+    "SceneCard",
+    "ChapterCard",
+    "EntityCard",
+    "ChapterColumn",
+    "CardsList",
+    "ThemeSelector",
+    "WriterPopover",
+    "AnnotationCard",
+    "MultiLineEntryRow",
+    "ScrptTextView",
 ]
-

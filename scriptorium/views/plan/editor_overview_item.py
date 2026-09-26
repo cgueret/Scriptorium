@@ -75,4 +75,3 @@ class ScrptOverviewPanelItem(Adw.Bin):
         resource = list_item.get_item()
         item_widget = list_item.get_child()
         item_widget.bind_to_resource(resource)
-

@@ -7,5 +7,5 @@ __all__ = [
     ScrptAddDialog,
     ScrptSelectScenesDialog,
     ScrptSelectEntitiesDialog,
-    ScrptPreferencesDialog
+    ScrptPreferencesDialog,
 ]

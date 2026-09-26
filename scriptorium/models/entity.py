@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 
 class Entity(Resource):
     """An entity is a story element (person, place, prop, ...)"""
+
     __gtype_name__ = "Entity"
 
     category = GObject.Property(type=str)
@@ -53,4 +54,3 @@ class Entity(Resource):
 
         # Remove the entity from the manuscript
         self._manuscript.entities.remove(position)
-
