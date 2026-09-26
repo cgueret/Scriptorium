@@ -16,7 +16,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+# Set the target version of the libraries
+import gi
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
+gi.require_version("WebKit", "6.0")
+gi.require_version("Soup", '3.0')
 import sys
+
 from .application import ScriptoriumApplication
 import logging
 

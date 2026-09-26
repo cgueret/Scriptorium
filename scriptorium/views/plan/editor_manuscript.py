@@ -204,9 +204,9 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
                 target=self.language_drop_down,
                 target_property="selected",
                 flags=GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
-                transform_from=lambda src, position:
+                transform_from=lambda _, position:
                     self.language_drop_down.get_selected_item().key,
-                transform_to=lambda src, string:
+                transform_to=lambda _, string:
                     find_in_model(model, string, index_english)
             )
 

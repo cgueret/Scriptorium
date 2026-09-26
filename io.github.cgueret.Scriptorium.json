@@ -1,7 +1,7 @@
 {
     "id" : "io.github.cgueret.Scriptorium",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "50",
+    "runtime-version" : "51",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.openjdk25"
@@ -66,7 +66,8 @@
             ],
             "config-opts" : [
                 "--libdir=lib"
-            ]
+            ],
+            "builddir" : true
         }
     ]
 }

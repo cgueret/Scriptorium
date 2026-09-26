@@ -205,4 +205,3 @@ class LanguageTool(GObject.Object):
         # Call back with the annotations
         callback(annotations)
 
-
