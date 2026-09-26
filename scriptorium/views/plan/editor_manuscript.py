@@ -221,17 +221,6 @@ class ScrptManuscriptPanel(Adw.NavigationPage):
         message_entry.set_subtitle(message.message)
         return message_entry
 
-    def on_delete_response_selected(self, _dialog, task):
-        """Handle the response to the confirmation dialog."""
-        response = _dialog.choose_finish(task)
-        if response == "delete":
-            # Delete the manuscript
-            library = self._editor.project.library
-            library.delete_project(self._editor.project)
-
-            # Pop the navigation
-            self._editor.close_on_delete()
-
     def update_cover(self):
         """Update the display of the cover."""
         cover_image = self._editor.project.manuscript.cover

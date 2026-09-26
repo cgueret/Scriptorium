@@ -57,18 +57,22 @@ class ScrptWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        # Load custom CSS
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_file(Gio.File.new_for_uri(f"resource:/{BASE}/style.css"))
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(),
-            css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
-        )
+        display = Gdk.Display.get_default()
+        if display:
+            # Load custom CSS
+            css_provider = Gtk.CssProvider()
+            css_provider.load_from_file(
+                Gio.File.new_for_uri(f"resource:/{BASE}/style.css")
+            )
+            Gtk.StyleContext.add_provider_for_display(
+                display,
+                css_provider,
+                Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+            )
 
-        # Load custom icons
-        theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
-        theme.add_resource_path(f"{BASE}/icons")
+            # Load custom icons
+            theme = Gtk.IconTheme.get_for_display(display)
+            theme.add_resource_path(f"{BASE}/icons")
 
         # Load the settings up
         self.settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")

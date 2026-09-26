@@ -182,7 +182,9 @@ class ScrptLibraryView(Adw.NavigationPage):
 
             # Create an editor navigation page and push it to the navigation
             editor_page = ScrptEditorView(project)
-            self.get_parent().push(editor_page)
+            parent = self.get_parent()
+            if parent and isinstance(parent, Adw.NavigationView):
+                parent.push(editor_page) # type: ignore[attr-defined]
 
     def open_last_project(self):
         """Check if we need to open the last project."""
@@ -226,12 +228,15 @@ class ScrptLibraryView(Adw.NavigationPage):
             window = self.props.root
 
             if worked:
-                window.inform("Project successfuly migrated!")
+                if window:
+                    # TODO replace this mechanism with a signal
+                    window.inform("Project successfuly migrated!") # type: ignore[attr-defined]
 
                 # Open the project right away
                 self._open_project(selected_project)
             else:
-                window.inform("Something went wrong. See logs for details")
+                if window:
+                    window.inform("Something went wrong. See logs for details") # type: ignore[attr-defined]
 
                 # Seems like we won't open that thing...
                 selection_model.set_selected(Gtk.INVALID_LIST_POSITION)

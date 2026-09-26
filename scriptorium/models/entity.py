@@ -33,6 +33,8 @@ class Entity(Resource):
 
     category = GObject.Property(type=str)
 
+    _manuscript = None
+
     def __init__(self, project, identifier: str):
         """Create an entity."""
         super().__init__(project, identifier)

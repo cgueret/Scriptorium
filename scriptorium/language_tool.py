@@ -150,13 +150,14 @@ class LanguageTool(GObject.Object):
             encoded_form=encoded,
         )
 
-        self._session.send_and_read_async(
-            msg=message,
-            cancellable=None,
-            io_priority=GObject.PRIORITY_LOW,
-            callback=self._process_check_result,
-            user_data=callback,
-        )
+        if message:
+            self._session.send_and_read_async(
+                msg=message,
+                cancellable=None,
+                io_priority=GObject.PRIORITY_LOW,
+                callback=self._process_check_result,
+                user_data=callback,
+            )
 
     def _process_check_result(self, session, result, callback):
         """Handle a response to a check request."""

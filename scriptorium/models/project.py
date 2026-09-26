@@ -426,12 +426,9 @@ class Project(GObject.Object):
             if prop.name not in resource_data:
                 continue
             value = resource_data[prop.name]
-            logger.info(f"{prop.value_type} {prop.name}")
             if prop.value_type in (GObject.TYPE_STRING, GObject.TYPE_INT):
-                logger.info(f"String/Int {prop.name}")
                 resource.set_property(prop.name, value)
             elif isinstance(prop, GObject.ParamSpecObject):
-                logger.info(f"Object {prop.name}")
                 if prop.value_type.is_a(Resource.__gtype__):
                     resource.set_property(prop.name, self.get_resource(value))
                 elif prop.value_type == Gio.ListStore.__gtype__:

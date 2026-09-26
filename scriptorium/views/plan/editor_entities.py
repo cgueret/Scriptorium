@@ -31,6 +31,8 @@ logger = logging.getLogger(__name__)
 
 # TODO: When adding a new element offer to pick a template to pre-populate attrs
 
+from gettext import gettext as _
+
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_entities.ui")
 class ScrptEntityPanel(Adw.NavigationPage):

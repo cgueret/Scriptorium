@@ -156,12 +156,11 @@ class NavigationItem(Adw.Bin):
         drag = drop_target.get_current_drop().get_drag()
         icon = Gtk.DragIcon.get_for_drag(drag)
         value = icon.get_child()
-        _got_bounds, _x, _y, _width, visitor_height = value.get_bounds()
-        _got_bounds, _x, own_y, _width, own_height = self.get_bounds()
+        if value:
+            _got_bounds, _x, _y, _width, visitor_height = value.get_bounds()
 
-        next_sibling = self.get_parent().get_next_sibling()
-        if next_sibling is not None:
-            if not next_sibling.get_first_child().is_dragged:
+            next_sibling = self.get_parent().get_next_sibling()
+            if next_sibling and not next_sibling.get_first_child().is_dragged:
                 self._animate(State.PUSHED, visitor_height)
 
         return Gdk.DragAction.MOVE

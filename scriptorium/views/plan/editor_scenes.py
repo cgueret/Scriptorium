@@ -31,6 +31,8 @@ from .editor_scenes_details import ScrptScenesDetailsPanel
 
 logger = logging.getLogger(__name__)
 
+from gettext import gettext as _
+
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_scenes.ui")
 class ScrptScenesPanel(Adw.NavigationPage):

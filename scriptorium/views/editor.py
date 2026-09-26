@@ -120,10 +120,6 @@ class ScrptEditorView(Adw.NavigationPage):
             logger.info("Editor is closed, saving the manuscript")
             self.project.save_to_disk()
 
-    def close_on_delete(self):
-        self.project = None
-        self.window.close_editor(self)
-
     def on_add_resource(self, _action, parameters):
         """Add a new resource to the project."""
 
@@ -201,7 +197,9 @@ class ScrptEditorView(Adw.NavigationPage):
 
         # Create and show the dialog
         file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
-        file_dialog.open(self.props.root, None, on_image_opened, action)
+        window = self.props.root
+        if window:
+            file_dialog.open(window, None, on_image_opened, action) # type: ignore[arg-type]
 
     def on_set_cover(self, resource_identifier: str):
         """Set the cover for the manuscript."""

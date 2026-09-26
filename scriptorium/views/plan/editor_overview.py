@@ -25,6 +25,7 @@ from .editor_overview_item import ScrptOverviewPanelItem
 import logging
 
 logger = logging.getLogger(__name__)
+from gettext import gettext as _
 
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_overview.ui")

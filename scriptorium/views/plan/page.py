@@ -31,6 +31,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+from gettext import gettext as _
+
 PANELS = [
     # Manuscript
     ("header", _("Manuscript")),

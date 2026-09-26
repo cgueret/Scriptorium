@@ -52,7 +52,7 @@ class Publisher(object):
         if self._book is None:
             self._build()
 
-        return self._book.toc
+        return self._book.toc if self._book else None
 
     def rebuild(self):
         self._build()
@@ -109,55 +109,59 @@ class Publisher(object):
 
         # Initialise the book
         self._book = epub.EpubBook()
-        self._book.set_identifier(self._manuscript.identifier)
-        self._book.set_title(self._manuscript.title)
-        self._book.set_language(self._manuscript.language)
-        self._book.toc = ()
+        if self._book:
+            self._book.set_identifier(self._manuscript.identifier)
+            self._book.set_title(self._manuscript.title)
+            self._book.set_language(self._manuscript.language)
+            self._book.toc = ()
 
-        # Set the cover
-        cover_img = self._manuscript.cover
-        if cover_img is not None:
-            self._book.set_cover(cover_img.path.name, open(cover_img.path, "rb").read())
+            # Set the cover
+            cover_img = self._manuscript.cover
+            if cover_img is not None:
+                self._book.set_cover(
+                    cover_img.path.name,
+                    open(cover_img.path, "rb").read()
+                )
 
-        # Add the content
-        for entry in self._manuscript.content:
-            epub_html = epub.EpubHtml(
-                title=entry.title,
-                file_name=f"{entry.identifier}.xhtml",
-                lang=self._manuscript.language,
+            # Add the content
+            for entry in self._manuscript.content:
+                epub_html = epub.EpubHtml(
+                    title=entry.title,
+                    file_name=f"{entry.identifier}.xhtml",
+                    lang=self._manuscript.language,
+                )
+                epub_html.set_content(self._get_chapter_content(entry))
+                self._book.add_item(epub_html)
+                self._book.toc += (epub_html,)
+
+            # Define the spine
+            self._book.spine = []
+            if cover_img is not None:
+                self._book.spine.append("cover")
+            self._book.spine.append("nav")
+            for part in self._book.toc:
+                self._book.spine.append(part)
+
+            # add default NCX and Nav file
+            self._book.add_item(epub.EpubNcx())
+            self._book.add_item(epub.EpubNav())
+
+            # define CSS style
+            style = (
+                Gio.File.new_for_uri(f"resource:/{BASE}/utils/epub-novel.css")
+                .load_contents()[1]
+                .decode()
             )
-            epub_html.set_content(self._get_chapter_content(entry))
-            self._book.add_item(epub_html)
-            self._book.toc += (epub_html,)
+            style_css = epub.EpubItem(
+                uid="style_novel",
+                file_name="style/novel.css",
+                media_type="text/css",
+                content=style,
+            )
 
-        # Define the spine
-        self._book.spine = []
-        if cover_img is not None:
-            self._book.spine.append("cover")
-        self._book.spine.append("nav")
-        for part in self._book.toc:
-            self._book.spine.append(part)
+            # Add the CSS file to the book
+            self._book.add_item(style_css)
 
-        # add default NCX and Nav file
-        self._book.add_item(epub.EpubNcx())
-        self._book.add_item(epub.EpubNav())
-
-        # define CSS style
-        style = (
-            Gio.File.new_for_uri(f"resource:/{BASE}/utils/epub-novel.css")
-            .load_contents()[1]
-            .decode()
-        )
-        style_css = epub.EpubItem(
-            uid="style_novel",
-            file_name="style/novel.css",
-            media_type="text/css",
-            content=style,
-        )
-
-        # Add the CSS file to the book
-        self._book.add_item(style_css)
-
-        # Connect it to all the parts
-        for part in self._book.toc:
-            part.add_item(style_css)
+            # Connect it to all the parts
+            for part in self._book.toc:
+                part.add_item(style_css)
