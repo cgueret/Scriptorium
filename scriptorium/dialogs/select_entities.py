@@ -18,10 +18,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Dialog to select scenes in Scriptorium."""
 
-from gi.repository import Adw, Gtk
-from scriptorium.globals import BASE
-
 import logging
+
+from gi.repository import Adw, Gtk
+
+from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)
 

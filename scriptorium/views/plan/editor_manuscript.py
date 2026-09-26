@@ -18,14 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Editor panel to select and work on the scenes."""
 
+import logging
 from gettext import gettext as _
 
-import logging
-
-from gi.repository import Adw, Gtk, GObject, Gio, GLib
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
 from scriptorium.globals import BASE
-
 
 logger = logging.getLogger(__name__)
 

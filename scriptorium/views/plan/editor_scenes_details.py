@@ -20,10 +20,10 @@
 
 import logging
 
-from gi.repository import Adw, Gtk, GObject
+from gi.repository import Adw, GObject, Gtk
 
-from scriptorium.globals import BASE
 from scriptorium.dialogs import ScrptSelectEntitiesDialog
+from scriptorium.globals import BASE
 from scriptorium.widgets import EntityCard
 
 logger = logging.getLogger(__name__)

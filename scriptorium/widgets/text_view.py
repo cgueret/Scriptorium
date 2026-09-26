@@ -16,10 +16,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Gtk, GObject, Pango, Gdk, Gio
-from scriptorium.globals import BASE
-
 import logging
+
+from gi.repository import Gdk, Gio, GObject, Gtk, Pango
+
+from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)
 

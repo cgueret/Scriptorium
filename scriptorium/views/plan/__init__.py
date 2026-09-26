@@ -23,14 +23,14 @@ This is different from the writing and publishing views respectively focused
 on the content and the styling+export of the manuscript.
 """
 
-from .page import PlanPage
 from .editor_entities import ScrptEntityPanel
 from .editor_entities_details import ScrptEntitiesDetailsPanel
+from .page import PlanPage
 
 __all__ = [
     "PlanPage",
-    "ScrptEntityPanel",
     "ScrptEntitiesDetailsPanel",
-    "ScrptScenesPanel",
+    "ScrptEntityPanel",
     "ScrptScenesDetailsPanel",
+    "ScrptScenesPanel",
 ]

@@ -19,8 +19,9 @@
 # TODO: Turn those into a Resource managed via the project to handle
 # sharing annotation across authors
 
-from gi.repository import GObject, Gtk
 import logging
+
+from gi.repository import GObject, Gtk
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ class Annotation(GObject.Object):
     length = GObject.Property(type=int)
     suggestions = GObject.Property(type=Gtk.StringList)
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Create a new instance of Chapter."""
         super().__init__()
         self.suggestions = Gtk.StringList()

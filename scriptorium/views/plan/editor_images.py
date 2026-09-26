@@ -17,11 +17,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
-from scriptorium.globals import BASE
-from .editor_images_item import ImageItem
-
 import logging
+
+from gi.repository import Adw, Gtk
+
+from scriptorium.globals import BASE
+
+from .editor_images_item import ImageItem
 
 logger = logging.getLogger(__name__)
 

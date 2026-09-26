@@ -18,23 +18,22 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from gi.repository import GObject, Gio, Gtk
-from .commit_message import CommitMessage
+import uuid
 from datetime import datetime
+from pathlib import Path
 
 import yaml
-from pathlib import Path
-import uuid
 from dulwich import porcelain
 from dulwich.repo import Repo
+from gi.repository import Gio, GObject, Gtk
 
-from .resource import Resource
-from .image import Image
 from .chapter import Chapter
-from .scene import Scene
+from .commit_message import CommitMessage
 from .entity import Entity
+from .image import Image
 from .manuscript import Manuscript
-
+from .resource import Resource
+from .scene import Scene
 
 logger = logging.getLogger(__name__)
 

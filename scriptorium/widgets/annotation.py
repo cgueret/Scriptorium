@@ -20,11 +20,12 @@
 # Code inspired from Eloquent:
 # https://github.com/sonnyp/Eloquent/blob/main/src/widgets/SuggestionPopover.js
 
-from gi.repository import Adw, Gtk, GObject
+import logging
+
+from gi.repository import Adw, GObject, Gtk
+
 from scriptorium.globals import BASE
 from scriptorium.models import Annotation
-
-import logging
 
 logger = logging.getLogger(__name__)
 

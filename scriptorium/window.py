@@ -18,15 +18,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from gi.repository import Gtk, Adw, GObject, Gdk, Gio, GLib
 from pathlib import Path
+
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
+
+from scriptorium.globals import BASE
 
 # Needed here for some weird reason, Builder does not find it otherwise
 # TODO: idea: maybe instantiate the libraryview and reset it on folder change
 from scriptorium.views import ScrptLibraryView
-
-from scriptorium.models import Project
-from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)
 

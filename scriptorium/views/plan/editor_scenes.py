@@ -22,10 +22,10 @@ import logging
 
 from gi.repository import Adw, Gtk
 
-from scriptorium.globals import BASE
-from scriptorium.widgets import SceneCard
 from scriptorium.dialogs import ScrptAddDialog
+from scriptorium.globals import BASE
 from scriptorium.models import Scene
+from scriptorium.widgets import SceneCard
 
 from .editor_scenes_details import ScrptScenesDetailsPanel
 

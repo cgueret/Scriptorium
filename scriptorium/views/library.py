@@ -17,18 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, GObject, Gio, Gtk
-from gi.repository import GLib
-
-from scriptorium.views import ScrptEditorView
-
-from scriptorium.globals import BASE
-from scriptorium.models import Library, Project
-from scriptorium.dialogs import ScrptAddDialog
-from scriptorium.widgets import ThemeSelector
-from .library_item import LibraryItem
-
 import logging
+
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
+
+from scriptorium.dialogs import ScrptAddDialog
+from scriptorium.globals import BASE
+from scriptorium.models import Library
+from scriptorium.views import ScrptEditorView
+from scriptorium.widgets import ThemeSelector
+
+from .library_item import LibraryItem
 
 logger = logging.getLogger(__name__)
 
@@ -184,7 +183,7 @@ class ScrptLibraryView(Adw.NavigationPage):
             editor_page = ScrptEditorView(project)
             parent = self.get_parent()
             if parent and isinstance(parent, Adw.NavigationView):
-                parent.push(editor_page) # type: ignore[attr-defined]
+                parent.push(editor_page)  # type: ignore[attr-defined]
 
     def open_last_project(self):
         """Check if we need to open the last project."""
@@ -230,13 +229,13 @@ class ScrptLibraryView(Adw.NavigationPage):
             if worked:
                 if window:
                     # TODO replace this mechanism with a signal
-                    window.inform("Project successfuly migrated!") # type: ignore[attr-defined]
+                    window.inform("Project successfuly migrated!")  # type: ignore[attr-defined]
 
                 # Open the project right away
                 self._open_project(selected_project)
             else:
                 if window:
-                    window.inform("Something went wrong. See logs for details") # type: ignore[attr-defined]
+                    window.inform("Something went wrong. See logs for details")  # type: ignore[attr-defined]
 
                 # Seems like we won't open that thing...
                 selection_model.set_selected(Gtk.INVALID_LIST_POSITION)

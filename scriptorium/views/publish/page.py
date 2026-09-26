@@ -18,10 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from gi.repository import Adw, Gtk, Gio, GLib
+from pathlib import Path
+
+from gi.repository import Adw, Gio, GLib, Gtk
+
 from scriptorium.globals import BASE
 from scriptorium.utils.publisher import Publisher
-from pathlib import Path
 
 try:
     from gi.repository import WebKit

@@ -18,14 +18,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """A Library is a collection of manuscripts."""
 
-from pathlib import Path
-from gi.repository import GObject, Gio
 import logging
-import uuid
 import shutil
+import uuid
+from pathlib import Path
 
-from .project import Project
+from gi.repository import Gio, GObject
+
 from .manuscript import Manuscript
+from .project import Project
 
 logger = logging.getLogger(__name__)
 

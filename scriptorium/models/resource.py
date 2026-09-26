@@ -17,9 +17,9 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import GObject, Gio
-
 import logging
+
+from gi.repository import Gio, GObject
 
 logger = logging.getLogger(__name__)
 
@@ -51,12 +51,12 @@ class Resource(GObject.Object):
         return self._project
 
     @property
-    def data_files(self):
+    def data_files(self) -> []:
         # An eventual list of data files associated with the resource
         return []
 
     @property
-    def references(self):
+    def references(self) -> set[Resource]:
         """Provide a list of other resources referencing that one."""
         output: set[Resource] = set()
 

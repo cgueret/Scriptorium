@@ -16,14 +16,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Gio
-from scriptorium.models import Resource, Manuscript, Chapter, Scene
-from scriptorium.globals import BASE
-from ebooklib import epub
-
 import io
-
 import logging
+
+from ebooklib import epub
+from gi.repository import Gio
+
+from scriptorium.globals import BASE
+from scriptorium.models import Chapter, Manuscript, Resource, Scene
 
 logger = logging.getLogger(__name__)
 
@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 # Create instances of PublisherSection and return the toc. When asked to export
 # the book call the rest of the epub lib functions
 # Need a separate call to get the CSS to render in the app. Maybe wrap that into a separate styling object
-class Publisher(object):
+class Publisher:
     """
     Publisher is a helper class to encapsulate the content of the manuscript
     as a set of HTML files. This content can be used as a view in the editor
@@ -119,8 +119,7 @@ class Publisher(object):
             cover_img = self._manuscript.cover
             if cover_img is not None:
                 self._book.set_cover(
-                    cover_img.path.name,
-                    open(cover_img.path, "rb").read()
+                    cover_img.path.name, open(cover_img.path, "rb").read()
                 )
 
             # Add the content

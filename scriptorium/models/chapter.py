@@ -21,6 +21,7 @@
 import logging
 
 from gi.repository import Gio, GObject
+
 from .resource import Resource
 from .scene import Scene
 

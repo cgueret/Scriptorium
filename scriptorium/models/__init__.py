@@ -18,26 +18,26 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Data models for all the custom objects managed by Scriptorium."""
 
-from .library import Library
-from .manuscript import Manuscript
+from .annotation import Annotation
 from .chapter import Chapter
-from .scene import Scene
 from .commit_message import CommitMessage
 from .entity import Entity
-from .project import Project
-from .annotation import Annotation
-from .resource import Resource
 from .image import Image
+from .library import Library
+from .manuscript import Manuscript
+from .project import Project
+from .resource import Resource
+from .scene import Scene
 
 __all__ = [
-    "Library",
-    "Manuscript",
+    "Annotation",
     "Chapter",
-    "Scene",
     "CommitMessage",
     "Entity",
-    "Project",
-    "Annotation",
-    "Resource",
     "Image",
+    "Library",
+    "Manuscript",
+    "Project",
+    "Resource",
+    "Scene",
 ]

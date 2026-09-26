@@ -18,12 +18,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Model for storing information about manuscripts and their content."""
 
+import logging
 from pathlib import Path
-from gi.repository import Gtk, GObject, Gio
+
+from gi.repository import Gio, GObject
+
 from .entity import Entity
 from .resource import Resource
-
-import logging
 
 logger = logging.getLogger(__name__)
 

@@ -1,8 +1,10 @@
 import logging
-from gi.repository import GObject, Gio, Gdk
-from .resource import Resource
-from pathlib import Path
 import shutil
+from pathlib import Path
+
+from gi.repository import Gdk, Gio, GObject
+
+from .resource import Resource
 
 logger = logging.getLogger(__name__)
 

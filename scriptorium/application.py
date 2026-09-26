@@ -16,13 +16,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+import logging
 from gettext import gettext as _
 
+from gi.repository import Adw, Gio, GLib, GObject
+
 from scriptorium.dialogs import ScrptPreferencesDialog
-from gi.repository import Gio, Adw, GLib, GObject
-from .window import ScrptWindow
+
 from .language_tool import LanguageTool
-import logging
+from .window import ScrptWindow
 
 logging.basicConfig(
     level=logging.INFO, format="%(name)-40s: %(levelname)-8s %(message)s"

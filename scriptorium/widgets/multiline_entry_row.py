@@ -19,7 +19,8 @@
 
 import logging
 
-from gi.repository import Adw, Gtk, GObject
+from gi.repository import Adw, GObject, Gtk
+
 from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)

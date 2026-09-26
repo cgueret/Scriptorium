@@ -18,8 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Widget to display a list of cards."""
 
-from gi.repository import Gtk, GObject, Gdk, Gio, Adw
 import logging
+
+from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 logger = logging.getLogger(__name__)
 

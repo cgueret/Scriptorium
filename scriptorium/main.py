@@ -23,10 +23,10 @@ gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 gi.require_version("WebKit", "6.0")
 gi.require_version("Soup", "3.0")
+import logging
 import sys
 
 from .application import ScriptoriumApplication
-import logging
 
 logging.basicConfig(
     level=logging.INFO, format="%(name)-40s: %(levelname)-8s %(message)s"

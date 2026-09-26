@@ -1,7 +1,9 @@
-from gi.repository import Adw, Gtk, GObject
-from scriptorium.models import Chapter
-from scriptorium.globals import BASE
 import logging
+
+from gi.repository import Adw, GObject, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.models import Chapter
 
 logger = logging.getLogger(__name__)
 

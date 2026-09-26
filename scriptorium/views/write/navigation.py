@@ -16,11 +16,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+import logging
 from gettext import gettext as _
 
-import logging
-
-from gi.repository import Gio, Graphene, Gtk, Adw, GLib
+from gi.repository import Adw, Gio, GLib, Graphene, Gtk
 
 from scriptorium.globals import BASE
 from scriptorium.models import Chapter, Manuscript, Scene

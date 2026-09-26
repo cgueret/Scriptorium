@@ -20,11 +20,12 @@
 
 import logging
 
-from gi.repository import GObject, Gio
+from gi.repository import Gio, GObject
+
 from .chapter import Chapter
-from .scene import Scene
-from .resource import Resource
 from .image import Image
+from .resource import Resource
+from .scene import Scene
 
 logger = logging.getLogger(__name__)
 

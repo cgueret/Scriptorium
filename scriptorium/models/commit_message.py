@@ -18,8 +18,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Model for storing information about manuscripts and their content."""
 
-from gi.repository import GObject
 import logging
+
+from gi.repository import GObject
 
 logger = logging.getLogger(__name__)
 

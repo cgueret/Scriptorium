@@ -17,12 +17,13 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, GObject
+import logging
+
+from gi.repository import Adw, GObject, Gtk
+
+from scriptorium.globals import BASE
 from scriptorium.models import Scene
 from scriptorium.utils import get_child_at
-from scriptorium.globals import BASE
-
-import logging
 
 logger = logging.getLogger(__name__)
 

@@ -16,16 +16,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Adw, Gtk, Gdk, GLib, Gio, GObject
-from scriptorium.globals import BASE
-from scriptorium.widgets import AnnotationCard
-from scriptorium.models import Scene
-from scriptorium.utils import switch_tag_for_selection
-from scriptorium.utils import html_to_buffer
-from scriptorium.utils import buffer_to_html
-
 import logging
 import threading
+
+from gi.repository import Adw, Gdk, Gio, GLib, GObject, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.models import Scene
+from scriptorium.utils import buffer_to_html, html_to_buffer, switch_tag_for_selection
+from scriptorium.widgets import AnnotationCard
 
 logger = logging.getLogger(__name__)
 

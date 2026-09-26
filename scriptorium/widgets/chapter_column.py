@@ -16,13 +16,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Adw, Gtk, GObject, Gdk
-
-from scriptorium.models import Chapter
-from .scene import SceneCard
-from scriptorium.globals import BASE
-
 import logging
+
+from gi.repository import Adw, Gdk, GObject, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.models import Chapter
+
+from .scene import SceneCard
 
 logger = logging.getLogger(__name__)
 

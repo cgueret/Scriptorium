@@ -18,9 +18,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Code inspired from https://github.com/sonnyp/Eloquent/blob/main/src/languagetool.js
-from gi.repository import Gio, GObject, Soup, GLib
 import json
 import logging
+
+from gi.repository import Gio, GLib, GObject, Soup
+
 from scriptorium.models import Annotation
 
 logger = logging.getLogger(__name__)

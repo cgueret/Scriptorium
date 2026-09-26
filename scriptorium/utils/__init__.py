@@ -1,8 +1,9 @@
+import html
 import io
 import logging
-from gi.repository import Gtk
+
 from bs4 import BeautifulSoup, NavigableString
-import html
+from gi.repository import Gtk
 
 logger = logging.getLogger(__name__)
 

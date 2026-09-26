@@ -17,17 +17,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, GObject
+import logging
+
+from gi.repository import Adw, GObject, Gtk
 
 from scriptorium.globals import BASE
 from scriptorium.models import Project
+
 from .editor_entities import ScrptEntityPanel
-from .editor_scenes import ScrptScenesPanel
+from .editor_images import ScrptImagesPanel
 from .editor_manuscript import ScrptManuscriptPanel
 from .editor_overview import ScrptOverviewPanel
-from .editor_images import ScrptImagesPanel
-
-import logging
+from .editor_scenes import ScrptScenesPanel
 
 logger = logging.getLogger(__name__)
 

@@ -17,12 +17,14 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
-from scriptorium.widgets import ChapterColumn
-from scriptorium.globals import BASE
-from .editor_overview_item import ScrptOverviewPanelItem
-
 import logging
+
+from gi.repository import Adw, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.widgets import ChapterColumn
+
+from .editor_overview_item import ScrptOverviewPanelItem
 
 logger = logging.getLogger(__name__)
 from gettext import gettext as _

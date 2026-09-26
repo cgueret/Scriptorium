@@ -17,24 +17,27 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, GObject, Gio, GLib
+import logging
 from pathlib import Path
 
-from scriptorium.globals import BASE
-from scriptorium.dialogs import ScrptAddDialog
-from scriptorium.widgets import ThemeSelector
-from scriptorium.models import Project, Image
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-# This is needed to import the Scene or Chapter when creating an object
-from scriptorium.models import Scene  # noqa: F401
-from scriptorium.models import Chapter  # noqa: F401
+import scriptorium.views.plan
+import scriptorium.views.publish
 
 # Import those to register them in Builder
 import scriptorium.views.write  # noqa: F401
-import scriptorium.views.publish  # noqa: F401
-import scriptorium.views.plan  # noqa: F401
+from scriptorium.dialogs import ScrptAddDialog
+from scriptorium.globals import BASE
 
-import logging
+# This is needed to import the Scene or Chapter when creating an object
+from scriptorium.models import (
+    Chapter,  # noqa: F401
+    Image,
+    Project,
+    Scene,  # noqa: F401
+)
+from scriptorium.widgets import ThemeSelector
 
 logger = logging.getLogger(__name__)
 
@@ -199,7 +202,7 @@ class ScrptEditorView(Adw.NavigationPage):
         file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
         window = self.props.root
         if window:
-            file_dialog.open(window, None, on_image_opened, action) # type: ignore[arg-type]
+            file_dialog.open(window, None, on_image_opened, action)  # type: ignore[arg-type]
 
     def on_set_cover(self, resource_identifier: str):
         """Set the cover for the manuscript."""

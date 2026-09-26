@@ -22,7 +22,7 @@ import logging
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 from scriptorium.globals import BASE
-from scriptorium.models import Manuscript, Chapter, Resource
+from scriptorium.models import Chapter, Manuscript, Resource
 
 logger = logging.getLogger(__name__)
 
