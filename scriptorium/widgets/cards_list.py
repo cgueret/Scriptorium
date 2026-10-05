@@ -18,12 +18,14 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Widget to display a list of cards."""
 
-from gi.repository import Gtk, GObject, Gdk, Gio, Adw
 import logging
+
+from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 logger = logging.getLogger(__name__)
 
 # TODO: Enhance the widget with a placeholder to show when list is empty
+
 
 class CardDropZone(Gtk.Box):
     __gtype_name__ = "CardDropZone"
@@ -225,9 +227,9 @@ class CardsList(Gtk.Box):
     __gtype_name__ = "CardsList"
 
     __gsignals__ = {
-            # signal_name: (flags, return_type, argument_types)
-            "start-drag": (GObject.SignalFlags.RUN_FIRST, None, ()),
-            "stop-drag": (GObject.SignalFlags.RUN_FIRST, None, ())
+        # signal_name: (flags, return_type, argument_types)
+        "start-drag": (GObject.SignalFlags.RUN_FIRST, None, ()),
+        "stop-drag": (GObject.SignalFlags.RUN_FIRST, None, ()),
     }
 
     def __init__(self):
@@ -292,7 +294,6 @@ class CardsList(Gtk.Box):
 
         # We reached the end of the list, return the last child
         if child is None:
-            self.get_last_child()
+            return self.get_last_child()
 
         return child
-

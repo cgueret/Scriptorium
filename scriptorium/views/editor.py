@@ -17,24 +17,27 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, GObject, Gio, GLib
+import logging
 from pathlib import Path
 
-from scriptorium.globals import BASE
-from scriptorium.dialogs import ScrptAddDialog
-from scriptorium.widgets import ThemeSelector
-from scriptorium.models import Project, Image
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
 
-# This is needed to import the Scene or Chapter when creating an object
-from scriptorium.models import Scene # noqa: F401
-from scriptorium.models import Chapter # noqa: F401
+import scriptorium.views.plan
+import scriptorium.views.publish
 
 # Import those to register them in Builder
-import scriptorium.views.write   # noqa: F401
-import scriptorium.views.publish # noqa: F401
-import scriptorium.views.plan    # noqa: F401
+import scriptorium.views.write  # noqa: F401
+from scriptorium.dialogs import ScrptAddDialog
+from scriptorium.globals import BASE
 
-import logging
+# This is needed to import the Scene or Chapter when creating an object
+from scriptorium.models import (
+    Chapter,  # noqa: F401
+    Image,
+    Project,
+    Scene,  # noqa: F401
+)
+from scriptorium.widgets import ThemeSelector
 
 logger = logging.getLogger(__name__)
 
@@ -67,50 +70,37 @@ class ScrptEditorView(Adw.NavigationPage):
 
         # Create the action to add a new resource
         action = Gio.SimpleAction.new(
-            name="add_resource",
-            parameter_type=GLib.VariantType.new("(ss)")
-            )
+            name="add_resource", parameter_type=GLib.VariantType.new("(ss)")
+        )
         action.connect("activate", self.on_add_resource)
         group.add_action(action)
 
         # Create the action to delete a resource
         action = Gio.SimpleAction.new(
-            name="delete_resource",
-            parameter_type=GLib.VariantType.new("s")
-            )
+            name="delete_resource", parameter_type=GLib.VariantType.new("s")
+        )
         action.connect("activate", self.on_delete_resource)
         group.add_action(action)
 
         # Create the action to import an image into the project
-        action = Gio.SimpleAction.new(
-            name="import_image",
-            parameter_type=None
-            )
-        action.connect(
-            "activate",
-            lambda _action, _param: self.on_import_image(None)
-        )
+        action = Gio.SimpleAction.new(name="import_image", parameter_type=None)
+        action.connect("activate", lambda _action, _param: self.on_import_image(None))
         group.add_action(action)
 
         # Create the action set the cover of the project
         action = Gio.SimpleAction.new(
-            name="set_cover",
-            parameter_type=GLib.VariantType.new("s")
-            )
+            name="set_cover", parameter_type=GLib.VariantType.new("s")
+        )
         action.connect(
             "activate",
-            lambda _action, parameter: self.on__set_cover(parameter.get_string())
+            lambda _action, parameter: self.on_set_cover(parameter.get_string()),
         )
         group.add_action(action)
 
         # Create the action to import a new cover and then set it as cover
-        action = Gio.SimpleAction.new(
-            name="import_cover",
-            parameter_type=None
-            )
+        action = Gio.SimpleAction.new(name="import_cover", parameter_type=None)
         action.connect(
-            "activate",
-            lambda _action, _param: self.on_import_image(self.on_set_cover)
+            "activate", lambda _action, _param: self.on_import_image(self.on_set_cover)
         )
         group.add_action(action)
 
@@ -133,10 +123,6 @@ class ScrptEditorView(Adw.NavigationPage):
             logger.info("Editor is closed, saving the manuscript")
             self.project.save_to_disk()
 
-    def close_on_delete(self):
-        self.project = None
-        self.window.close_editor(self)
-
     def on_add_resource(self, _action, parameters):
         """Add a new resource to the project."""
 
@@ -155,7 +141,7 @@ class ScrptEditorView(Adw.NavigationPage):
                     eval(target_type), dialog.title, dialog.synopsis
                 )
                 # If we want to add it as a child of something, do so now
-                if parent != '':
+                if parent != "":
                     parent_resource = self.project.get_resource(parent)
                     parent_resource.content.append(resource)
 
@@ -187,7 +173,7 @@ class ScrptEditorView(Adw.NavigationPage):
 
         dialog.choose(self, None, handle_response)
 
-    def on_import_image(self, action = None):
+    def on_import_image(self, action=None):
         """Import an image into the project. Return the resource identifier."""
 
         # Callback
@@ -214,17 +200,16 @@ class ScrptEditorView(Adw.NavigationPage):
 
         # Create and show the dialog
         file_dialog = Gtk.FileDialog(default_filter=self.file_filter_image)
-        file_dialog.open(
-            self.props.root, None, on_image_opened, action
-        )
+        window = self.props.root
+        if window:
+            file_dialog.open(window, None, on_image_opened, action)  # type: ignore[arg-type]
 
     def on_set_cover(self, resource_identifier: str):
         """Set the cover for the manuscript."""
         logger.info(f"Set cover to {resource_identifier}")
 
-        if resource_identifier is not None and resource_identifier != '':
+        if resource_identifier is not None and resource_identifier != "":
             resource = self.project.get_resource(resource_identifier)
             self.project.manuscript.cover = resource
         else:
             self.project.manuscript.cover = None
-

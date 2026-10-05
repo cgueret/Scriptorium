@@ -16,12 +16,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Gtk
-from gi.repository import GObject
-from gi.repository import Gio
-from scriptorium.globals import BASE
-
 import logging
+
+from gi.repository import Gio, GObject, Gtk
+
+from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)
 
@@ -48,8 +47,7 @@ class LibraryItem(Gtk.Box):
         if self._can_be_opened_handler_id is not None:
             project.disconnect(self._can_be_opened_handler_id)
         self._can_be_opened_handler_id = project.connect(
-            "notify::can-be-opened",
-            lambda _src, _value: self.refresh_display()
+            "notify::can-be-opened", lambda _src, _value: self.refresh_display()
         )
 
         # Set the icon now and keep an eye on cover changes
@@ -62,8 +60,10 @@ class LibraryItem(Gtk.Box):
         if self._title_bind is not None:
             self._title_bind.unbind()
         self._title_bind = self._project.bind_property(
-            "title", self.inscription, "text",
-            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE
+            "title",
+            self.inscription,
+            "text",
+            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
         )
 
         # See if we can display a cover or not (to signal a broken project)
@@ -93,11 +93,11 @@ class LibraryItem(Gtk.Box):
         if self._project.can_be_opened:
             menu.append(
                 label="About this project",
-                detailed_action=f"library.about('{self._project.identifier}')"
+                detailed_action=f"library.about('{self._project.identifier}')",
             )
         menu.append(
             label="Delete",
-            detailed_action=f"library.delete('{self._project.identifier}')"
+            detailed_action=f"library.delete('{self._project.identifier}')",
         )
         self.menu_button.set_menu_model(menu)
 
@@ -110,4 +110,3 @@ class LibraryItem(Gtk.Box):
             # Add a place holder
             self.cover_label.set_label(self.title)
             self.stack.set_visible_child_name("label")
-

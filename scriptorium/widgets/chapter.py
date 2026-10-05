@@ -1,11 +1,14 @@
-from gi.repository import Adw, Gtk, GObject
-from scriptorium.models import Chapter
 import logging
+
+from gi.repository import Adw, GObject, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.models import Chapter
 
 logger = logging.getLogger(__name__)
 
 
-@Gtk.Template(resource_path="/com/github/cgueret/Scriptorium/widgets/chapter.ui")
+@Gtk.Template(resource_path=f"{BASE}/widgets/chapter.ui")
 class ChapterCard(Adw.Bin):
     __gtype_name__ = "ChapterCard"
 
@@ -33,5 +36,3 @@ class ChapterCard(Adw.Bin):
     @GObject.Property(type=Chapter)
     def chapter(self):
         return self._chapter
-
-

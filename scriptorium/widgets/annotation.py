@@ -20,11 +20,12 @@
 # Code inspired from Eloquent:
 # https://github.com/sonnyp/Eloquent/blob/main/src/widgets/SuggestionPopover.js
 
-from gi.repository import Adw, Gtk, GObject
+import logging
+
+from gi.repository import Adw, GObject, Gtk
+
 from scriptorium.globals import BASE
 from scriptorium.models import Annotation
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -72,4 +73,3 @@ class AnnotationCard(Adw.Bin):
         )
         text_buffer.delete(start_iter, end_iter)
         text_buffer.insert(start_iter, button.get_label())
-

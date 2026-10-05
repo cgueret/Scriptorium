@@ -18,12 +18,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Model for storing information about manuscripts and their content."""
 
+import logging
 from pathlib import Path
-from gi.repository import Gtk, GObject, Gio
+
+from gi.repository import Gio, GObject
+
 from .entity import Entity
 from .resource import Resource
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -57,9 +58,7 @@ class Scene(Resource):
     @property
     def data_files(self):
         # An eventual list of data files associated with the resource
-        return [
-            Path("scenes") / Path(f"{self.identifier}.html")
-        ]
+        return [Path("scenes") / Path(f"{self.identifier}.html")]
 
     @property
     def history(self):
@@ -103,4 +102,3 @@ class Scene(Resource):
     def set_content(self, html_code: str) -> None:
         """Set the HTML content for the scene."""
         self._scene_content = html_code
-

@@ -16,10 +16,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Gtk, GObject, Pango, Gdk, Gio
-from scriptorium.globals import BASE
-
 import logging
+
+from gi.repository import Gdk, Gio, GObject, Gtk, Pango
+
+from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +43,7 @@ class ScrptTextView(Gtk.TextView):
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(),
             self.css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
         # Create the tags for the buffer
@@ -56,50 +57,35 @@ class ScrptTextView(Gtk.TextView):
         color_error = Gdk.RGBA()
         color_error.parse("#e01b24")
         text_buffer.create_tag(
-            "error",
-            underline=Pango.Underline.ERROR,
-            underline_rgba=color_error
+            "error", underline=Pango.Underline.ERROR, underline_rgba=color_error
         )
 
         # Warning tag
         color_warning = Gdk.RGBA()
         color_warning.parse("#f5c211")
         text_buffer.create_tag(
-            "warning",
-            underline=Pango.Underline.ERROR,
-            underline_rgba=color_warning
+            "warning", underline=Pango.Underline.ERROR, underline_rgba=color_warning
         )
 
         # Hint tag
         color_hint = Gdk.RGBA()
         color_hint.parse("#62a0ea")
         text_buffer.create_tag(
-            "hint",
-            underline=Pango.Underline.ERROR,
-            underline_rgba=color_hint
+            "hint", underline=Pango.Underline.ERROR, underline_rgba=color_hint
         )
 
         # Connect the properties to the settings
-        settings = Gio.Settings.new(
-            schema_id="io.github.cgueret.Scriptorium"
-        )
+        settings = Gio.Settings.new(schema_id="io.github.cgueret.Scriptorium")
         settings.bind(
-            "editor-line-height", self, "line-height",
-            Gio.SettingsBindFlags.GET
+            "editor-line-height", self, "line-height", Gio.SettingsBindFlags.GET
         )
+        settings.bind("editor-font-desc", self, "font-desc", Gio.SettingsBindFlags.GET)
         settings.bind(
-            "editor-font-desc", self, "font-desc",
-            Gio.SettingsBindFlags.GET
+            "editor-underline-style", self, "underline_style", Gio.SettingsBindFlags.GET
         )
-        settings.bind(
-            "editor-underline-style", self, "underline_style",
-            Gio.SettingsBindFlags.GET
-        )
-
-
 
     @Gtk.Template.Callback()
-    def on_settings_changed(self, _settings = None, _key = None):
+    def on_settings_changed(self, _settings=None, _key=None):
         """
         Handle a change in settings by updating the CSS
         """
@@ -123,4 +109,3 @@ class ScrptTextView(Gtk.TextView):
                 tag.props.underline = Pango.Underline.DOUBLE
             elif self.underline_style == "dashed":
                 tag.props.underline = Pango.Underline.ERROR
-

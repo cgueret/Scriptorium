@@ -18,23 +18,22 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import logging
-from gi.repository import GObject, Gio, Gtk
-from .commit_message import CommitMessage
+import uuid
 from datetime import datetime
+from pathlib import Path
 
 import yaml
-from pathlib import Path
-import uuid
 from dulwich import porcelain
 from dulwich.repo import Repo
+from gi.repository import Gio, GObject, Gtk
 
-from .resource import Resource
-from .image import Image
 from .chapter import Chapter
-from .scene import Scene
+from .commit_message import CommitMessage
 from .entity import Entity
+from .image import Image
 from .manuscript import Manuscript
-
+from .resource import Resource
+from .scene import Scene
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +42,7 @@ CLASSES = {
     "Entity": Entity,
     "Chapter": Chapter,
     "Image": Image,
-    "Manuscript": Manuscript
+    "Manuscript": Manuscript,
 }
 
 PROJECT_DESCRIPTION_VERSION = 1
@@ -56,7 +55,7 @@ class Project(GObject.Object):
     manuscript = GObject.Property(type=Resource)
 
     # The title for the project
-    title = GObject.Property(type=str, default='New project')
+    title = GObject.Property(type=str, default="New project")
 
     # Can the project be opened?
     can_be_opened = GObject.Property(type=bool, default=False)
@@ -99,7 +98,7 @@ class Project(GObject.Object):
                 "version": PROJECT_DESCRIPTION_VERSION,
                 "manuscript": None,
                 "title": self.title,
-                "resources": []
+                "resources": [],
             }
 
             # Do a first commit
@@ -162,9 +161,9 @@ class Project(GObject.Object):
 
         # We changed the keys "chapters" and "scenes" into "content"
         for resource in self._yaml_data.get("resources", []):
-            for key in ['chapters', 'scenes']:
+            for key in ["chapters", "scenes"]:
                 if key in resource:
-                    resource['content'] = resource.pop(key)
+                    resource["content"] = resource.pop(key)
 
         # We added a title key. By default, use the title of the manuscript
         for resource in self._yaml_data.get("resources", []):
@@ -213,7 +212,7 @@ class Project(GObject.Object):
         """The scenes of the manuscript."""
         model = Gtk.FilterListModel(
             model=self._resources,
-            filter=Gtk.CustomFilter.new(lambda x: isinstance(x, Scene))
+            filter=Gtk.CustomFilter.new(lambda x: isinstance(x, Scene)),
         )
         return model
 
@@ -222,7 +221,7 @@ class Project(GObject.Object):
         """The scenes of the manuscript."""
         model = Gtk.FilterListModel(
             model=self._resources,
-            filter=Gtk.CustomFilter.new(lambda x: isinstance(x, Entity))
+            filter=Gtk.CustomFilter.new(lambda x: isinstance(x, Entity)),
         )
         return model
 
@@ -231,7 +230,7 @@ class Project(GObject.Object):
         """The instances of Image in the manuscript."""
         model = Gtk.FilterListModel(
             model=self._resources,
-            filter=Gtk.CustomFilter.new(lambda x: isinstance(x, Image))
+            filter=Gtk.CustomFilter.new(lambda x: isinstance(x, Image)),
         )
         return model
 
@@ -252,8 +251,7 @@ class Project(GObject.Object):
         for data_file in resource.data_files:
             porcelain.add(self.repo, data_file)
         porcelain.commit(
-            self.repo,
-            f'Created new {cls.__gtype_name__} titled "{title}"'
+            self.repo, f'Created new {cls.__gtype_name__} titled "{title}"'
         )
 
         return resource
@@ -267,13 +265,10 @@ class Project(GObject.Object):
         unstaged_files = porcelain.status(self.repo).unstaged
         for file_name in unstaged_files:
             for data_file_name in resource.data_files:
-                if data_file_name == file_name.decode():
+                if str(data_file_name) == file_name.decode():
                     porcelain.add(self.repo, file_name)
 
-        porcelain.commit(
-            self.repo,
-            f'Modified files for "{resource.identifier}"'
-        )
+        porcelain.commit(self.repo, f'Modified content of "{resource.title}"')
 
     def delete_resource(self, resource):
         """Delete the resource."""
@@ -291,8 +286,7 @@ class Project(GObject.Object):
         # in order to avoid creating orfan resources
         if isinstance(resource, Chapter):
             self.manuscript.content.splice(
-                self.manuscript.content.get_n_items(),
-                0, resource.content
+                self.manuscript.content.get_n_items(), 0, resource.content
             )
             resource.content.splice(0, resource.content.get_n_items(), [])
 
@@ -327,10 +321,7 @@ class Project(GObject.Object):
         for data_file in resource.data_files:
             logger.info(data_file)
             porcelain.rm(self.repo, [data_file])
-        porcelain.commit(
-            self.repo,
-            f'Deleted resource "{resource.identifier}"'
-        )
+        porcelain.commit(self.repo, f'Deleted resource "{resource.identifier}"')
 
         # Emit the signal of the resource and eventually do additional
         # actions
@@ -379,9 +370,7 @@ class Project(GObject.Object):
             }
             props = GObject.list_properties(cls)
             for prop in props:
-                if isinstance(prop, GObject.ParamSpecString):
-                    entry[prop.name] = resource.get_property(prop.name)
-                elif isinstance(prop, GObject.ParamSpecInt):
+                if prop.value_type in (GObject.TYPE_STRING, GObject.TYPE_INT):
                     entry[prop.name] = resource.get_property(prop.name)
                 elif isinstance(prop, GObject.ParamSpecObject):
                     value = resource.get_property(prop.name)
@@ -397,7 +386,7 @@ class Project(GObject.Object):
         self._yaml_data = {
             "version": PROJECT_DESCRIPTION_VERSION,
             "title": self.title,
-            "resources": resources
+            "resources": resources,
         }
 
         # Save it
@@ -436,16 +425,11 @@ class Project(GObject.Object):
             if prop.name not in resource_data:
                 continue
             value = resource_data[prop.name]
-            if isinstance(prop, GObject.ParamSpecString):
-                resource.set_property(prop.name, value)
-            elif isinstance(prop, GObject.ParamSpecInt):
+            if prop.value_type in (GObject.TYPE_STRING, GObject.TYPE_INT):
                 resource.set_property(prop.name, value)
             elif isinstance(prop, GObject.ParamSpecObject):
                 if prop.value_type.is_a(Resource.__gtype__):
-                    resource.set_property(
-                        prop.name,
-                        self.get_resource(value)
-                    )
+                    resource.set_property(prop.name, self.get_resource(value))
                 elif prop.value_type == Gio.ListStore.__gtype__:
                     for v in value:
                         r = self.get_resource(v)

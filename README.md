@@ -20,6 +20,7 @@ In addition, some general features are:
   * Back-end using plain text YAML and HTML files
 
 
+
 ## Installation
 
 <a href='https://flathub.org/apps/io.github.cgueret.Scriptorium'><img width='240' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>

@@ -22,7 +22,7 @@ import logging
 from gi.repository import Adw, Gdk, Gio, GObject, Gtk
 
 from scriptorium.globals import BASE
-from scriptorium.models import Manuscript, Chapter, Resource
+from scriptorium.models import Chapter, Manuscript, Resource
 
 logger = logging.getLogger(__name__)
 
@@ -156,12 +156,11 @@ class NavigationItem(Adw.Bin):
         drag = drop_target.get_current_drop().get_drag()
         icon = Gtk.DragIcon.get_for_drag(drag)
         value = icon.get_child()
-        _got_bounds, _x, _y, _width, visitor_height = value.get_bounds()
-        _got_bounds, _x, own_y, _width, own_height = self.get_bounds()
+        if value:
+            _got_bounds, _x, _y, _width, visitor_height = value.get_bounds()
 
-        next_sibling = self.get_parent().get_next_sibling()
-        if next_sibling is not None:
-            if not next_sibling.get_first_child().is_dragged:
+            next_sibling = self.get_parent().get_next_sibling()
+            if next_sibling and not next_sibling.get_first_child().is_dragged:
                 self._animate(State.PUSHED, visitor_height)
 
         return Gdk.DragAction.MOVE
@@ -220,25 +219,21 @@ class NavigationItem(Adw.Bin):
         # Main menu to add new Chapter or Scene for container nodes
         if isinstance(self.resource, (Manuscript, Chapter)):
             menu.append(
-                label = "Add new child Chapter",
-                detailed_action = f"editor.add_resource(('Chapter', '{id}'))"
+                label="Add new child Chapter",
+                detailed_action=f"editor.add_resource(('Chapter', '{id}'))",
             )
             menu.append(
-                label = "Add new child Scene",
-                detailed_action = f"editor.add_resource(('Scene', '{id}'))"
+                label="Add new child Scene",
+                detailed_action=f"editor.add_resource(('Scene', '{id}'))",
             )
 
         # Add a menu to delete the resource, unless it's a root node
         if not isinstance(self.resource, Manuscript):
             dangerous_section = Gio.Menu()
             dangerous_section.append(
-                label = "Delete",
-                detailed_action = f"editor.delete_resource('{id}')"
+                label="Delete", detailed_action=f"editor.delete_resource('{id}')"
             )
-            menu.append_section(
-                label = None,
-                section = dangerous_section
-            )
+            menu.append_section(label=None, section=dangerous_section)
 
         # Create the popover menu and make it pop up
         popover = Gtk.PopoverMenu.new_from_model(menu)
@@ -246,4 +241,3 @@ class NavigationItem(Adw.Bin):
         popover.set_autohide(True)
         popover.set_position(Gtk.PositionType.RIGHT)
         popover.popup()
-

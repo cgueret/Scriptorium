@@ -1,1 +1,1 @@
-BASE = "/com/github/cgueret/Scriptorium"
+BASE = "/io/github/cgueret/Scriptorium"

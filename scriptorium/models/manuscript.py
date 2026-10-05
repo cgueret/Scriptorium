@@ -20,17 +20,19 @@
 
 import logging
 
-from gi.repository import GObject, Gio
+from gi.repository import Gio, GObject
+
 from .chapter import Chapter
-from .scene import Scene
-from .resource import Resource
 from .image import Image
+from .resource import Resource
+from .scene import Scene
 
 logger = logging.getLogger(__name__)
 
 
 class Manuscript(Resource):
     """A manuscript is a collection of scenes and chapters."""
+
     __gtype_name__ = "Manuscript"
 
     # Properties of the manuscript
@@ -40,7 +42,7 @@ class Manuscript(Resource):
     cover = GObject.Property(type=Image)
 
     # The language of the manuscript
-    language = GObject.Property(type=str, default="en")
+    language = GObject.Property(type=str, default="en-GB")
 
     def __init__(self, project, identifier):
         """Create a new manuscript."""
@@ -73,5 +75,3 @@ class Manuscript(Resource):
         # Now move the source where the target used to be located
         self.content.remove(source_position)
         self.content.insert(target_position, source_chapter)
-
-

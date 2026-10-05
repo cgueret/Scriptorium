@@ -18,9 +18,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 #
 # Code inspired from https://github.com/sonnyp/Eloquent/blob/main/src/languagetool.js
-from gi.repository import Gio, GObject, Soup, GLib
 import json
 import logging
+
+from gi.repository import Gio, GLib, GObject, Soup
+
 from scriptorium.models import Annotation
 
 logger = logging.getLogger(__name__)
@@ -31,7 +33,6 @@ SEND_PING_TIMEOUT_SECONDS = 1
 
 
 class LanguageTool(GObject.Object):
-
     # This is True when we could connect to Language Tool, False otherwise
     server_is_alive = GObject.Property(type=bool, default=False)
 
@@ -106,8 +107,7 @@ class LanguageTool(GObject.Object):
 
             # Try to connect to it
             GLib.timeout_add_seconds(
-                SEND_PING_TIMEOUT_SECONDS,
-                self._start_or_connect_to_server
+                SEND_PING_TIMEOUT_SECONDS, self._start_or_connect_to_server
             )
 
     def languages(self, callback):
@@ -120,7 +120,7 @@ class LanguageTool(GObject.Object):
             io_priority=GObject.PRIORITY_LOW,
             cancellable=None,
             callback=self._handle_languages_reply,
-            user_data=callback
+            user_data=callback,
         )
 
     def _handle_languages_reply(self, session, result, callback):
@@ -133,30 +133,33 @@ class LanguageTool(GObject.Object):
             callback(None)
 
     def check(self, text: str, language: str, callback):
-        """ Check a text. """
+        """Check a text."""
 
         # Return None if the server is not alive
         if not self.server_is_alive:
             return None
 
-        encoded = Soup.form_encode_hash({
-            "text": text,
-            "language": language,
-        })
+        encoded = Soup.form_encode_hash(
+            {
+                "text": text,
+                "language": language,
+            }
+        )
 
         message = Soup.Message.new_from_encoded_form(
             method="POST",
             uri_string="http://localhost:8081/v2/check",
-            encoded_form=encoded
+            encoded_form=encoded,
         )
 
-        self._session.send_and_read_async(
-            msg=message,
-            cancellable=None,
-            io_priority=GObject.PRIORITY_LOW,
-            callback=self._process_check_result,
-            user_data=callback
-        )
+        if message:
+            self._session.send_and_read_async(
+                msg=message,
+                cancellable=None,
+                io_priority=GObject.PRIORITY_LOW,
+                callback=self._process_check_result,
+                user_data=callback,
+            )
 
     def _process_check_result(self, session, result, callback):
         """Handle a response to a check request."""
@@ -167,39 +170,40 @@ class LanguageTool(GObject.Object):
 
         # Prepare a list of annotations
         annotations = []
-        for match in results['matches']:
-            annotation = Annotation()
+        for match in results["matches"]:
+            try:
+                annotation = Annotation()
 
-            # Set the message
-            annotation.title = match["shortMessage"]
-            if len(match["shortMessage"]) == 0:
-                annotation.title = match["rule"]["category"]["name"]
-            annotation.message = match["message"]
+                # Set the message
+                annotation.title = match["shortMessage"]
+                if len(match["shortMessage"]) == 0:
+                    annotation.title = match["rule"]["category"]["name"]
+                annotation.message = match["message"]
 
-            # Set the boundaries
-            annotation.offset = match["offset"]
-            annotation.length = match["length"]
+                # Set the boundaries
+                annotation.offset = match["offset"]
+                annotation.length = match["length"]
 
-            # Set the category
-            if match["type"]["typeName"] == "Hint":
-                annotation.category = "hint"
-            elif match["rule"]["issueType"] == "style":
-                annotation.category = "hint"
-            elif match["type"]["typeName"] == "Other":
-                annotation.category = "warning"
-            elif match["rule"]["issueType"] == "inconsistency":
-                annotation.category = "warning"
-            else:
-                annotation.category = "error"
+                # Set the category
+                if match["type"]["typeName"] in ("Hint", "style"):
+                    annotation.category = "hint"
+                elif match["type"]["typeName"] in ("Other", "inconsistency"):
+                    annotation.category = "warning"
+                elif match["type"]["typeName"] in ("UnknownWord"):
+                    annotation.category = "error"
+                else:
+                    annotation.category = "error"
 
-            # Add the suggestions
-            for replacement in match["replacements"]:
-                annotation.suggestions.append(replacement["value"])
+                # Add the suggestions
+                for replacement in match["replacements"]:
+                    annotation.suggestions.append(replacement["value"])
 
-            # Append the annotation
-            annotations.append(annotation)
+                # Append the annotation
+                annotations.append(annotation)
+            except KeyError:
+                # Ignore those who miss one of the keys
+                logger.info(f"Ignored {match}")
+                pass
 
         # Call back with the annotations
         callback(annotations)
-
-

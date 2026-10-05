@@ -17,16 +17,18 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, GObject
+import logging
+
+from gi.repository import Adw, GObject, Gtk
+
+from scriptorium.globals import BASE
 from scriptorium.models import Scene
 from scriptorium.utils import get_child_at
-
-import logging
 
 logger = logging.getLogger(__name__)
 
 
-@Gtk.Template(resource_path="/com/github/cgueret/Scriptorium/widgets/scene.ui")
+@Gtk.Template(resource_path=f"{BASE}/widgets/scene.ui")
 class SceneCard(Adw.Bin):
     __gtype_name__ = "SceneCard"
 
@@ -38,16 +40,16 @@ class SceneCard(Adw.Bin):
     prefixes = Gtk.Template.Child()
     entities = Gtk.Template.Child()
 
-    def __init__(self, scene: Scene, can_activate: bool = False, can_move: bool = False):
+    def __init__(
+        self, scene: Scene, can_activate: bool = False, can_move: bool = False
+    ):
         super().__init__()
         self._scene = scene
 
         # Configure the information for the scene
         self.set_property("title", scene.title)
         self.set_property("synopsis", scene.synopsis)
-        self.bind_property(
-            "title", scene, "title", GObject.BindingFlags.BIDIRECTIONAL
-        )
+        self.bind_property("title", scene, "title", GObject.BindingFlags.BIDIRECTIONAL)
         self.bind_property(
             "synopsis", scene, "synopsis", GObject.BindingFlags.BIDIRECTIONAL
         )
@@ -85,5 +87,3 @@ class SceneCard(Adw.Bin):
             entry = liststore.get_item(position + i)
             child = get_child_at(self.entities, position + i - 1)
             self.entities.insert_child_after(self._get_avatar(entry), child)
-
-

@@ -18,14 +18,15 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """A Library is a collection of manuscripts."""
 
-from pathlib import Path
-from gi.repository import GObject, Gio
 import logging
-import uuid
 import shutil
+import uuid
+from pathlib import Path
 
-from .project import Project
+from gi.repository import Gio, GObject
+
 from .manuscript import Manuscript
+from .project import Project
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +36,9 @@ class Library(GObject.Object):
 
     projects: GObject.Property = GObject.Property(type=Gio.ListStore)
 
-    def __init__(self, ):
+    def __init__(
+        self,
+    ):
         """Create an instance of the library for the target folder."""
         super().__init__()
 
@@ -50,9 +53,14 @@ class Library(GObject.Object):
         logger.info(f"Scanning content of {self._base_directory}")
         self.projects.remove_all()
         for directory in self._base_directory.iterdir():
-            logger.info(f"Adding project {directory.name}")
-            project = Project(directory)
-            self.projects.append(project)
+            if not directory.is_dir():
+                continue
+            try:
+                project = Project(directory)
+                self.projects.append(project)
+                logger.info(f"Added project {directory.name}")
+            except Exception:
+                logger.warning("Ignoring %s", directory.name, exc_info=True)
 
     @property
     def base_directory(self) -> Path:
@@ -105,4 +113,3 @@ class Library(GObject.Object):
         # That does not seem to be here
         logger.warning(f"Project not found: {identifier}")
         return None
-

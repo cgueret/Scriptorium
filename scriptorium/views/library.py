@@ -17,18 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, GObject, Gio, Gtk
-from gi.repository import GLib
-
-from scriptorium.views import ScrptEditorView
-
-from scriptorium.globals import BASE
-from scriptorium.models import Library, Project
-from scriptorium.dialogs import ScrptAddDialog
-from scriptorium.widgets import ThemeSelector
-from .library_item import LibraryItem
-
 import logging
+
+from gi.repository import Adw, Gio, GLib, GObject, Gtk
+
+from scriptorium.dialogs import ScrptAddDialog
+from scriptorium.globals import BASE
+from scriptorium.models import Library
+from scriptorium.views import ScrptEditorView
+from scriptorium.widgets import ThemeSelector
+
+from .library_item import LibraryItem
 
 logger = logging.getLogger(__name__)
 
@@ -70,26 +69,21 @@ class ScrptLibraryView(Adw.NavigationPage):
 
         # Create the action to edit the attributes of a project
         action = Gio.SimpleAction.new(
-            name="about",
-            parameter_type=GLib.VariantType.new("s")
-            )
+            name="about", parameter_type=GLib.VariantType.new("s")
+        )
         action.connect("activate", self.on_about_project)
         group.add_action(action)
 
         # Create the action to delete a project
         action = Gio.SimpleAction.new(
-            name="delete",
-            parameter_type=GLib.VariantType.new("s")
-            )
+            name="delete", parameter_type=GLib.VariantType.new("s")
+        )
         action.connect("activate", self.on_delete_project)
         group.add_action(action)
 
         # Signal to the list model to detect when content is available
         # this is useful when a new Manuscript is created
-        self.library.projects.connect(
-            "items-changed",
-            self.on_grid_content_changed
-        )
+        self.library.projects.connect("items-changed", self.on_grid_content_changed)
 
         # Connect the model to the grid, don't select anything by default
         selection_model = Gtk.SingleSelection(model=self.library.projects)
@@ -164,7 +158,7 @@ class ScrptLibraryView(Adw.NavigationPage):
         settings = Gio.Settings(schema_id="io.github.cgueret.Scriptorium")
         settings.set_string(
             "last-manuscript-name",
-            selected_project.identifier if selected_project is not None else ""
+            selected_project.identifier if selected_project is not None else "",
         )
 
         selected_project = selection_model.get_selected_item()
@@ -172,7 +166,7 @@ class ScrptLibraryView(Adw.NavigationPage):
             logger.info(f"Selected project {selected_project.identifier}")
             if not selected_project.can_be_opened:
                 self.migrate_dialog.choose(self)
-                #selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
+                # selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
             else:
                 # Open the project
                 self._open_project(selected_project)
@@ -183,11 +177,13 @@ class ScrptLibraryView(Adw.NavigationPage):
         """
         # If we did select something, open the editor
         if project is not None:
-            logger.info(f"\"{project.title}\": create and open editor")
+            logger.info(f'"{project.title}": create and open editor')
 
             # Create an editor navigation page and push it to the navigation
             editor_page = ScrptEditorView(project)
-            self.get_parent().push(editor_page)
+            parent = self.get_parent()
+            if parent and isinstance(parent, Adw.NavigationView):
+                parent.push(editor_page)  # type: ignore[attr-defined]
 
     def open_last_project(self):
         """Check if we need to open the last project."""
@@ -231,12 +227,15 @@ class ScrptLibraryView(Adw.NavigationPage):
             window = self.props.root
 
             if worked:
-                window.inform("Project successfuly migrated!")
+                if window:
+                    # TODO replace this mechanism with a signal
+                    window.inform("Project successfuly migrated!")  # type: ignore[attr-defined]
 
                 # Open the project right away
                 self._open_project(selected_project)
             else:
-                window.inform("Something went wrong. See logs for details")
+                if window:
+                    window.inform("Something went wrong. See logs for details")  # type: ignore[attr-defined]
 
                 # Seems like we won't open that thing...
                 selection_model.set_selected(Gtk.INVALID_LIST_POSITION)
@@ -285,8 +284,10 @@ class ScrptLibraryView(Adw.NavigationPage):
         if self.edit_title_bind is not None:
             self.edit_title_bind.unbind()
         self.edit_title_bind = project.bind_property(
-            "title", self.edit_title, "text",
-            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE
+            "title",
+            self.edit_title,
+            "text",
+            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
         )
 
         self.about_dialog.present(self)

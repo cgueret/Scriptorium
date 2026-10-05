@@ -17,11 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
-from scriptorium.globals import BASE
-from scriptorium.models import Manuscript, Chapter, Resource
-
 import logging
+
+from gi.repository import Adw, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.models import Chapter, Manuscript, Resource
 
 logger = logging.getLogger(__name__)
 
@@ -75,4 +76,3 @@ class ScrptOverviewPanelItem(Adw.Bin):
         resource = list_item.get_item()
         item_widget = list_item.get_child()
         item_widget.bind_to_resource(resource)
-

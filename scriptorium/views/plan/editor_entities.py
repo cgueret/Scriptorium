@@ -31,6 +31,8 @@ logger = logging.getLogger(__name__)
 
 # TODO: When adding a new element offer to pick a template to pre-populate attrs
 
+from gettext import gettext as _
+
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_entities.ui")
 class ScrptEntityPanel(Adw.NavigationPage):
@@ -51,12 +53,13 @@ class ScrptEntityPanel(Adw.NavigationPage):
         # Connect to the entities of the manuscript
         self.entities_list.bind_model(
             self._editor.project.entities,
-            lambda entity: EntityCard(entity, can_activate=True)
+            lambda entity: EntityCard(entity, can_activate=True),
         )
 
     @Gtk.Template.Callback()
     def on_add_entity_clicked(self, _button):
         """Handle a request to add a new entity."""
+
         def handle_response(dialog, task):
             response = dialog.choose_finish(task)
             if response == "add":
@@ -74,4 +77,3 @@ class ScrptEntityPanel(Adw.NavigationPage):
         logger.info(f'Clicked on entity "{entity.title}"')
         details_panel = ScrptEntitiesDetailsPanel(entity)
         self.navigation.push(details_panel)
-

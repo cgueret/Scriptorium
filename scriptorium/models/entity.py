@@ -18,19 +18,23 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """An entity is a story element (person, place, prop, ...)"""
 
-from gi.repository import GObject
-from .resource import Resource
-
 import logging
+
+from gi.repository import GObject
+
+from .resource import Resource
 
 logger = logging.getLogger(__name__)
 
 
 class Entity(Resource):
     """An entity is a story element (person, place, prop, ...)"""
+
     __gtype_name__ = "Entity"
 
     category = GObject.Property(type=str)
+
+    _manuscript = None
 
     def __init__(self, project, identifier: str):
         """Create an entity."""
@@ -53,4 +57,3 @@ class Entity(Resource):
 
         # Remove the entity from the manuscript
         self._manuscript.entities.remove(position)
-

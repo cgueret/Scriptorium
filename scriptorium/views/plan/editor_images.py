@@ -17,13 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
-from scriptorium.globals import BASE
-from .editor_images_item import ImageItem
-
 import logging
 
+from gi.repository import Adw, Gtk
+
+from scriptorium.globals import BASE
+
+from .editor_images_item import ImageItem
+
 logger = logging.getLogger(__name__)
+
+from gettext import gettext as _
 
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_images.ui")
@@ -43,5 +47,3 @@ class ScrptImagesPanel(Adw.NavigationPage):
 
         # Connect the model of the flow box
         self.images_box.bind_model(editor.project.images, ImageItem)
-
-

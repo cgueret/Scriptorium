@@ -20,10 +20,11 @@
 # Code adapted from libpanel:
 # https://gitlab.gnome.org/GNOME/libpanel/-/blob/main/src/panel-theme-selector.c
 
-from gi.repository import Adw, Gtk, GLib
-from scriptorium.globals import BASE
-
 import logging
+
+from gi.repository import Adw, GLib, Gtk
+
+from scriptorium.globals import BASE
 
 logger = logging.getLogger(__name__)
 
@@ -66,4 +67,3 @@ class ThemeSelector(Adw.Bin):
             self.add_css_class("dark")
         else:
             self.remove_css_class("dark")
-

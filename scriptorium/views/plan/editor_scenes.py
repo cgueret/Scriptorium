@@ -22,19 +22,22 @@ import logging
 
 from gi.repository import Adw, Gtk
 
-from scriptorium.globals import BASE
-from scriptorium.widgets import SceneCard
 from scriptorium.dialogs import ScrptAddDialog
+from scriptorium.globals import BASE
 from scriptorium.models import Scene
+from scriptorium.widgets import SceneCard
 
 from .editor_scenes_details import ScrptScenesDetailsPanel
 
 logger = logging.getLogger(__name__)
 
+from gettext import gettext as _
+
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_scenes.ui")
 class ScrptScenesPanel(Adw.NavigationPage):
     """Panel to list all the scenes and edit their content."""
+
     __gtype_name__ = "ScrptScenesPanel"
     __icon_name__ = "edit-symbolic"
 
@@ -51,7 +54,7 @@ class ScrptScenesPanel(Adw.NavigationPage):
 
         self.scenes_list.bind_model(
             self._editor.project.scenes,
-            lambda scene: SceneCard(scene=scene, can_activate=True)
+            lambda scene: SceneCard(scene=scene, can_activate=True),
         )
 
     @Gtk.Template.Callback()

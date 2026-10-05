@@ -16,17 +16,19 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-from gi.repository import Adw, Gtk, GObject, Gdk
-
-from scriptorium.models import Chapter
-from .scene import SceneCard
-
 import logging
+
+from gi.repository import Adw, Gdk, GObject, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.models import Chapter
+
+from .scene import SceneCard
 
 logger = logging.getLogger(__name__)
 
 
-@Gtk.Template(resource_path="/com/github/cgueret/Scriptorium/widgets/chapter_column.ui")
+@Gtk.Template(resource_path=f"{BASE}/widgets/chapter_column.ui")
 class ChapterColumn(Adw.Bin):
     __gtype_name__ = "ChapterColumn"
 
@@ -92,4 +94,3 @@ class ChapterColumn(Adw.Bin):
         # Move the chapter
         logger.info(f"Move {chapter.title} where {self._chapter.title} is")
         chapter.project.manuscript.splice_chapters(chapter, self._chapter)
-

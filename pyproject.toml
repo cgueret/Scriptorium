@@ -1,0 +1,55 @@
+# --------------------------------------------------------------------------
+# ruff
+# --------------------------------------------------------------------------
+[tool.ruff]
+# Check with flatpak run --command=python3 org.gnome.Sdk//51 --version
+target-version = "py314"
+line-length = 88
+builtins = ["_"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B", "SIM", "C4", "RUF"]
+dummy-variable-rgx = "^_.*$"
+
+[tool.ruff.lint.per-file-ignores]
+# gi.require_version() has to run before any gi.repository import.
+"scriptorium/__init__.py" = ["E402"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["scriptorium"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
+
+# --------------------------------------------------------------------------
+# mypy — staged.  Uncomment one stage, clean it, then move to the next.
+# --------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.14"
+files = ["scriptorium"]
+ignore_missing_imports = true
+check_untyped_defs = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = "scriptorium.models.*"
+disallow_untyped_defs = true
+
+
+# --------------------------------------------------------------------------
+# pytest
+# --------------------------------------------------------------------------
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+
+# --------------------------------------------------------------------------
+# codespell
+# --------------------------------------------------------------------------
+[tool.codespell]
+skip = ".git,po,*.po,*.pot,*.svg,*.png,builddir,_build,.flatpak-builder"

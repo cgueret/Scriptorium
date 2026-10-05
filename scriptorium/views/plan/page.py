@@ -17,19 +17,22 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, GObject
+import logging
+
+from gi.repository import Adw, GObject, Gtk
 
 from scriptorium.globals import BASE
 from scriptorium.models import Project
+
 from .editor_entities import ScrptEntityPanel
-from .editor_scenes import ScrptScenesPanel
+from .editor_images import ScrptImagesPanel
 from .editor_manuscript import ScrptManuscriptPanel
 from .editor_overview import ScrptOverviewPanel
-from .editor_images import ScrptImagesPanel
-
-import logging
+from .editor_scenes import ScrptScenesPanel
 
 logger = logging.getLogger(__name__)
+
+from gettext import gettext as _
 
 PANELS = [
     # Manuscript
@@ -37,7 +40,6 @@ PANELS = [
     ("manuscript", ScrptManuscriptPanel),
     # Background research
     # Writing goals
-
     # Story elements
     ("header", _("Story line")),
     ("overview", ScrptOverviewPanel),
@@ -45,7 +47,6 @@ PANELS = [
     ("entities", ScrptEntityPanel),
     # Time line
     # Plot lines
-
     # Special pages
     ("header", _("Additional resources")),
     ("images", ScrptImagesPanel),
@@ -134,4 +135,3 @@ class PlanPage(Adw.Bin):
                 p = panel(self)
 
         self.panels.replace([p])
-

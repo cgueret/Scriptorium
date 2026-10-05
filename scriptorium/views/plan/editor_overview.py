@@ -17,14 +17,17 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
-from scriptorium.widgets import ChapterColumn
-from scriptorium.globals import BASE
-from .editor_overview_item import ScrptOverviewPanelItem
-
 import logging
 
+from gi.repository import Adw, Gtk
+
+from scriptorium.globals import BASE
+from scriptorium.widgets import ChapterColumn
+
+from .editor_overview_item import ScrptOverviewPanelItem
+
 logger = logging.getLogger(__name__)
+from gettext import gettext as _
 
 
 @Gtk.Template(resource_path=f"{BASE}/views/plan/editor_overview.ui")
@@ -64,4 +67,3 @@ class ScrptOverviewPanel(Adw.NavigationPage):
         chapter = list_item.get_item()
         chapter_column = list_item.get_child()
         chapter_column.connect_to_chapter(chapter)
-

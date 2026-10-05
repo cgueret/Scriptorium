@@ -17,11 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import GObject, Gio
-
 import logging
 
+from gi.repository import Gio, GObject
+
 logger = logging.getLogger(__name__)
+
 
 class Resource(GObject.Object):
     __gtype_name__ = "Resource"
@@ -50,14 +51,14 @@ class Resource(GObject.Object):
         return self._project
 
     @property
-    def data_files(self):
+    def data_files(self) -> []:
         # An eventual list of data files associated with the resource
         return []
 
     @property
-    def references(self):
+    def references(self) -> set[Resource]:
         """Provide a list of other resources referencing that one."""
-        output = set()
+        output: set[Resource] = set()
 
         all_resources = self._project.resources
         for other in all_resources:
@@ -68,18 +69,18 @@ class Resource(GObject.Object):
             for prop in GObject.list_properties(type(other)):
                 if isinstance(prop, GObject.ParamSpecObject):
                     # Check if the use is a direct assignment
-                    if prop.value_type == Resource.__gtype__:
+                    if prop.value_type == getattr(Resource, "__gtype__", None):
                         if other.get_property(prop.name) == self:
-                            output.append(other)
+                            output.add(other)
                     # Or if it is found in a list
-                    elif prop.value_type == Gio.ListStore.__gtype__:
+                    elif prop.value_type == getattr(Gio.ListStore, "__gtype__", None):
                         list_store = other.get_property(prop.name)
                         accepted_item_type = list_store.get_item_type()
-                        resource_type = self.__gtype__
-                        if resource_type.is_a(accepted_item_type):
-                            found, position = list_store.find(self)
+                        resource_type = getattr(self, "__gtype__", None)
+                        if resource_type and resource_type.is_a(accepted_item_type):
+                            found, _ = list_store.find(self)
                             if found:
-                                output.append(other)
+                                output.add(other)
 
         return output
 
@@ -93,4 +94,3 @@ class Resource(GObject.Object):
 
         # We emit the signal
         self.emit("deleted")
-

@@ -1,5 +1,6 @@
-import os
 import gettext
+import os
+
 from .editor import ScrptEditorView
 from .library import ScrptLibraryView
 
