@@ -7,8 +7,8 @@
     "sources": [
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/9a/0c/f1dd3ec610f12812681bdda1ebb34f5d0520d6db12cbc0b7b91257e0cf36/dulwich-1.2.0-py3-none-any.whl",
-            "sha256": "5948faa66b0e9185c9f07602dbe5ba0cd92fdda397e5303964fb53aada7746fe",
+            "url": "https://files.pythonhosted.org/packages/08/b0/5f971b268481b8b7ff3d237ffb1c33772da85b907438e25cd5399e8530f8/dulwich-1.2.17-py3-none-any.whl",
+            "sha256": "82555d6ea6d728ed722fdfcde6658e3d2b1774ad916260fdfd90a2e7af64291a",
             "x-checker-data": {
                 "type": "pypi",
                 "name": "dulwich",
@@ -17,8 +17,8 @@
         },
         {
             "type": "file",
-            "url": "https://files.pythonhosted.org/packages/39/08/aaaad47bc4e9dc8c725e68f9d04865dbcb2052843ff09c97b08904852d84/urllib3-2.6.3-py3-none-any.whl",
-            "sha256": "bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4",
+            "url": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+            "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
             "x-checker-data": {
                 "type": "pypi",
                 "name": "urllib3",
