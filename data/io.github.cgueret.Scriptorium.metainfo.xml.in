@@ -63,6 +63,17 @@
   </screenshots>
 
   <releases>
+    <release version="1.3.1" date="2026-04-29">
+      <url type="details">https://github.com/cgueret/Scriptorium/releases/tag/v1.3.1</url>
+      <description translate="no">
+        <p>Release description</p>
+        <ul>
+          <li>Added policy on LLM authored contributions</li>
+          <li>Moved to Gnome 51 and updated Python dependencies</li>
+          <li>General code fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.3.0" date="2026-04-29">
       <url type="details">https://github.com/cgueret/Scriptorium/releases/tag/v1.3.0</url>
       <description translate="no">
