@@ -8,40 +8,44 @@ msgstr ""
 "Project-Id-Version: scriptorium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-22 10:36+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-10-16 08:51+0000\n"
+"Last-Translator: Andres Blasco Arnáiz "
+"<andresbarnaiz@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/scriptorium/"
+"scriptorium/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: data/io.github.cgueret.Scriptorium.desktop.in:2
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:7
 #: scriptorium/window.blp:5
 msgid "Scriptorium"
-msgstr ""
+msgstr "Scriptorium"
 
 #: data/io.github.cgueret.Scriptorium.desktop.in:8
 msgid "GTK;"
-msgstr ""
+msgstr "GTK;"
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:21
 msgid "The location for the manuscripts, defaults to user data directory"
 msgstr ""
+"La ubicación para los manuscritos, por defecto es la carpeta del usuario"
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:30
 msgid "Style Variant"
-msgstr ""
+msgstr "Tema"
 
 #: data/io.github.cgueret.Scriptorium.gschema.xml:31
 msgid "Use the light or dark variant of the GTK theme"
-msgstr ""
+msgstr "Utiliza el tema claro u oscuro de GTK"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:8
 msgid "Design and write manuscripts"
-msgstr ""
+msgstr "Diseña y escribe manuscritos"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:10
 msgid ""
@@ -49,54 +53,59 @@ msgid ""
 "tool. The objective is to provide writers with a simple and complete "
 "environment to plan, write and publish e-books."
 msgstr ""
+"Scriptorium es un editor de texto que combina herramientas de planificación "
+"y publicación. El objetivo es proporcionar a los escritores una solución "
+"para planificar, escribir y publicar ebooks."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:13
 msgid "Scriptorium features are organised around three facets:"
-msgstr ""
+msgstr "Las funciones de Scriptorium se organizan en tres aspectos:"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:15
 msgid "Plan the list of scenes and story elements of the manuscript."
 msgstr ""
+"Organizar la lista de escenas y los elementos de la historia del manuscrito."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:16
 msgid "Write the content of the scenes with a text focused editor."
 msgstr ""
+"Escribir el contenido de escenas con un editor de texto sin distracciones."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:17
 msgid "Publish your manuscript as an epub after previewing it."
-msgstr ""
+msgstr "Publicar tu manuscrito como un epub, tras revisarlo."
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:19
 msgid "In addition, some general features are:"
-msgstr ""
+msgstr "Además, otras de sus funcionalidades son:"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:21
 msgid "Dark mode"
-msgstr ""
+msgstr "Modo oscuro"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:22
 msgid "Versioning of scenes managed via Git"
-msgstr ""
+msgstr "Versiones de escenas gestionadas por Git"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:23
 msgid "Back-end using plain text YAML and HTML files"
-msgstr ""
+msgstr "Utilización de texto plano YAML y archivos HTML"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:49
 msgid "Plan the content of the manuscript"
-msgstr ""
+msgstr "Planificar el contenido de un manuscrito"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:53
 msgid "Write and re-arrange the scenes"
-msgstr ""
+msgstr "Escribir y reordenar la escenas"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:57
 msgid "Write and re-arrange the scenes (dark mode)"
-msgstr ""
+msgstr "Escribir y reordenar las escenas (modo oscuro)"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:61
 msgid "Preview and publish the manuscript as an epub file"
-msgstr ""
+msgstr "Previsualizar y publicar el manuscrito como un archivo epub"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:69
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:79
@@ -106,85 +115,89 @@ msgstr ""
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:121
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:131
 msgid "Release description"
-msgstr ""
+msgstr "Descripción de la versión"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:71
 msgid "Update to Gnome 49"
-msgstr ""
+msgstr "Actualizada a Gnome 49"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:72
 msgid "Clamp the text editor to a usable width"
-msgstr ""
+msgstr "Ajuste en el ancho del editor de texto"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:81
 msgid "Fix regression in Write"
-msgstr ""
+msgstr "Resuelta regresión en Escritura"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:90
 msgid "Re-design of the interface around 3 main facets (Plan/Write/Publish)"
 msgstr ""
+"Rediseño de la interfaz en 3 facetas principales (Planificar/Escribir/"
+"Publicar)"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:91
 msgid "Plan: addition of a tool to set the book cover"
 msgstr ""
+"Planificar: añadida una herramienta para configurar la portada del ebook"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:92
 msgid "Plan: addition of a gallery tool to manage images"
-msgstr ""
+msgstr "Planificar añadida una galería para organizar imágenes"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:93
 msgid "Write: right click on a suggestion to see its content"
-msgstr ""
+msgstr "Escribir: clic derecho en una sugerencia para ver su contenido"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:94
 msgid "Publish: export the manuscript as an epub file"
-msgstr ""
+msgstr "Publicar: Exportar el manuscrito como un archivo epub"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:103
 msgid "Addition of LanguageTool to provide content suggestions"
 msgstr ""
+"Añadida herramienta de idioma para proporcionar sugerencias de contenido"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:104
 msgid "Added styling options for the text (strong, emphasis)"
-msgstr ""
+msgstr "Añadidas opciones de estilo (negrita y cursiva)"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:105
 msgid "Added preferences dialog to define preferences of the text editor"
-msgstr ""
+msgstr "Añadido diálogo de preferencias del editor de texto"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:114
 msgid "Fixed metadata for Flatpak"
-msgstr ""
+msgstr "Metadatos para Flatpak solucionados"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:123
 msgid "Added startup screen"
-msgstr ""
+msgstr "Añadida pantalla de bienvenida"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:124
 msgid "Fixed bug where icons would not re-style"
-msgstr ""
+msgstr "Arreglado error por el cual los iconos no se ajustaban al tema"
 
 #: data/io.github.cgueret.Scriptorium.metainfo.xml.in:133
 msgid "First public release of the code"
-msgstr ""
+msgstr "Primer lanzamiento público del código"
 
 #: scriptorium/application.py:85
 msgid "Beta testing"
-msgstr ""
+msgstr "Prueba en Beta"
 
 #: scriptorium/application.py:89
 msgid "Icon design"
-msgstr ""
+msgstr "Diseño de iconos"
 
 #. Translators: Replace "translator-credits" with your name/username,
 #. and optionally an email or URL.
 #: scriptorium/application.py:95
 msgid "translator-credits"
-msgstr ""
+msgstr "Andrés Blasco <andrewblasco@masto.es>"
 
 #: scriptorium/dialogs/dialog_add.blp:5 scriptorium/dialogs/dialog_add.blp:36
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 #: scriptorium/dialogs/dialog_add.blp:6 scriptorium/dialogs/dialog_add.blp:35
 #: scriptorium/dialogs/select_entities.blp:6
@@ -192,90 +205,90 @@ msgstr ""
 #: scriptorium/dialogs/select_scenes.blp:6
 #: scriptorium/dialogs/select_scenes.blp:31 scriptorium/views/library.blp:64
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: scriptorium/dialogs/dialog_add.blp:12
 #: scriptorium/views/plan/editor_manuscript.blp:10
 #: scriptorium/views/plan/editor_scenes_details.blp:19
 #: scriptorium/views/write/page.blp:23
 msgid "Summary"
-msgstr ""
+msgstr "Resumen"
 
 #: scriptorium/dialogs/preferences.blp:8
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: scriptorium/dialogs/preferences.blp:13
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #: scriptorium/dialogs/preferences.blp:14
 msgid "Select the theme for the application"
-msgstr ""
+msgstr "Elige el tema para la aplicación"
 
 #: scriptorium/dialogs/preferences.blp:21
 msgid "Projects"
-msgstr ""
+msgstr "Proyectos"
 
 #: scriptorium/dialogs/preferences.blp:23
 msgid "Restore Previous Session"
-msgstr ""
+msgstr "Restaurar Última Sesión"
 
 #: scriptorium/dialogs/preferences.blp:24
 msgid "Open the last project when starting Scriptorium"
-msgstr ""
+msgstr "Abre el último proyecto cuando se inicia Scriptorium"
 
 #: scriptorium/dialogs/preferences.blp:30 scriptorium/views/editor.blp:5
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: scriptorium/dialogs/preferences.blp:34
 msgid "Preview"
-msgstr ""
+msgstr "Vista previa"
 
 #: scriptorium/dialogs/preferences.blp:55
 msgid "Settings"
-msgstr ""
+msgstr "Ajustes"
 
 #: scriptorium/dialogs/preferences.blp:58
 msgid "Font"
-msgstr ""
+msgstr "Fuente"
 
 #: scriptorium/dialogs/preferences.blp:59
 msgid "The font used within the scene editor"
-msgstr ""
+msgstr "La fuente utilizada en el editor de escenas"
 
 #: scriptorium/dialogs/preferences.blp:68
 msgid "Select a font"
-msgstr ""
+msgstr "Elige una fuente"
 
 #: scriptorium/dialogs/preferences.blp:76
 msgid "Line Height"
-msgstr ""
+msgstr "Interlineado"
 
 #: scriptorium/dialogs/preferences.blp:77
 msgid "Adjust the space between lines"
-msgstr ""
+msgstr "Ajusta el espacio entre líneas"
 
 #: scriptorium/dialogs/preferences.blp:87
 msgid "Underline style"
-msgstr ""
+msgstr "Estilo de subrayado"
 
 #: scriptorium/dialogs/preferences.blp:88
 msgid "Adjust the style of the underlines"
-msgstr ""
+msgstr "Ajusta el estilo de los subrayados"
 
 #: scriptorium/dialogs/preferences.blp:90
 msgid "single"
-msgstr ""
+msgstr "una línea"
 
 #: scriptorium/dialogs/preferences.blp:90
 msgid "double"
-msgstr ""
+msgstr "dos líneas"
 
 #: scriptorium/dialogs/preferences.blp:90
 msgid "dashed"
-msgstr ""
+msgstr "punteado"
 
 #: scriptorium/dialogs/preferences.py:30
 msgid ""
@@ -284,282 +297,288 @@ msgid ""
 "error> are shown and how wordswith an <em>emphasis</em> or noted as "
 "<strong>strong</strong> will appear.</p>"
 msgstr ""
+"<p>Este es un <hint>texto de relleno</hint> para <warning>seleccionar</"
+"warning> la fuente del editor de escenas</p><p>También puedes ver cómo se "
+"muestran las <error>correcciones</error> y cómo aparecen las palabras en <em>"
+"cursiva</em> o en <strong>negrita</strong>.</p>"
 
 #: scriptorium/dialogs/select_entities.blp:5
 #: scriptorium/dialogs/select_entities.blp:32
 #: scriptorium/dialogs/select_scenes.blp:5
 #: scriptorium/dialogs/select_scenes.blp:32
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #: scriptorium/dialogs/select_entities.blp:7
 msgid "Select the element you would like to use and validate when done"
-msgstr ""
+msgstr "Selecciona el elemento que quieres utilizar"
 
 #: scriptorium/dialogs/select_entities.blp:8
 msgid "Select story element"
-msgstr ""
+msgstr "Seleccionar un elemento de la historia"
 
 #: scriptorium/dialogs/select_entities.blp:12
 msgid "Available elements"
-msgstr ""
+msgstr "Elementos disponibles"
 
 #: scriptorium/dialogs/select_entities.blp:25
 msgid "No more element available"
-msgstr ""
+msgstr "No hay más elementos disponibles"
 
 #: scriptorium/dialogs/select_scenes.blp:7
 msgid "Select the scene you would like to use and validate when done"
-msgstr ""
+msgstr "Selecciona la escena que quieres utilizar"
 
 #: scriptorium/dialogs/select_scenes.blp:8
 msgid "Select scenes"
-msgstr ""
+msgstr "Seleccionar escenas"
 
 #: scriptorium/dialogs/select_scenes.blp:12
 msgid "Available scenes"
-msgstr ""
+msgstr "Escenas disponibles"
 
 #: scriptorium/dialogs/select_scenes.blp:25
 msgid "No scene available"
-msgstr ""
+msgstr "No hay más escenas disponibles"
 
 #: scriptorium/views/editor.blp:23 scriptorium/views/library.blp:23
 msgid "Main Menu"
-msgstr ""
+msgstr "Menú Principal"
 
 #: scriptorium/views/editor.blp:33
 msgid "Plan"
-msgstr ""
+msgstr "Planificar"
 
 #: scriptorium/views/editor.blp:40
 msgid "Write"
-msgstr ""
+msgstr "Escribir"
 
 #: scriptorium/views/editor.blp:47 scriptorium/views/publish/page.blp:53
 #: scriptorium/views/publish/page.blp:54
 msgid "Publish"
-msgstr ""
+msgstr "Publicar"
 
 #: scriptorium/views/editor.blp:65 scriptorium/views/library.blp:104
 msgid "Preferences"
-msgstr ""
+msgstr "Preferencias"
 
 #: scriptorium/views/editor.blp:69 scriptorium/views/library.blp:108
 msgid "About Scriptorium"
-msgstr ""
+msgstr "Sobre Scriptorium"
 
 #: scriptorium/views/editor.blp:77 scriptorium/views/plan/editor_images.blp:12
 msgid "Images"
-msgstr ""
+msgstr "Imágenes"
 
 #: scriptorium/views/library.blp:5
 msgid "Library"
-msgstr ""
+msgstr "Biblioteca"
 
 #: scriptorium/views/library.blp:47
 msgid ""
 "Your data folder is empty, click on the button on the top left corner to "
 "create a first manuscript"
 msgstr ""
+"Tu carpeta está vacía, pulsa en el botón en la esquina superior izquierda "
+"para crear tu primer manuscrito"
 
 #: scriptorium/views/library.blp:48
 msgid "Welcome to Scriptorium !"
-msgstr ""
+msgstr "¡ Bienvenido a Scriptorium !"
 
 #: scriptorium/views/library.blp:65
 msgid "Migrate"
-msgstr ""
+msgstr "Migrar"
 
 #: scriptorium/views/library_item.blp:62
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: scriptorium/views/plan/editor_entities.blp:5
 #: scriptorium/views/plan/editor_entities.py:40
 msgid "Story elements"
-msgstr ""
+msgstr "Elementos de la historia"
 
 #: scriptorium/views/plan/editor_entities.blp:22
 #: scriptorium/views/plan/editor_scenes_details.blp:47
 msgid "Elements"
-msgstr ""
+msgstr "Elementos"
 
 #: scriptorium/views/plan/editor_entities.blp:23
 msgid "The character, places, and props of the story"
-msgstr ""
+msgstr "Los personajes, lugares y objetos de la historia"
 
 #: scriptorium/views/plan/editor_entities.py:41
 msgid "Set the key elements of the story"
-msgstr ""
+msgstr "Define los elementos principales de la historia"
 
 #: scriptorium/views/plan/editor_images.blp:13
 msgid "These are all the images associated to your project"
-msgstr ""
+msgstr "Estas son todas las imágenes asociadas a tu proyecto"
 
 #: scriptorium/views/plan/editor_images_item.blp:25
 msgid "Remove this image from the project"
-msgstr ""
+msgstr "Eliminar esta imagen del proyecto"
 
 #: scriptorium/views/plan/editor_images_item.blp:35
 msgid "Use this image as cover"
-msgstr ""
+msgstr "Usar esta imagen como portada"
 
 #: scriptorium/views/plan/editor_images.py:33
 msgid "Gallery of images used in the project"
-msgstr ""
+msgstr "Galería de imágenes usadas en el proyecto"
 
 #: scriptorium/views/plan/editor_images.py:34
 msgid "Gallery"
-msgstr ""
+msgstr "Galería"
 
 #: scriptorium/views/plan/editor_manuscript.blp:20
 #: scriptorium/views/plan/editor_scenes_details.blp:29
 msgid "Identifier"
-msgstr ""
+msgstr "Identificador"
 
 #: scriptorium/views/plan/editor_manuscript.blp:28
 #: scriptorium/views/plan/editor_scenes_details.blp:37
 #: scriptorium/views/write/page.blp:30
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: scriptorium/views/plan/editor_manuscript.blp:32
 #: scriptorium/views/plan/editor_scenes_details.blp:41
 msgid "Synopsis"
-msgstr ""
+msgstr "Sinopsis"
 
 #: scriptorium/views/plan/editor_manuscript.blp:38
 msgid "Cover"
-msgstr ""
+msgstr "Portada"
 
 #: scriptorium/views/plan/editor_manuscript.blp:60
 msgid "No cover selected"
-msgstr ""
+msgstr "Sin portada"
 
 #: scriptorium/views/plan/editor_manuscript.py:36
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: scriptorium/views/plan/editor_manuscript.py:37
 msgid "Edit the information about the manuscript"
-msgstr ""
+msgstr "Editar la información sobre el manuscrito"
 
 #: scriptorium/views/plan/editor_overview.blp:12
 msgid "Overview"
-msgstr ""
+msgstr "Vista general"
 
 #: scriptorium/views/plan/editor_overview.blp:13
 msgid "Outline of the story per chapters and scenes"
-msgstr ""
+msgstr "Esquema de la historia por capítulos y escenas"
 
 #: scriptorium/views/plan/editor_overview.py:35
 msgid "Outline"
-msgstr ""
+msgstr "Esquema"
 
 #: scriptorium/views/plan/editor_overview.py:36
 msgid "Overview of all the content"
-msgstr ""
+msgstr "Vista general de todo el contenido"
 
 #: scriptorium/views/plan/editor_scenes.blp:24
 msgid "Scenes"
-msgstr ""
+msgstr "Escenas"
 
 #: scriptorium/views/plan/editor_scenes.blp:25
 msgid "This is the list of all the scenes in your project"
-msgstr ""
+msgstr "Este es el listado de todas las escenas en tu proyecto"
 
 #: scriptorium/views/plan/editor_scenes.blp:45
 msgid "Add a first scene and start writing"
-msgstr ""
+msgstr "Añade una primera escena y empieza a escribir"
 
 #: scriptorium/views/plan/editor_scenes_details.blp:57
 msgid "Connect story elements ..."
-msgstr ""
+msgstr "Conectar elementos de la historia..."
 
 #: scriptorium/views/plan/editor_scenes.py:41
 msgid "Scenes list"
-msgstr ""
+msgstr "Lista de escenas"
 
 #: scriptorium/views/plan/editor_scenes.py:42
 msgid "Edit the content of the scenes"
-msgstr ""
+msgstr "Editar el contenido de las escenas"
 
 #. Manuscript
 #: scriptorium/views/plan/page.py:36
 msgid "Manuscript"
-msgstr ""
+msgstr "Manuscrito"
 
 #. Background research
 #. Writing goals
 #. Story elements
 #: scriptorium/views/plan/page.py:42
 msgid "Story line"
-msgstr ""
+msgstr "Trama"
 
 #. Time line
 #. Plot lines
 #. Special pages
 #: scriptorium/views/plan/page.py:50
 msgid "Additional resources"
-msgstr ""
+msgstr "Recursos complementarios"
 
 #: scriptorium/views/write/navigation.blp:32
 #: scriptorium/views/write/navigation.py:107
 msgid "Add new Scene"
-msgstr ""
+msgstr "Añadir nueva Escena"
 
 #: scriptorium/views/write/navigation.py:111
 msgid "Add new Chapter"
-msgstr ""
+msgstr "Añadir nuevo Capítulo"
 
 #: scriptorium/views/write/page.blp:39
 msgid "Suggestions"
-msgstr ""
+msgstr "Sugerencias"
 
 #: scriptorium/views/write/page.blp:57
 msgid "No suggested changes"
-msgstr ""
+msgstr "No hay sugerencias de cambios"
 
 #: scriptorium/views/write/page.blp:103
 msgid "Set the selection to strong (Ctrl+b)"
-msgstr ""
+msgstr "Marcar selección en negrita (Ctrl+b)"
 
 #: scriptorium/views/write/page.blp:109
 msgid "Set the selection to emphasis (Ctrl+i)"
-msgstr ""
+msgstr "Marcar selección en cursiva (Ctrl+i)"
 
 #: scriptorium/views/write/page.blp:116
 msgid "Show annotations"
-msgstr ""
+msgstr "Mostrar correcciones"
 
 #: scriptorium/views/write/page.blp:121
 msgid "Show information panel"
-msgstr ""
+msgstr "Mostrar panel de información"
 
 #: scriptorium/views/write/page.blp:133
 msgid "words "
-msgstr ""
+msgstr "palabras "
 
 #: scriptorium/views/write/page.blp:146
 msgid "No scene selected"
-msgstr ""
+msgstr "Ninguna escena seleccionada"
 
 #: scriptorium/views/write/page.blp:147
 msgid "Create or select a scene to write its content"
-msgstr ""
+msgstr "Crea o selecciona una escena para escribir su contenido"
 
 #: scriptorium/widgets/theme_selector.blp:28
 #: scriptorium/widgets/theme_selector.blp:30
 msgid "Follow system style"
-msgstr ""
+msgstr "Seguir tema del sistema"
 
 #: scriptorium/widgets/theme_selector.blp:42
 #: scriptorium/widgets/theme_selector.blp:44
 msgid "Light style"
-msgstr ""
+msgstr "Tema claro"
 
 #: scriptorium/widgets/theme_selector.blp:57
 #: scriptorium/widgets/theme_selector.blp:59
 msgid "Dark style"
-msgstr ""
+msgstr "Tema oscuro"
