@@ -21,6 +21,12 @@ In addition, some general features are:
 
 
 
+## Translating
+
+The translations for this project are managed by [WebLate](https://hosted.weblate.org/projects/scriptorium/scriptorium/)
+
+[![Translation status](https://hosted.weblate.org/widget/scriptorium/scriptorium/287x66-grey.png)](https://hosted.weblate.org/engage/scriptorium/)
+
 ## Installation
 
 <a href='https://flathub.org/apps/io.github.cgueret.Scriptorium'><img width='240' alt='Get it on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
@@ -56,29 +62,6 @@ You may have to run this first if it's the first time you build:
 flatpak install -y flathub org.flatpak.Builder
 flatpak remote-add --if-not-exists --user flathub \
     https://dl.flathub.org/repo/flathub.flatpakrepo
-```
-
-## Update POT files
-
-When some strings have been added to the code, make sure the files are in the
-listing of `POTFILE.in` and then run:
-
-```
-meson compile -C _build scriptorium-update-po
-```
-
-To create a new localisation, add the localisation name to `LINGUAS` and then
-create a new `.po` from the `.pot` with:
-
-```
-msginit --locale=fr --input=po/scriptorium.pot --output-file=po/fr.po
-```
-
-To test a localisation add something like that to the finishing args of the
-flatpak:
-
-```
-"--env=LC_ALL=fr_FR.UTF-8"
 ```
 
 ## Credit
