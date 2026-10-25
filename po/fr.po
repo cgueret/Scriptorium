@@ -428,7 +428,7 @@ msgstr "Galerie d'images utilisées dans le projet"
 
 #: scriptorium/views/plan/editor_images.py:34
 msgid "Gallery"
-msgstr "Gallerie"
+msgstr "Galerie"
 
 #: scriptorium/views/plan/editor_manuscript.blp:20
 #: scriptorium/views/plan/editor_scenes_details.blp:29
